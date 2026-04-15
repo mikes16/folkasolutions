@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { cloudinaryUrl } from "@/lib/cloudinary";
 import { organizationSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/lib/site-config";
 
@@ -20,7 +21,11 @@ export async function generateMetadata({
     openGraph: {
       title: t("title"),
       description: t("intro"),
-      images: [{ url: `${siteConfig.siteUrl}/backs/folka_hero.webp` }],
+      images: [
+        {
+          url: cloudinaryUrl("/backs/folka_hero.webp", ["f_auto", "q_auto", "w_1200"]),
+        },
+      ],
     },
     alternates: {
       canonical: `${siteConfig.siteUrl}/${locale}/pages/about`,
