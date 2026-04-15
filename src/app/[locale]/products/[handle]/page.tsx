@@ -9,6 +9,7 @@ import { ProductBreadcrumbs } from "@/components/product/product-breadcrumbs";
 import { getCuratedCategoryForProduct } from "@/lib/product-category-mapping";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
+import { ProductViewedTracker } from "@/components/product/product-viewed-tracker";
 
 export const revalidate = 60;
 
@@ -87,6 +88,14 @@ export default async function ProductPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ProductViewedTracker
+        productId={product.id}
+        productTitle={product.title}
+        vendor={product.vendor}
+        price={variant?.price.amount ?? ""}
+        currency={variant?.price.currencyCode ?? ""}
+        availableForSale={product.availableForSale}
       />
       <div className="container-page py-6 md:py-12">
         <ProductBreadcrumbs

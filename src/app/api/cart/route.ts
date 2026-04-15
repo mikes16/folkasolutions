@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import { commerce } from "@/lib/commerce";
 import { CartActionSchema } from "@/lib/api/schemas";
 import { formatApiError } from "@/lib/api/error";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 export async function POST(req: Request) {
+  const distinctId = req.headers.get("X-POSTHOG-DISTINCT-ID") ?? "anonymous";
+  const sessionId = req.headers.get("X-POSTHOG-SESSION-ID") ?? undefined;
+
   let body: unknown;
   try {
     body = await req.json();
@@ -33,6 +37,18 @@ export async function POST(req: Request) {
       }
       case "add": {
         const cart = await commerce.addToCart(data.cartId, data.lines);
+        const posthog = getPostHogClient();
+        posthog.capture({
+          distinctId,
+          event: "cart_item_added_server",
+          properties: {
+            cart_id: data.cartId,
+            lines: data.lines,
+            cart_total: cart.cost?.totalAmount?.amount,
+            cart_total_currency: cart.cost?.totalAmount?.currencyCode,
+            ...(sessionId && { $session_id: sessionId }),
+          },
+        });
         return NextResponse.json(cart);
       }
       case "update": {
@@ -47,6 +63,10 @@ export async function POST(req: Request) {
       }
       case "remove": {
         const cart = await commerce.removeFromCart(data.cartId, data.lineIds);
+        return NextResponse.json(cart);
+      }
+      case "updateAttributes": {
+        const cart = await commerce.updateCartAttributes(data.cartId, data.attributes);
         return NextResponse.json(cart);
       }
     }

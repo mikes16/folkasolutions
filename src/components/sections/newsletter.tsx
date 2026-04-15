@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Icon } from "@/components/ui/icon";
+import posthog from "posthog-js";
 
 interface NewsletterProps {
   eyebrow: string;
@@ -27,6 +28,9 @@ export function Newsletter({
     e.preventDefault();
     if (!email.trim()) return;
     // TODO: wire to Shopify customer or Klaviyo
+    posthog.capture("newsletter_subscribed", {
+      $set: { email },
+    });
     setSubmitted(true);
   }
 

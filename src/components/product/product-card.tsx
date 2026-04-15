@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import type { Product } from "@/lib/commerce/types";
 import { formatMoney } from "@/lib/utils/format";
 import { Badge } from "@/components/ui/badge";
+import posthog from "posthog-js";
 
 interface ProductCardProps {
   product: Product;
@@ -19,7 +20,21 @@ export function ProductCard({ product }: ProductCardProps) {
     parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price.amount);
 
   return (
-    <Link href={`/products/${product.handle}`} className="group flex flex-col">
+    <Link
+      href={`/products/${product.handle}`}
+      className="group flex flex-col"
+      onClick={() => {
+        posthog.capture("product_clicked", {
+          product_id: product.id,
+          product_title: product.title,
+          vendor: product.vendor,
+          handle: product.handle,
+          price: variant?.price.amount,
+          currency: variant?.price.currencyCode,
+          available_for_sale: product.availableForSale,
+        });
+      }}
+    >
       {/* Image */}
       <div className="relative aspect-square bg-card rounded-[24px] overflow-hidden mb-4 hover:shadow-md transition-shadow duration-300">
         {product.featuredImage ? (

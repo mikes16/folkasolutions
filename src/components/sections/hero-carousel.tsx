@@ -5,6 +5,7 @@ import NextImage from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Icon } from "@/components/ui/icon";
 import type { HeroSlide } from "@/lib/hero-slides";
+import posthog from "posthog-js";
 
 interface HeroCarouselProps {
   slides: HeroSlide[];
@@ -348,6 +349,14 @@ function Slide({
                 href={slide.href}
                 className="inline-flex items-center gap-3 border rounded-full px-6 py-3 text-[11px] uppercase tracking-[3px] font-semibold font-[family-name:var(--font-rajdhani)] transition-all duration-300 cursor-pointer hover:border-primary hover:gap-4"
                 style={{ color: textColor, borderColor: "rgba(16, 28, 46, 0.3)" }}
+                onClick={() => {
+                  posthog.capture("hero_cta_clicked", {
+                    slide_title: slide.title,
+                    slide_href: slide.href,
+                    cta_text: slide.ctaText,
+                    layout: "mobile",
+                  });
+                }}
               >
                 {slide.ctaText}
                 <Icon name="chevron-right" size={14} />
@@ -427,6 +436,14 @@ function Slide({
               href={slide.href}
               className="inline-flex items-center gap-3 border rounded-full px-6 py-3 text-[11px] uppercase tracking-[3px] font-semibold font-[family-name:var(--font-rajdhani)] transition-all duration-300 cursor-pointer hover:border-primary hover:gap-4"
               style={{ color: textColor, borderColor: "rgba(16, 28, 46, 0.3)" }}
+              onClick={() => {
+                posthog.capture("hero_cta_clicked", {
+                  slide_title: slide.title,
+                  slide_href: slide.href,
+                  cta_text: slide.ctaText,
+                  layout: "desktop",
+                });
+              }}
             >
               {slide.ctaText}
               <Icon name="chevron-right" size={14} />

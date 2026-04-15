@@ -28,6 +28,13 @@ export const CartActionSchema = z.discriminatedUnion("action", [
     cartId: z.string().min(1),
     lineIds: z.array(z.string().min(1)).min(1),
   }),
+  z.object({
+    action: z.literal("updateAttributes"),
+    cartId: z.string().min(1),
+    attributes: z
+      .array(z.object({ key: z.string().min(1), value: z.string() }))
+      .min(1),
+  }),
 ]);
 
 export type CartAction = z.infer<typeof CartActionSchema>;

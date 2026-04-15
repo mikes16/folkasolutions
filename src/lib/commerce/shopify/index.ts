@@ -21,7 +21,13 @@ import { GET_CART } from "./queries/cart";
 import { GET_MENU } from "./queries/menu";
 import { GET_BLOG_BY_HANDLE, GET_ARTICLE_BY_HANDLE } from "./queries/blog";
 import { GET_PAGE_BY_HANDLE } from "./queries/page";
-import { CREATE_CART, ADD_TO_CART, UPDATE_CART_LINES, REMOVE_FROM_CART } from "./mutations/cart";
+import {
+  CREATE_CART,
+  ADD_TO_CART,
+  UPDATE_CART_LINES,
+  UPDATE_CART_ATTRIBUTES,
+  REMOVE_FROM_CART,
+} from "./mutations/cart";
 import { UserError } from "../errors";
 
 export const shopifyProvider: CommerceProvider = {
@@ -240,6 +246,22 @@ export const shopifyProvider: CommerceProvider = {
       variables: { cartId, lineIds },
     });
     return mapCart(data.cartLinesRemove.cart);
+  },
+
+  async updateCartAttributes(
+    cartId: string,
+    attributes: { key: string; value: string }[]
+  ): Promise<Cart> {
+    const data = await shopifyFetch<{
+      cartAttributesUpdate: { cart: any; userErrors: { message: string; field?: string[] }[] };
+    }>({
+      query: UPDATE_CART_ATTRIBUTES,
+      variables: { cartId, attributes },
+    });
+    if (data.cartAttributesUpdate.userErrors?.length) {
+      throw new UserError(data.cartAttributesUpdate.userErrors[0].message);
+    }
+    return mapCart(data.cartAttributesUpdate.cart);
   },
 
   // ── Navigation ───────────────────────────────────────

@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/product/product-card";
 import { Icon } from "@/components/ui/icon";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import type { Product } from "@/lib/commerce/types";
+import posthog from "posthog-js";
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -37,8 +38,16 @@ function SearchContent() {
       });
       const res = await fetch(`/api/search?${params}`);
       const data = await res.json();
-      setResults(data.products || []);
-    } catch {
+      const products: Product[] = data.products || [];
+      setResults(products);
+      posthog.capture("search_performed", {
+        query: q,
+        results_count: products.length,
+        has_results: products.length > 0,
+        locale,
+      });
+    } catch (error) {
+      posthog.captureException(error);
       setResults([]);
     } finally {
       setIsLoading(false);

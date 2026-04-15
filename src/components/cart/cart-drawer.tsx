@@ -7,6 +7,7 @@ import { useCart } from "./cart-context";
 import { formatMoney } from "@/lib/utils/format";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
+import posthog from "posthog-js";
 
 export function CartDrawer() {
   const t = useTranslations();
@@ -188,6 +189,25 @@ export function CartDrawer() {
             <a
               href={cart.checkoutUrl}
               className="block"
+              onClick={() => {
+                try {
+                  posthog.startSessionRecording();
+                } catch {
+                  // ignore — SDK may not expose method on older builds
+                }
+                posthog.capture("begin_checkout", {
+                  cart_total: cart.cost.totalAmount?.amount,
+                  cart_total_currency: cart.cost.totalAmount?.currencyCode,
+                  subtotal: cart.cost.subtotalAmount?.amount,
+                  item_count: cart.totalQuantity,
+                  items: cart.lines.map((l) => ({
+                    product_title: l.merchandise.product.title,
+                    variant_title: l.merchandise.title,
+                    quantity: l.quantity,
+                    price: l.merchandise.price?.amount,
+                  })),
+                });
+              }}
             >
               <Button size="lg" className="w-full">
                 {t("common.checkout")}

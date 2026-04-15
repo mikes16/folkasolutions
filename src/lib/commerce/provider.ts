@@ -85,6 +85,10 @@ export interface CommerceProvider {
     lines: { id: string; merchandiseId?: string; quantity: number }[]
   ): Promise<Cart>;
   removeFromCart(cartId: string, lineIds: string[]): Promise<Cart>;
+  updateCartAttributes(
+    cartId: string,
+    attributes: { key: string; value: string }[]
+  ): Promise<Cart>;
 
   // Navigation
   getMenu(handle: string, options?: LocaleOptions): Promise<Menu>;

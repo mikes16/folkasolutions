@@ -58,3 +58,7 @@ Thumbs.db
 # logs
 logs/
 *.log
+.env.local
+
+# mcp (contains personal api keys)
+.mcp.json
