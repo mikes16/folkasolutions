@@ -17,15 +17,42 @@ interface Props {
   params: Promise<{ handle: string; locale: string }>;
 }
 
+// Transforms a Shopify CDN image URL to a 1200x630 JPG crop optimized for
+// social previews (WhatsApp, X, Facebook, iMessage). Shopify CDN accepts
+// width/height/crop query params and honors them for the original asset.
+function toSocialPreviewUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    u.searchParams.set("width", "1200");
+    u.searchParams.set("height", "630");
+    u.searchParams.set("crop", "center");
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle, locale } = await params;
   const { country, language } = localeCountryMap[locale as Locale] ?? localeCountryMap.es;
   const product = await commerce.getProduct(handle, { country, language });
   if (!product) return {};
 
+  const productUrl = `${siteConfig.siteUrl}/${locale}/products/${handle}`;
+  const variant = product.variants[0];
   const ogImages = product.featuredImage
-    ? [{ url: product.featuredImage.url, width: product.featuredImage.width, height: product.featuredImage.height, alt: product.title }]
+    ? [
+        {
+          url: toSocialPreviewUrl(product.featuredImage.url),
+          width: 1200,
+          height: 630,
+          alt: product.title,
+        },
+      ]
     : [];
+
+  const ogLocale = locale === "en" ? "en_US" : "es_MX";
+  const alternateLocale = locale === "en" ? "es_MX" : "en_US";
 
   return {
     title: product.seo.title,
@@ -33,11 +60,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: product.seo.title,
       description: product.seo.description,
+      url: productUrl,
+      siteName: "Folka Coffee",
       images: ogImages,
       type: "website",
+      locale: ogLocale,
+      alternateLocale,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: product.seo.title,
+      description: product.seo.description,
+      images: ogImages.map((img) => img.url),
+    },
+    other: variant
+      ? {
+          "product:price:amount": variant.price.amount,
+          "product:price:currency": variant.price.currencyCode,
+          "product:availability": product.availableForSale
+            ? "in stock"
+            : "out of stock",
+          "product:brand": product.vendor ?? "Folka Coffee",
+        }
+      : undefined,
     alternates: {
-      canonical: `${siteConfig.siteUrl}/${locale}/products/${handle}`,
+      canonical: productUrl,
       languages: { en: `/en/products/${handle}`, es: `/es/products/${handle}` },
     },
   };

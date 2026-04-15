@@ -62,3 +62,6 @@ logs/
 
 # mcp (contains personal api keys)
 .mcp.json
+
+# Claude Code
+.claude/

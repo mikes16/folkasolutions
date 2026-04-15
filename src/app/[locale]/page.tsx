@@ -12,15 +12,29 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale === "es";
+  const title = isEs
+    ? "Folka Coffee | Equipo Premium para Café"
+    : "Folka Coffee | Premium Coffee Equipment";
+  const description = isEs
+    ? "Importadores oficiales de Rocket Espresso, Profitec, Mazzer, Fellow y más. Equipo premium para el barista exigente."
+    : "Official importers of Rocket Espresso, Profitec, Mazzer, Fellow & more. Premium coffee equipment for the discerning barista.";
+  const url = `${siteConfig.siteUrl}/${locale}`;
   return {
-    title: isEs
-      ? "Folka Coffee | Equipo Premium para Café"
-      : "Folka Coffee | Premium Coffee Equipment",
-    description: isEs
-      ? "Importadores oficiales de Rocket Espresso, Profitec, Mazzer, Fellow y más. Equipo premium para el barista exigente."
-      : "Official importers of Rocket Espresso, Profitec, Mazzer, Fellow & more. Premium coffee equipment for the discerning barista.",
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      locale: isEs ? "es_MX" : "en_US",
+      alternateLocale: isEs ? "en_US" : "es_MX",
+    },
+    twitter: {
+      title,
+      description,
+    },
     alternates: {
-      canonical: `${siteConfig.siteUrl}/${locale}`,
+      canonical: url,
       languages: { en: "/en", es: "/es" },
     },
   };
