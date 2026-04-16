@@ -59,12 +59,12 @@ export function LocaleSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 flex items-center gap-1"
-        aria-label={`Language: ${localeLabels[currentLocale].lang}`}
+        className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 flex items-center gap-1.5"
+        aria-label={`Language: ${localeLabels[currentLocale].lang}, Currency: ${localeCountryMap[currentLocale].currency}`}
       >
         <Icon name="globe" size={18} />
         <span className="text-[11px] uppercase font-medium tracking-wider hidden sm:inline">
-          {currentLocale}
+          {currentLocale} · {localeCountryMap[currentLocale].currency}
         </span>
       </button>
 
