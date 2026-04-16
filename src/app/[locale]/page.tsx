@@ -125,7 +125,14 @@ export default async function HomePage({
         nextLabel={t("home.heroNext")}
       />
 
-      {/* 2. Category Navigation — visual browsing with images */}
+      {/* 2. Featured Products — new arrivals, editorial */}
+      <FeaturedProducts
+        title={t("home.newArrivals")}
+        linkText={t("common.viewAll")}
+        products={featuredProducts}
+      />
+
+      {/* 3. Category Navigation — "keep exploring" after a first product taste */}
       <CategoryNavigation
         eyebrow={t("categories.eyebrow")}
         title={t("categories.title")}
@@ -135,13 +142,6 @@ export default async function HomePage({
           href,
           imageUrl,
         }))}
-      />
-
-      {/* 3. Featured Products — new arrivals, editorial */}
-      <FeaturedProducts
-        title={t("home.newArrivals")}
-        linkText={t("common.viewAll")}
-        products={featuredProducts}
       />
 
       {/* 4. Editorial Moment — video/image full-bleed storytelling */}
