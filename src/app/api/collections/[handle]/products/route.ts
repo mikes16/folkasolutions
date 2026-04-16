@@ -4,6 +4,7 @@ import { parseSortParam } from "@/lib/commerce/sort";
 import { CollectionProductsParamsSchema } from "@/lib/api/schemas";
 import { formatApiError } from "@/lib/api/error";
 import { parseFilterParams } from "@/lib/commerce/filters";
+import { isProductOnSale, isSaleCollectionHandle } from "@/lib/commerce/sale";
 
 export async function GET(
   req: Request,
@@ -53,8 +54,12 @@ export async function GET(
       );
     }
 
+    const products = isSaleCollectionHandle(handle)
+      ? collection.products.filter(isProductOnSale)
+      : collection.products;
+
     return NextResponse.json({
-      products: collection.products,
+      products,
       pageInfo: collection.pageInfo,
     });
   } catch (error) {

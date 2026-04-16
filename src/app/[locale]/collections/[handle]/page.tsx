@@ -13,6 +13,7 @@ import { collectionSchema } from "@/lib/seo/schemas";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
 import { getCuratedCategory } from "@/lib/curated-categories";
+import { isProductOnSale, isSaleCollectionHandle } from "@/lib/commerce/sale";
 
 export const revalidate = 60;
 
@@ -92,6 +93,14 @@ export default async function CollectionPage({ params, searchParams }: Props) {
 
   if (!collection) notFound();
 
+  // For sale-oriented collections, drop products that don't actually have a
+  // discount in the current market. Shopify's automated collection rule can
+  // only test "compareAtPrice > 0", not "compareAtPrice > price", so stale
+  // compareAtPrice values leak in otherwise.
+  const visibleProducts = isSaleCollectionHandle(handle)
+    ? collection.products.filter(isProductOnSale)
+    : collection.products;
+
   const filterKey = `${sort}|${filters.brands.join(",")}|${filters.typeIds.join(",")}|${filters.priceBucketId ?? ""}`;
 
   return (
@@ -129,10 +138,10 @@ export default async function CollectionPage({ params, searchParams }: Props) {
         <SortSelect currentSort={sort} />
       </FilterBar>
 
-      {collection.products.length > 0 ? (
+      {visibleProducts.length > 0 ? (
         <LoadMoreProducts
           key={filterKey}
-          initialProducts={collection.products}
+          initialProducts={visibleProducts}
           initialPageInfo={collection.pageInfo}
           collectionHandle={handle}
           sort={sort}
