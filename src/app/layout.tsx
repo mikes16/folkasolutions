@@ -2,19 +2,14 @@ import type { Metadata } from "next";
 import { Inter, Rajdhani } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { siteConfig } from "@/lib/site-config";
-import { cloudinaryUrl } from "@/lib/cloudinary";
 import "./globals.css";
 
-// Default social preview image: 1200x630 JPG with smart crop. Used as a
-// fallback for any page that doesn't define its own og:image.
-const DEFAULT_OG_IMAGE = cloudinaryUrl("/backs/folka_hero.webp", [
-  "f_jpg",
-  "q_auto",
-  "w_1200",
-  "h_630",
-  "c_fill",
-  "g_auto",
-]);
+// Default social preview image: pre-designed 1200x630 asset served from
+// Cloudinary. Transforms force JPG (max client compatibility incl. WhatsApp)
+// and auto quality. Used as a fallback for any page that doesn't define
+// its own og:image.
+const DEFAULT_OG_IMAGE =
+  "https://res.cloudinary.com/insightcollective/image/upload/f_jpg,q_auto/v1776360628/whatsapp_image_ntxwih.png";
 
 const inter = Inter({
   variable: "--font-inter",
