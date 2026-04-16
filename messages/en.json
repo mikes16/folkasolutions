@@ -133,7 +133,11 @@
     "ctaSubheading": "Start Your Journey",
     "ctaTitle": "Build Your Coffee Bar",
     "ctaDescription": "Whether you're setting up your first home espresso station or outfitting a commercial café, we have everything you need to get started.",
-    "essentials": "Essentials"
+    "essentials": "Essentials",
+    "homeBarEyebrow": "Bestsellers",
+    "homeBarTitle": "For Your Home Bar",
+    "homeBarDescription": "What ships most from our warehouse. A pick for the serious enthusiast building a setup at home — from competition grinders to bar-grade scales.",
+    "homeBarViewAll": "View all"
   },
   "categories": {
     "eyebrow": "Shop by Category",

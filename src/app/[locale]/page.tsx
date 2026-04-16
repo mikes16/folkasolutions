@@ -44,6 +44,7 @@ import { HeroCarousel } from "@/components/sections/hero-carousel";
 import { CategoryNavigation } from "@/components/sections/category-navigation";
 import { FeaturedProducts } from "@/components/sections/featured-products";
 import { EditorialMoment } from "@/components/sections/editorial-moment";
+import { HomeBarFavorites } from "@/components/sections/home-bar-favorites";
 import { BrandLogos } from "@/components/sections/brand-logos";
 import { Reviews } from "@/components/sections/reviews";
 import { TrustStrip } from "@/components/sections/trust-strip";
@@ -90,11 +91,16 @@ export default async function HomePage({
   const t = await getTranslations();
   const { country, language } = localeCountryMap[locale as Locale] ?? localeCountryMap.es;
 
-  const [featuredProducts, blog] = await Promise.all([
+  const [featuredProducts, homeBarCollection, blog] = await Promise.all([
     commerce.getProducts({
       first: 4,
       sortKey: "CREATED_AT",
       reverse: true,
+      country,
+      language,
+    }),
+    commerce.getCollection("best-seller", {
+      first: 8,
       country,
       language,
     }),
@@ -147,7 +153,18 @@ export default async function HomePage({
         imageAlt={t("home.editorialTitle")}
       />
 
-      {/* 5. Brand Logos — credibility strip */}
+      {/* 5. Home Bar Favorites — curated bestsellers */}
+      {homeBarCollection && (
+        <HomeBarFavorites
+          eyebrow={t("home.homeBarEyebrow")}
+          title={t("home.homeBarTitle")}
+          description={t("home.homeBarDescription")}
+          viewAllText={t("home.homeBarViewAll")}
+          products={homeBarCollection.products}
+        />
+      )}
+
+      {/* 6. Brand Logos — credibility strip */}
       <BrandLogos
         eyebrow={t("home.trustedBy")}
         brands={brands}

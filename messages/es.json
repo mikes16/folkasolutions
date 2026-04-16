@@ -133,7 +133,11 @@
     "ctaSubheading": "Empieza Tu Journey",
     "ctaTitle": "Arma Tu Coffee Bar",
     "ctaDescription": "Ya sea que estés armando tu primer setup de espresso en casa o equipando un café comercial, tenemos todo lo que necesitas.",
-    "essentials": "Esenciales"
+    "essentials": "Esenciales",
+    "homeBarEyebrow": "Bestsellers",
+    "homeBarTitle": "Para Tu Home Bar",
+    "homeBarDescription": "Lo que más envían nuestras bodegas. Selección para el aficionado serio que arma su setup en casa — de molinos de competencia a básculas de barra.",
+    "homeBarViewAll": "Ver todos"
   },
   "categories": {
     "eyebrow": "Explora por Categoría",
