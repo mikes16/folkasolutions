@@ -71,18 +71,16 @@ export function CategoryNavigation({
                   )}
                 </div>
               </div>
-              <div className="flex flex-col items-center gap-1.5">
-                <span className="text-[12px] md:text-[14px] uppercase tracking-[2px] font-semibold text-foreground font-[family-name:var(--font-rajdhani)] transition-colors duration-300 group-hover:text-foreground">
-                  {category.label}
-                </span>
-                {/* Arrow chevron — static opacity 40%, slides right + fully opaque on hover. */}
+              {/* Label with inline arrow that slides right on hover. */}
+              <span className="inline-flex items-center gap-1.5 text-[12px] md:text-[14px] uppercase tracking-[2px] font-semibold text-foreground font-[family-name:var(--font-rajdhani)]">
+                {category.label}
                 <span
                   aria-hidden="true"
-                  className="text-[11px] text-foreground/40 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1"
+                  className="text-foreground/40 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1"
                 >
                   →
                 </span>
-              </div>
+              </span>
             </Link>
           ))}
         </div>
