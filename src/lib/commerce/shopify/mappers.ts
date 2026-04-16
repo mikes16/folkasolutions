@@ -111,6 +111,7 @@ function mapCartLine(line: any): CartLine {
     merchandise: {
       id: line.merchandise.id,
       title: line.merchandise.title,
+      image: line.merchandise.image ? mapImage(line.merchandise.image) : null,
       product: {
         handle: line.merchandise.product.handle,
         title: line.merchandise.product.title,

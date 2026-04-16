@@ -94,6 +94,9 @@ export const CART_FRAGMENT = `
             ... on ProductVariant {
               id
               title
+              image {
+                ...ImageFragment
+              }
               product {
                 handle
                 title

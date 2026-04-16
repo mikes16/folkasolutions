@@ -88,6 +88,7 @@ export interface CartLine {
   merchandise: {
     id: string;
     title: string;
+    image: Image | null;
     product: {
       handle: string;
       title: string;

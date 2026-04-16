@@ -79,7 +79,11 @@ export function CartDrawer() {
             </div>
           ) : (
             <ul className="flex flex-col gap-5">
-              {lines.map((line) => (
+              {lines.map((line) => {
+                // Prefer variant-specific image; fall back to product featured image.
+                const lineImage =
+                  line.merchandise.image ?? line.merchandise.product.featuredImage;
+                return (
                 <li key={line.id} className="flex gap-4">
                   {/* Image */}
                   <Link
@@ -87,10 +91,10 @@ export function CartDrawer() {
                     onClick={closeCart}
                     className="relative w-20 h-20 shrink-0 bg-white rounded-xl overflow-hidden"
                   >
-                    {line.merchandise.product.featuredImage ? (
+                    {lineImage ? (
                       <Image
-                        src={line.merchandise.product.featuredImage.url}
-                        alt={line.merchandise.product.title}
+                        src={lineImage.url}
+                        alt={lineImage.altText || line.merchandise.product.title}
                         fill
                         className="object-contain p-2"
                         sizes="80px"
@@ -166,7 +170,8 @@ export function CartDrawer() {
                     <Icon name="close" size={16} />
                   </button>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           )}
         </div>
