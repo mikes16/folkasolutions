@@ -25,18 +25,19 @@ export async function POST(req: Request) {
 
   try {
     const data = result.data;
+    const locale = { country: data.country, language: data.language };
 
     switch (data.action) {
       case "create": {
-        const cart = await commerce.createCart();
+        const cart = await commerce.createCart(locale);
         return NextResponse.json(cart);
       }
       case "get": {
-        const cart = await commerce.getCart(data.cartId);
+        const cart = await commerce.getCart(data.cartId, locale);
         return NextResponse.json(cart);
       }
       case "add": {
-        const cart = await commerce.addToCart(data.cartId, data.lines);
+        const cart = await commerce.addToCart(data.cartId, data.lines, locale);
         const posthog = getPostHogClient();
         posthog.capture({
           distinctId,
@@ -57,16 +58,25 @@ export async function POST(req: Request) {
           data.lines.map((l) => ({
             id: l.id,
             quantity: l.quantity,
-          }))
+          })),
+          locale
         );
         return NextResponse.json(cart);
       }
       case "remove": {
-        const cart = await commerce.removeFromCart(data.cartId, data.lineIds);
+        const cart = await commerce.removeFromCart(
+          data.cartId,
+          data.lineIds,
+          locale
+        );
         return NextResponse.json(cart);
       }
       case "updateAttributes": {
-        const cart = await commerce.updateCartAttributes(data.cartId, data.attributes);
+        const cart = await commerce.updateCartAttributes(
+          data.cartId,
+          data.attributes,
+          locale
+        );
         return NextResponse.json(cart);
       }
     }

@@ -6,13 +6,16 @@ import {
   useState,
   useEffect,
   useCallback,
+  useMemo,
   useOptimistic,
   useTransition,
   type ReactNode,
 } from "react";
 import Cookies from "js-cookie";
 import posthog from "posthog-js";
+import { useLocale } from "next-intl";
 import type { Cart, CartLineInput } from "@/lib/commerce/types";
+import { localeCountryMap, type Locale } from "@/i18n/config";
 
 const CART_COOKIE = "folka_cart_id";
 const OUT_OF_STOCK_MSG = "No hay más unidades disponibles en stock.";
@@ -41,7 +44,11 @@ export function useCart() {
 // Server actions via API routes to avoid exposing tokens client-side
 class CartUserError extends Error {}
 
-async function cartFetch(action: string, body: Record<string, unknown>): Promise<Cart> {
+async function cartFetch(
+  action: string,
+  body: Record<string, unknown>,
+  locale: { country: string; language: string }
+): Promise<Cart> {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   try {
     const posthog = (await import("posthog-js")).default;
@@ -55,7 +62,7 @@ async function cartFetch(action: string, body: Record<string, unknown>): Promise
   const res = await fetch("/api/cart", {
     method: "POST",
     headers,
-    body: JSON.stringify({ action, ...body }),
+    body: JSON.stringify({ action, ...locale, ...body }),
   });
   if (!res.ok) {
     const detail = await res.json().catch(() => ({}));
@@ -75,17 +82,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const clearError = useCallback(() => setErrorMessage(null), []);
 
+  // Active locale → country/language for Shopify @inContext (ensures cart
+  // prices match product page, including market-level tax/price adjustments).
+  const activeLocale = useLocale() as Locale;
+  const locale = useMemo(() => {
+    const entry = localeCountryMap[activeLocale] ?? localeCountryMap.es;
+    return { country: entry.country, language: entry.language };
+  }, [activeLocale]);
+
   // Load cart from cookie on mount
   useEffect(() => {
     const cartId = Cookies.get(CART_COOKIE);
     if (cartId) {
-      cartFetch("get", { cartId })
+      cartFetch("get", { cartId }, locale)
         .then((c) => {
           if (c) setCart(c);
           else Cookies.remove(CART_COOKIE);
         })
         .catch(() => Cookies.remove(CART_COOKIE));
     }
+    // Only runs once on mount — locale is stable per render tree.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openCart = useCallback(() => setIsOpen(true), []);
@@ -93,7 +110,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const ensureCart = useCallback(async (): Promise<string> => {
     if (cart?.id) return cart.id;
-    const newCart = await cartFetch("create", {});
+    const newCart = await cartFetch("create", {}, locale);
     setCart(newCart);
     Cookies.set(CART_COOKIE, newCart.id, { expires: 30 });
     // Stamp the PostHog distinct_id onto the cart as a note attribute so
@@ -102,16 +119,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const distinctId = posthog.get_distinct_id?.();
       if (distinctId) {
-        await cartFetch("updateAttributes", {
-          cartId: newCart.id,
-          attributes: [{ key: "posthog_distinct_id", value: distinctId }],
-        });
+        await cartFetch(
+          "updateAttributes",
+          {
+            cartId: newCart.id,
+            attributes: [{ key: "posthog_distinct_id", value: distinctId }],
+          },
+          locale
+        );
       }
     } catch {
       // ignore — non-fatal for cart creation
     }
     return newCart.id;
-  }, [cart?.id]);
+  }, [cart?.id, locale]);
 
   const handleError = useCallback((error: unknown, fallback: string) => {
     if (error instanceof CartUserError) {
@@ -130,7 +151,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           const cartId = await ensureCart();
           const prevQty =
             cart?.lines.find((l) => l.merchandise.id === line.merchandiseId)?.quantity ?? 0;
-          const updated = await cartFetch("add", { cartId, lines: [line] });
+          const updated = await cartFetch("add", { cartId, lines: [line] }, locale);
           const newLine = updated.lines.find((l) => l.merchandise.id === line.merchandiseId);
           const expectedQty = prevQty + line.quantity;
           if (newLine && newLine.quantity < expectedQty) {
@@ -164,7 +185,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
       });
     },
-    [ensureCart, handleError, cart?.lines]
+    [ensureCart, handleError, cart?.lines, locale]
   );
 
   const updateItem = useCallback(
@@ -174,16 +195,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
         try {
           setErrorMessage(null);
           if (quantity === 0) {
-            const updated = await cartFetch("remove", {
-              cartId: cart.id,
-              lineIds: [lineId],
-            });
+            const updated = await cartFetch(
+              "remove",
+              { cartId: cart.id, lineIds: [lineId] },
+              locale
+            );
             setCart(updated);
           } else {
-            const updated = await cartFetch("update", {
-              cartId: cart.id,
-              lines: [{ id: lineId, quantity }],
-            });
+            const updated = await cartFetch(
+              "update",
+              { cartId: cart.id, lines: [{ id: lineId, quantity }] },
+              locale
+            );
             const updatedLine = updated.lines.find((l) => l.id === lineId);
             if (updatedLine && updatedLine.quantity !== quantity) {
               setErrorMessage(OUT_OF_STOCK_MSG);
@@ -195,7 +218,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
       });
     },
-    [cart?.id, handleError]
+    [cart?.id, handleError, locale]
   );
 
   const removeItem = useCallback(
@@ -205,10 +228,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       startTransition(async () => {
         try {
           setErrorMessage(null);
-          const updated = await cartFetch("remove", {
-            cartId: cart.id,
-            lineIds: [lineId],
-          });
+          const updated = await cartFetch(
+            "remove",
+            { cartId: cart.id, lineIds: [lineId] },
+            locale
+          );
           posthog.capture("remove_from_cart", {
             product_title: removedLine?.merchandise.product.title,
             variant_title: removedLine?.merchandise.title,
@@ -224,7 +248,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
       });
     },
-    [cart?.id, cart?.lines, handleError]
+    [cart?.id, cart?.lines, handleError, locale]
   );
 
   return (

@@ -201,24 +201,33 @@ export const shopifyProvider: CommerceProvider = {
   async createCart(options?: LocaleOptions): Promise<Cart> {
     const data = await shopifyFetch<{ cartCreate: { cart: any } }>({
       query: CREATE_CART,
+      variables: { country: options?.country, language: options?.language },
       country: options?.country,
       language: options?.language,
     });
     return mapCart(data.cartCreate.cart);
   },
 
-  async getCart(cartId: string): Promise<Cart | null> {
+  async getCart(cartId: string, options?: LocaleOptions): Promise<Cart | null> {
     const data = await shopifyFetch<{ cart: any }>({
       query: GET_CART,
-      variables: { cartId },
+      variables: { cartId, country: options?.country, language: options?.language },
+      country: options?.country,
+      language: options?.language,
     });
     return data.cart ? mapCart(data.cart) : null;
   },
 
-  async addToCart(cartId: string, lines: CartLineInput[]): Promise<Cart> {
+  async addToCart(
+    cartId: string,
+    lines: CartLineInput[],
+    options?: LocaleOptions
+  ): Promise<Cart> {
     const data = await shopifyFetch<{ cartLinesAdd: { cart: any; userErrors: { message: string; field?: string[] }[] } }>({
       query: ADD_TO_CART,
-      variables: { cartId, lines },
+      variables: { cartId, lines, country: options?.country, language: options?.language },
+      country: options?.country,
+      language: options?.language,
     });
     if (data.cartLinesAdd.userErrors?.length) {
       throw new UserError(data.cartLinesAdd.userErrors[0].message);
@@ -228,11 +237,14 @@ export const shopifyProvider: CommerceProvider = {
 
   async updateCart(
     cartId: string,
-    lines: { id: string; merchandiseId?: string; quantity: number }[]
+    lines: { id: string; merchandiseId?: string; quantity: number }[],
+    options?: LocaleOptions
   ): Promise<Cart> {
     const data = await shopifyFetch<{ cartLinesUpdate: { cart: any; userErrors: { message: string; field?: string[] }[] } }>({
       query: UPDATE_CART_LINES,
-      variables: { cartId, lines },
+      variables: { cartId, lines, country: options?.country, language: options?.language },
+      country: options?.country,
+      language: options?.language,
     });
     if (data.cartLinesUpdate.userErrors?.length) {
       throw new UserError(data.cartLinesUpdate.userErrors[0].message);
@@ -240,23 +252,32 @@ export const shopifyProvider: CommerceProvider = {
     return mapCart(data.cartLinesUpdate.cart);
   },
 
-  async removeFromCart(cartId: string, lineIds: string[]): Promise<Cart> {
+  async removeFromCart(
+    cartId: string,
+    lineIds: string[],
+    options?: LocaleOptions
+  ): Promise<Cart> {
     const data = await shopifyFetch<{ cartLinesRemove: { cart: any } }>({
       query: REMOVE_FROM_CART,
-      variables: { cartId, lineIds },
+      variables: { cartId, lineIds, country: options?.country, language: options?.language },
+      country: options?.country,
+      language: options?.language,
     });
     return mapCart(data.cartLinesRemove.cart);
   },
 
   async updateCartAttributes(
     cartId: string,
-    attributes: { key: string; value: string }[]
+    attributes: { key: string; value: string }[],
+    options?: LocaleOptions
   ): Promise<Cart> {
     const data = await shopifyFetch<{
       cartAttributesUpdate: { cart: any; userErrors: { message: string; field?: string[] }[] };
     }>({
       query: UPDATE_CART_ATTRIBUTES,
-      variables: { cartId, attributes },
+      variables: { cartId, attributes, country: options?.country, language: options?.language },
+      country: options?.country,
+      language: options?.language,
     });
     if (data.cartAttributesUpdate.userErrors?.length) {
       throw new UserError(data.cartAttributesUpdate.userErrors[0].message);

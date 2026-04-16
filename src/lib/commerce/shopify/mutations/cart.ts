@@ -1,7 +1,8 @@
 import { CART_FRAGMENT } from "../fragments";
 
 export const CREATE_CART = `
-  mutation CreateCart {
+  mutation CreateCart($country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     cartCreate {
       cart {
         ...CartFragment
@@ -16,7 +17,8 @@ export const CREATE_CART = `
 `;
 
 export const ADD_TO_CART = `
-  mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+  mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart {
         ...CartFragment
@@ -31,7 +33,8 @@ export const ADD_TO_CART = `
 `;
 
 export const UPDATE_CART_LINES = `
-  mutation UpdateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  mutation UpdateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {
         ...CartFragment
@@ -46,7 +49,8 @@ export const UPDATE_CART_LINES = `
 `;
 
 export const UPDATE_CART_ATTRIBUTES = `
-  mutation UpdateCartAttributes($cartId: ID!, $attributes: [AttributeInput!]!) {
+  mutation UpdateCartAttributes($cartId: ID!, $attributes: [AttributeInput!]!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     cartAttributesUpdate(cartId: $cartId, attributes: $attributes) {
       cart {
         ...CartFragment
@@ -61,7 +65,8 @@ export const UPDATE_CART_ATTRIBUTES = `
 `;
 
 export const REMOVE_FROM_CART = `
-  mutation RemoveFromCart($cartId: ID!, $lineIds: [ID!]!) {
+  mutation RemoveFromCart($cartId: ID!, $lineIds: [ID!]!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart {
         ...CartFragment

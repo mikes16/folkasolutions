@@ -10,23 +10,31 @@ const cartLineUpdate = z.object({
   quantity: z.number().int().nonnegative(),
 });
 
+const localeFields = {
+  country: z.string().optional(),
+  language: z.string().optional(),
+};
+
 export const CartActionSchema = z.discriminatedUnion("action", [
-  z.object({ action: z.literal("create") }),
-  z.object({ action: z.literal("get"), cartId: z.string().min(1) }),
+  z.object({ action: z.literal("create"), ...localeFields }),
+  z.object({ action: z.literal("get"), cartId: z.string().min(1), ...localeFields }),
   z.object({
     action: z.literal("add"),
     cartId: z.string().min(1),
     lines: z.array(cartLineInput).min(1),
+    ...localeFields,
   }),
   z.object({
     action: z.literal("update"),
     cartId: z.string().min(1),
     lines: z.array(cartLineUpdate).min(1),
+    ...localeFields,
   }),
   z.object({
     action: z.literal("remove"),
     cartId: z.string().min(1),
     lineIds: z.array(z.string().min(1)).min(1),
+    ...localeFields,
   }),
   z.object({
     action: z.literal("updateAttributes"),
@@ -34,6 +42,7 @@ export const CartActionSchema = z.discriminatedUnion("action", [
     attributes: z
       .array(z.object({ key: z.string().min(1), value: z.string() }))
       .min(1),
+    ...localeFields,
   }),
 ]);
 

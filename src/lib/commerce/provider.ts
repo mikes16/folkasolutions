@@ -78,16 +78,26 @@ export interface CommerceProvider {
 
   // Cart
   createCart(options?: LocaleOptions): Promise<Cart>;
-  getCart(cartId: string): Promise<Cart | null>;
-  addToCart(cartId: string, lines: CartLineInput[]): Promise<Cart>;
+  getCart(cartId: string, options?: LocaleOptions): Promise<Cart | null>;
+  addToCart(
+    cartId: string,
+    lines: CartLineInput[],
+    options?: LocaleOptions
+  ): Promise<Cart>;
   updateCart(
     cartId: string,
-    lines: { id: string; merchandiseId?: string; quantity: number }[]
+    lines: { id: string; merchandiseId?: string; quantity: number }[],
+    options?: LocaleOptions
   ): Promise<Cart>;
-  removeFromCart(cartId: string, lineIds: string[]): Promise<Cart>;
+  removeFromCart(
+    cartId: string,
+    lineIds: string[],
+    options?: LocaleOptions
+  ): Promise<Cart>;
   updateCartAttributes(
     cartId: string,
-    attributes: { key: string; value: string }[]
+    attributes: { key: string; value: string }[],
+    options?: LocaleOptions
   ): Promise<Cart>;
 
   // Navigation
