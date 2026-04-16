@@ -12,6 +12,7 @@ import { parseFilterParams } from "@/lib/commerce/filters";
 import { collectionSchema } from "@/lib/seo/schemas";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
+import { getCuratedCategory } from "@/lib/curated-categories";
 
 export const revalidate = 60;
 
@@ -31,16 +32,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const collection = await commerce.getCollection(handle, { country, language });
   if (!collection) return {};
 
+  // Fallback to curated i18n description when Shopify has no SEO copy.
+  // Preserves Folka's editorial tone across all 13 curated categories
+  // without depending on per-collection Shopify admin edits.
+  let description = collection.seo.description || collection.description || "";
+  if (!description) {
+    const curated = getCuratedCategory(handle);
+    if (curated) {
+      const t = await getTranslations({ locale });
+      description = t(
+        curated.descriptionKey as Parameters<typeof t>[0],
+      );
+    }
+  }
+
+  const url = `${siteConfig.siteUrl}/${locale}/collections/${handle}`;
+  const title = collection.seo.title || collection.title;
+
   return {
-    title: collection.seo.title,
-    description: collection.seo.description,
+    title,
+    description,
     openGraph: {
-      title: collection.seo.title,
-      description: collection.seo.description,
+      title,
+      description,
+      url,
       ...(collection.image && { images: [{ url: collection.image.url }] }),
     },
+    twitter: {
+      title,
+      description,
+    },
     alternates: {
-      canonical: `${siteConfig.siteUrl}/${locale}/collections/${handle}`,
+      canonical: url,
       languages: { en: `/en/collections/${handle}`, es: `/es/collections/${handle}` },
     },
   };

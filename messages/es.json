@@ -184,6 +184,21 @@
       "syrups": "Jarabes y Polvos",
       "merch": "Merch"
     },
+    "descriptions": {
+      "espressoMachines": "Máquinas de espresso para casa y café. Rocket, La Marzocco, Profitec, Lelit. Instalación y soporte técnico desde Monterrey.",
+      "commercialEspresso": "Máquinas comerciales para cafeterías que sirven cientos de tazas al día. Slayer, La Marzocco, Faema, Cimbali. Con servicio técnico Folka.",
+      "homeGrinders": "Molinos de precisión para tu setup en casa. Niche, Fellow, Baratza, DF64. El eslabón que define qué tan buena es la taza.",
+      "commercialGrinders": "Molinos para barra profesional. Mazzer, Mahlkönig, Eureka, Ceado. Consistencia turno tras turno.",
+      "brewing": "Pour over, prensa, AeroPress, sifón. Todo lo que necesitas para extraer lo mejor de un grano fuera del espresso.",
+      "accessories": "Herramientas de barista: tampers, pitchers, distribuidores, paños. Lo que convierte un café decente en uno que recuerdas.",
+      "drinkware": "Tazas, vasos y platillos para servir con intención. Acme, NotNeutral, Kinto, Origami. Cada sorbo importa.",
+      "scales": "Básculas Acaia, Felicita y Timemore. Gramos, tiempo, flow. La herramienta favorita de cualquier barista serio.",
+      "cleaning": "Detergentes, cepillos y pastillas para mantener tu equipo a punto. Urnex, Cafiza, Puly. Cuidar la máquina es cuidar el café.",
+      "coffee": "Café de especialidad tostado en Monterrey. Orígenes de Chiapas y Guerrero, trazable y fresco. Tostamos bajo pedido.",
+      "tea": "Tés, matcha y bebidas para complementar tu menú. Opciones para baristas que piensan más allá del café.",
+      "syrups": "Jarabes, chai y polvos de cafetería. Ingredientes para bebidas de firma con perfil limpio y pronunciado.",
+      "merch": "Totes, termos, mandiles y stickers. Un pedazo de Folka para llevar al siguiente turno."
+    },
     "sortBestSelling": "Mas Vendidos",
     "sortPriceLowHigh": "Precio: Menor a Mayor",
     "sortPriceHighLow": "Precio: Mayor a Menor",

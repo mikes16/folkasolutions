@@ -184,6 +184,21 @@
       "syrups": "Syrups & Powders",
       "merch": "Merch"
     },
+    "descriptions": {
+      "espressoMachines": "Espresso machines for home and café. Rocket, La Marzocco, Profitec, Lelit. Installed and supported from Monterrey.",
+      "commercialEspresso": "Commercial machines built for cafés pulling hundreds of shots a day. Slayer, La Marzocco, Faema, Cimbali. Serviced by Folka.",
+      "homeGrinders": "Precision grinders for your home setup. Niche, Fellow, Baratza, DF64. The link that defines how good the cup really gets.",
+      "commercialGrinders": "Grinders for the professional bar. Mazzer, Mahlkönig, Eureka, Ceado. Consistency, shift after shift.",
+      "brewing": "Pour over, French press, AeroPress, siphon. Everything you need to get the best from a bean beyond espresso.",
+      "accessories": "Barista tools: tampers, pitchers, distributors, cloths. What turns a decent cup into one you'll remember.",
+      "drinkware": "Cups, glassware and saucers to serve with intention. Acme, NotNeutral, Kinto, Origami. Every sip matters.",
+      "scales": "Acaia, Felicita and Timemore scales. Grams, time, flow. The quiet tool every serious barista relies on.",
+      "cleaning": "Detergents, brushes and tablets to keep your gear dialed. Urnex, Cafiza, Puly. Care for the machine, care for the coffee.",
+      "coffee": "Specialty coffee roasted in Monterrey. Chiapas and Guerrero origins, traceable and fresh. Roasted to order.",
+      "tea": "Teas, matcha and beverages to round out your menu. Options for baristas thinking beyond coffee.",
+      "syrups": "Syrups, chai and powders for cafés. Ingredients for signature drinks with a clean, deliberate profile.",
+      "merch": "Totes, travel mugs, aprons and stickers. A piece of Folka to take with you to the next shift."
+    },
     "sortBestSelling": "Best Selling",
     "sortPriceLowHigh": "Price: Low to High",
     "sortPriceHighLow": "Price: High to Low",
