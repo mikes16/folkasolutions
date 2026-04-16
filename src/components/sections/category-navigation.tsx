@@ -71,15 +71,8 @@ export function CategoryNavigation({
                   )}
                 </div>
               </div>
-              {/* Label with inline arrow that slides right on hover. */}
-              <span className="inline-flex items-center gap-1.5 text-[12px] md:text-[14px] uppercase tracking-[2px] font-semibold text-foreground font-[family-name:var(--font-rajdhani)]">
+              <span className="text-[12px] md:text-[14px] uppercase tracking-[2px] font-semibold text-foreground font-[family-name:var(--font-rajdhani)] transition-colors duration-300 group-hover:text-foreground/70">
                 {category.label}
-                <span
-                  aria-hidden="true"
-                  className="text-foreground/40 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1"
-                >
-                  →
-                </span>
               </span>
             </Link>
           ))}
