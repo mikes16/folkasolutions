@@ -141,6 +141,8 @@
   },
   "categories": {
     "eyebrow": "Shop by Category",
+    "title": "Build Your Setup",
+    "description": "From espresso machines to competition grinders, bar accessories and care tools. Pick where to start.",
     "espresso": "Espresso",
     "grinders": "Grinders",
     "brewing": "Brewing",

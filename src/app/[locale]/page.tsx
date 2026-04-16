@@ -128,6 +128,8 @@ export default async function HomePage({
       {/* 2. Category Navigation — visual browsing with images */}
       <CategoryNavigation
         eyebrow={t("categories.eyebrow")}
+        title={t("categories.title")}
+        description={t("categories.description")}
         categories={categoryKeys.map(({ key, href, imageUrl }) => ({
           label: t(`categories.${key}` as Parameters<typeof t>[0]),
           href,
