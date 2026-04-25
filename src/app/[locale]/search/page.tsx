@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { ProductCard } from "@/components/product/product-card";
 import { Icon } from "@/components/ui/icon";
+import { EmptyState } from "@/components/ui/empty-state";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import type { Product } from "@/lib/commerce/types";
 import posthog from "posthog-js";
@@ -90,9 +91,13 @@ function SearchContent() {
       {isLoading ? (
         <p className="text-center text-muted py-20">{t("search.searching")}</p>
       ) : hasSearched && results.length === 0 ? (
-        <div className="text-center py-20">
-          <p className="text-muted">{t("search.noResults", { query })}</p>
-        </div>
+        <EmptyState
+          eyebrow={t("emptyState.searchEyebrow")}
+          title={t("emptyState.searchTitle", { query })}
+          description={t("emptyState.searchDescription")}
+          ctaHref="/shop"
+          ctaText={t("emptyState.browseCatalog")}
+        />
       ) : results.length > 0 ? (
         <>
           <p className="text-sm text-muted mb-6">

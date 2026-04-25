@@ -42,9 +42,8 @@ export async function generateMetadata({
 
 import { HeroCarousel } from "@/components/sections/hero-carousel";
 import { CategoryNavigation } from "@/components/sections/category-navigation";
-import { FeaturedProducts } from "@/components/sections/featured-products";
 import { EditorialMoment } from "@/components/sections/editorial-moment";
-import { HomeBarFavorites } from "@/components/sections/home-bar-favorites";
+import { ProductCarousel } from "@/components/sections/product-carousel";
 import { BrandLogos } from "@/components/sections/brand-logos";
 import { Reviews } from "@/components/sections/reviews";
 import { TrustStrip } from "@/components/sections/trust-strip";
@@ -79,7 +78,30 @@ const brands = [
   { name: "Acaia", href: "/collections/acaia" },
 ];
 
-const reviewKeys = ["review1", "review2", "review3"] as const;
+// Locale-independent review metadata: video URL, poster image, café name.
+// Text/author/role come from i18n. Videos live in /public/videos/ for now —
+// swap to Cloudinary URLs when ready for CDN adaptive delivery. Leave
+// videoUrl empty to fall back to the pull-quote layout per slide.
+const reviewsMeta = [
+  {
+    key: "review1",
+    videoUrl: "/videos/testimonial-1.mp4",
+    image: "/videos/posters/testimonial-1.jpg",
+    cafeName: "",
+  },
+  {
+    key: "review2",
+    videoUrl: "/videos/testimonial-2.mp4",
+    image: "/videos/posters/testimonial-2.jpg",
+    cafeName: "",
+  },
+  {
+    key: "review3",
+    videoUrl: "/videos/testimonial-3.mp4",
+    image: "/videos/posters/testimonial-3.jpg",
+    cafeName: "",
+  },
+] as const;
 
 export default async function HomePage({
   params,
@@ -91,28 +113,38 @@ export default async function HomePage({
   const t = await getTranslations();
   const { country, language } = localeCountryMap[locale as Locale] ?? localeCountryMap.es;
 
-  const [featuredProducts, homeBarCollection, blog] = await Promise.all([
-    commerce.getProducts({
-      first: 4,
-      sortKey: "CREATED_AT",
-      reverse: true,
-      country,
-      language,
-    }),
-    commerce.getCollection("best-seller", {
-      first: 8,
-      country,
-      language,
-    }),
-    commerce.getBlog("coffee-grounds", { first: 3, country, language }),
-  ]);
+  const [featuredProducts, homeBarCollection, baristaPicksCollection, blog] =
+    await Promise.all([
+      commerce.getProducts({
+        first: 4,
+        sortKey: "CREATED_AT",
+        reverse: true,
+        country,
+        language,
+      }),
+      commerce.getCollection("best-seller", {
+        first: 8,
+        country,
+        language,
+      }),
+      commerce.getCollection("barista-picks", {
+        first: 12,
+        sortKey: "MANUAL",
+        country,
+        language,
+      }),
+      commerce.getBlog("coffee-grounds", { first: 3, country, language }),
+    ]);
 
   const heroSlides = getHeroSlides(locale as Locale);
 
-  const reviews = reviewKeys.map((key) => ({
+  const reviews = reviewsMeta.map(({ key, videoUrl, image, cafeName }) => ({
     text: t(`testimonials.${key}Text`),
     author: t(`testimonials.${key}Author`),
     role: t(`testimonials.${key}Role`),
+    videoUrl: videoUrl || undefined,
+    image: image || undefined,
+    cafeName: cafeName || undefined,
   }));
 
   return (
@@ -125,11 +157,15 @@ export default async function HomePage({
         nextLabel={t("home.heroNext")}
       />
 
-      {/* 2. Featured Products — new arrivals, editorial */}
-      <FeaturedProducts
-        title={t("home.newArrivals")}
-        linkText={t("common.viewAll")}
+      {/* 2. New Arrivals — first product moment, above-the-fold taster */}
+      <ProductCarousel
+        eyebrow={t("home.newArrivals")}
+        title={t("home.newArrivalsTitle")}
+        description={t("home.newArrivalsDescription")}
+        viewAllText={t("common.viewAll")}
+        viewAllHref="/new-arrivals"
         products={featuredProducts}
+        layout="grid"
       />
 
       {/* 3. Category Navigation — "keep exploring" after a first product taste */}
@@ -157,11 +193,12 @@ export default async function HomePage({
 
       {/* 5. Home Bar Favorites — curated bestsellers */}
       {homeBarCollection && (
-        <HomeBarFavorites
+        <ProductCarousel
           eyebrow={t("home.homeBarEyebrow")}
           title={t("home.homeBarTitle")}
           description={t("home.homeBarDescription")}
           viewAllText={t("home.homeBarViewAll")}
+          viewAllHref="/collections/best-seller"
           products={homeBarCollection.products}
         />
       )}
@@ -178,13 +215,25 @@ export default async function HomePage({
         reviews={reviews}
       />
 
-      {/* 7. Trust Strip — horizontal indicators */}
+      {/* 7. Barista Picks — curated equipment chosen by working pros */}
+      {baristaPicksCollection && (
+        <ProductCarousel
+          eyebrow={t("home.baristaPicksEyebrow")}
+          title={t("home.baristaPicksTitle")}
+          description={t("home.baristaPicksDescription")}
+          viewAllText={t("home.baristaPicksViewAll")}
+          viewAllHref="/collections/barista-picks"
+          products={baristaPicksCollection.products}
+        />
+      )}
+
+      {/* 8. Trust Strip — editorial hairline row */}
       <TrustStrip
-        items={[
-          { label: t("home.trustShipping"), imageUrl: "/icons/ic_shipping.webp" },
-          { label: t("home.trustService"), imageUrl: "/icons/ic_service.webp" },
-          { label: t("home.trustPayment"), imageUrl: "/icons/ic_payment.webp" },
-          { label: t("home.trustSca"), imageUrl: "/icons/ic_sca.webp" },
+        labels={[
+          t("home.trustShipping"),
+          t("home.trustService"),
+          t("home.trustPayment"),
+          t("home.trustSca"),
         ]}
       />
 
@@ -197,6 +246,20 @@ export default async function HomePage({
         ctaHref="/pages/contact"
         imageUrl="/backs/build_cafe.webp"
         imageAlt={t("home.commercialTitle")}
+        stats={[
+          {
+            value: t("home.commercialStat1Value"),
+            label: t("home.commercialStat1Label"),
+          },
+          {
+            value: t("home.commercialStat2Value"),
+            label: t("home.commercialStat2Label"),
+          },
+          {
+            value: t("home.commercialStat3Value"),
+            label: t("home.commercialStat3Label"),
+          },
+        ]}
       />
 
       {/* 9. Blog / Stories — editorial content */}
@@ -219,13 +282,15 @@ export default async function HomePage({
         successMessage={t("home.newsletterSuccess")}
       />
 
-      {/* 11. Closing CTA — final conversion push */}
+      {/* 11. Closing CTA — cinematic closing moment over brand imagery */}
       <ClosingCta
         eyebrow={t("home.ctaSubheading")}
         title={t("home.ctaTitle")}
         description={t("home.ctaDescription")}
         ctaText={t("common.shopNow")}
         ctaHref="/shop"
+        imageUrl="/hero/hf_20260424_231041_d5c47494-e52b-47a5-9c34-43f15ba71b58.png"
+        imageAlt={t("home.ctaTitle")}
       />
     </>
   );

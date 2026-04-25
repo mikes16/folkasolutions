@@ -17,9 +17,12 @@
   --muted: #6B7280;
   --border: #D5CFC4;
   --card-bg: #F7F4EE;
-  --radius-button: 60px;
-  --radius-input: 8px;
-  --radius-block: 24px;
+  --footer-bg: #0B1422;
+  /* Editorial radii — pill for intentional CTAs only, near-sharp for inputs
+     and blocks so the design reads like paper, not SaaS cards. */
+  --radius-button: 9999px;
+  --radius-input: 2px;
+  --radius-block: 4px;
   --page-width: 1640px;
 }
 
@@ -34,6 +37,7 @@
   --color-border: var(--border);
   --color-card: var(--card-bg);
   --color-header-bg: var(--header-bg);
+  --color-footer-bg: var(--footer-bg);
   --font-sans: var(--font-inter);
   --font-heading: var(--font-rajdhani);
 }

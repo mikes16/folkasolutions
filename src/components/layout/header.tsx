@@ -7,12 +7,13 @@ import { CartButton, LocaleSwitcher } from "./header-actions";
 import { DesktopNav } from "./desktop-nav";
 import { MobileMenu } from "./mobile-menu";
 import { AnnouncementBar } from "./announcement-bar";
+import { HeaderShell } from "./header-shell";
 
 export async function Header() {
   const t = await getTranslations();
 
   return (
-    <header className="sticky top-0 z-50 bg-header-bg/85 backdrop-blur-[12px] transition-shadow duration-300">
+    <HeaderShell>
       <AnnouncementBar
         text={t("announcement.text")}
         linkText={t("announcement.linkText")}
@@ -63,6 +64,6 @@ export async function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }

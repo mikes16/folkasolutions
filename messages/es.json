@@ -111,6 +111,8 @@
     "heroNext": "Siguiente slide",
     "heroSlideOf": "Slide {current} de {total}",
     "newArrivals": "Recién Llegados",
+    "newArrivalsTitle": "Recién salido del piso.",
+    "newArrivalsDescription": "Equipo que acaba de aterrizar en nuestras bodegas. Seleccionado de las importaciones de la semana, listo para salir.",
     "editorialEyebrow": "Detrás de Cada Buena Taza",
     "editorialTitle": "Un Sistema Completo",
     "editorialDescription": "Los mejores baristas no improvisan su setup. Cada detalle — molino, máquina, agua, técnica — trabaja en conjunto para crear algo extraordinario.",
@@ -123,6 +125,12 @@
     "commercialEyebrow": "Para Profesionales del Café",
     "commercialTitle": "Equipamos Tu Café",
     "commercialText": "Del concepto a la barra, Folka te ayuda a armar el setup perfecto con el equipo correcto, capacitación y asesoría de especialistas. No somos solo un proveedor — somos tu partner.",
+    "commercialStat1Value": "32 marcas",
+    "commercialStat1Label": "Importadas desde 2018",
+    "commercialStat2Value": "80+ cafés",
+    "commercialStat2Label": "Atendidos en MX y EE.UU.",
+    "commercialStat3Value": "Miembros SCA",
+    "commercialStat3Label": "Specialty Coffee Association",
     "stories": "Historias",
     "newsletterEyebrow": "Mantente al Día",
     "newsletterTitle": "Únete a la Comunidad Folka",
@@ -137,7 +145,11 @@
     "homeBarEyebrow": "Bestsellers",
     "homeBarTitle": "Para Tu Home Bar",
     "homeBarDescription": "Lo que más envían nuestras bodegas. Selección para el aficionado serio que arma su setup en casa — de molinos de competencia a básculas de barra.",
-    "homeBarViewAll": "Ver todos"
+    "homeBarViewAll": "Ver todos",
+    "baristaPicksEyebrow": "La Selección del Barista",
+    "baristaPicksTitle": "Las herramientas que los profesionales eligen.",
+    "baristaPicksDescription": "Una selección curada del equipo que confían en barras de especialidad y setups caseros — elegido por oficio, consistencia y resistencia al paso del tiempo.",
+    "baristaPicksViewAll": "Ver la selección"
   },
   "categories": {
     "eyebrow": "Explora por Categoría",
@@ -259,9 +271,15 @@
     "resultsCount": "{count} resultados para \"{query}\""
   },
   "footer": {
+    "missionEyebrow": "Folka Coffee Solutions",
+    "missionHeadline": "Ayudamos a cafés independientes a prosperar.",
+    "rootsEyebrow": "Raíces",
+    "rootsLocations": "Monterrey, MX · San Antonio, TX",
+    "contactEyebrow": "Contacto",
+    "whatsappLabel": "WhatsApp",
     "shop": "Tienda",
-    "company": "Empresa",
-    "support": "Soporte",
+    "companyAndSupport": "Empresa y Soporte",
+    "legal": "Legal",
     "espressoMachines": "Máquinas de Espresso",
     "grinders": "Molinos",
     "brewingEquipment": "Equipo de Brewing",
@@ -272,11 +290,10 @@
     "faq": "Preguntas Frecuentes",
     "shippingReturns": "Envíos y Devoluciones",
     "warrantyService": "Garantía y Servicio",
-    "legal": "Legal",
     "termsOfService": "Términos y Condiciones",
     "refundPolicy": "Política de Devoluciones",
-    "copyright": "© {year} Folka Coffee. Todos los derechos reservados.",
-    "description": "Importadores oficiales de equipo premium para café. Rocket Espresso, Profitec, Mazzer, Fellow y más."
+    "copyright": "© {year} Folka Coffee",
+    "paymentsNote": "Pagamos la mitad de tu envío · Atención el mismo día"
   },
   "blog": {
     "title": "Blog",
@@ -286,14 +303,14 @@
     "noPosts": "Aún no hay publicaciones. ¡Vuelve pronto!"
   },
   "testimonials": {
-    "review1Author": "Oliver Perez",
-    "review1Text": "Tuve una experiencia increíble comprando mi molino Niche; excelente atención y respuestas rápidas a mis preguntas. ¡Definitivamente compraré de nuevo!",
-    "review1Role": "Home Barista",
-    "review2Author": "Bruno Valdez",
-    "review2Text": "Mucha comunicación por correo e Instagram. Siempre sentí el interés en hacer la experiencia fácil y confiable.",
-    "review2Role": "Home Barista",
-    "review3Author": "Calaca Cafe",
-    "review3Text": "Tuvimos un problema con la máquina de espresso pero lo resolvieron rápido. Los insumos que compramos regularmente son de gran calidad.",
+    "review1Author": "Carolina Guadiana",
+    "review1Text": "Folka fue siempre nuestra única opción — sabemos que siempre nos iban a acompañar en el proceso.",
+    "review1Role": "Café Owner",
+    "review2Author": "Fabiola Flores",
+    "review2Text": "La gente en Folka tiene una pasión y un expertise por el café que yo no conocía.",
+    "review2Role": "Café Owner",
+    "review3Author": "Juan CT",
+    "review3Text": "Al diseñar nuestra barra buscamos el mejor equipo para tener el mayor flujo de trabajo.",
     "review3Role": "Café Owner"
   },
   "error": {
@@ -305,6 +322,23 @@
   "notFound": {
     "title": "Página no encontrada",
     "goHome": "Ir al Inicio"
+  },
+  "emptyState": {
+    "collectionEyebrow": "Selección en curso",
+    "collectionTitle": "Aún no hay productos aquí",
+    "collectionDescription": "Estamos preparando esta selección. Mientras tanto, explora el catálogo completo.",
+    "cartEyebrow": "Carrito vacío",
+    "cartTitle": "Aún no eliges equipo",
+    "cartDescription": "Un gran espresso empieza por el equipo correcto. Déjanos mostrarte lo que tenemos.",
+    "searchEyebrow": "Sin coincidencias",
+    "searchTitle": "No encontramos nada para \"{query}\"",
+    "searchDescription": "Prueba con otro término, revisa la ortografía o explora por categoría.",
+    "notFoundEyebrow": "404",
+    "notFoundTitle": "Esta página se perdió en el desierto",
+    "notFoundDescription": "La ruta que visitaste ya no existe o nunca existió. Te llevamos de vuelta.",
+    "browseCatalog": "Ver catálogo",
+    "backHome": "Volver al inicio",
+    "keepShopping": "Seguir comprando"
   },
   "a11y": {
     "skipToContent": "Ir al contenido",

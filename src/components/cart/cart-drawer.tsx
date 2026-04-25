@@ -7,6 +7,7 @@ import { useCart } from "./cart-context";
 import { formatMoney } from "@/lib/utils/format";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
 import posthog from "posthog-js";
 
 export function CartDrawer() {
@@ -71,11 +72,22 @@ export function CartDrawer() {
         {/* Items */}
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {isEmpty ? (
-            <div className="flex flex-col items-center justify-center h-full text-center gap-4">
-              <p className="text-muted">{t("cart.empty")}</p>
-              <Button variant="outline" size="sm" onClick={closeCart}>
-                {t("common.continueShopping")}
-              </Button>
+            <div className="flex flex-col justify-center h-full">
+              <EmptyState
+                eyebrow={t("emptyState.cartEyebrow")}
+                title={t("emptyState.cartTitle")}
+                description={t("emptyState.cartDescription")}
+                className="py-8"
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={closeCart}
+                  className="mt-2"
+                >
+                  {t("emptyState.keepShopping")}
+                </Button>
+              </EmptyState>
             </div>
           ) : (
             <ul className="flex flex-col gap-5">

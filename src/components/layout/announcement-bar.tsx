@@ -17,13 +17,13 @@ export function AnnouncementBar({ text, linkText, href, dismissLabel }: Announce
   if (dismissed) return null;
 
   return (
-    <div className="relative bg-primary text-primary-foreground">
+    <div className="relative bg-background border-b border-foreground/10">
       <div className="container-page flex items-center justify-center h-9 gap-2">
-        <p className="text-[11px] tracking-[2px] uppercase font-medium font-[family-name:var(--font-rajdhani)]">
+        <p className="text-[10px] tracking-[3px] uppercase font-medium font-[family-name:var(--font-rajdhani)] text-foreground/75">
           {text}
           <Link
             href={href}
-            className="ml-3 underline underline-offset-4 decoration-primary-foreground/40 hover:decoration-primary-foreground transition-colors duration-200"
+            className="ml-3 underline underline-offset-4 decoration-foreground/25 hover:decoration-foreground transition-colors duration-200"
           >
             {linkText}
           </Link>
@@ -32,10 +32,10 @@ export function AnnouncementBar({ text, linkText, href, dismissLabel }: Announce
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          className="absolute right-4 p-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+          className="absolute right-4 p-1 text-foreground/35 hover:text-foreground/80 transition-colors duration-200 cursor-pointer"
           aria-label={dismissLabel}
         >
-          <Icon name="close" size={14} />
+          <Icon name="close" size={12} />
         </button>
       </div>
     </div>

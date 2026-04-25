@@ -3,9 +3,10 @@ import type { Locale } from "@/i18n/config";
 /**
  * PLACEHOLDER hero slides for the homepage carousel.
  *
- * These will be replaced by a Shopify collection (e.g. "rocket-new-arrivals")
- * once the products are uploaded. The HeroSlide shape is the contract — keep
- * it stable so the swap is one file change in src/app/[locale]/page.tsx.
+ * Curated editorial selection that tells the "Ecosistema Folka" story:
+ * prosumer espresso → design-forward brewer → commercial espresso →
+ * commercial grinder → precision accessory. Swap to a Shopify collection
+ * later by keeping the HeroSlide shape stable.
  *
  * Image files live in public/hero/ as WebP pairs:
  *   {product}.webp  — main product image (transparent bg)
@@ -62,107 +63,86 @@ const SLIDES: PlaceholderHeroSlide[] = [
     },
   },
   {
-    id: "r9v",
-    brand: "Rocket Espresso",
-    title: "R 9V Pressure Profiling",
-    watermark: "R9V",
-    href: "/products/r9v-pressure-profiling",
-    imageUrl: "/hero/rv9.webp",
-    lifestyleImageUrl: "/hero/rv9_1.webp",
+    id: "xbloom-studio",
+    brand: "xBloom",
+    title: "xBloom Studio",
+    watermark: "XBLOOM",
+    href: "/products/xbloom-studio",
+    imageUrl: "/hero/xbloom_studio.webp",
+    lifestyleImageUrl: "/hero/xbloom_studio_1.webp",
     i18n: {
       en: {
         chapterLabel: "Chapter 02",
-        tagline: "Multi-boiler precision. Five programmable pressure profiles.",
-        ctaText: "Explore the R 9V",
+        tagline: "Specialty pour-over, reimagined. Ceramic dripper, auto-tuned recipes.",
+        ctaText: "Discover xBloom",
       },
       es: {
         chapterLabel: "Capítulo 02",
-        tagline: "Precisión multi-caldera. Cinco perfiles de presión programables.",
-        ctaText: "Explora la R 9V",
+        tagline: "Pour-over de especialidad, reinventado. Dripper de cerámica, recetas afinadas.",
+        ctaText: "Descubre xBloom",
       },
     },
   },
   {
-    id: "sotto-banco",
-    brand: "Rocket Espresso",
-    title: "Sotto Banco",
-    watermark: "SOTTO BANCO",
-    href: "/products/sotto-banco",
-    imageUrl: "/hero/sotto-banco.webp",
-    lifestyleImageUrl: "/hero/sotto-banco_1.webp",
+    id: "slayer-steam-single",
+    brand: "Slayer",
+    title: "Steam Single",
+    watermark: "STEAM SINGLE",
+    href: "/products/slayer-steam-single",
+    imageUrl: "/hero/slayer_steam_single.webp",
+    lifestyleImageUrl: "/hero/slayer_steam_single_1.webp",
     i18n: {
       en: {
         chapterLabel: "Chapter 03",
-        tagline: "An invisible machine. An espresso without compromise.",
-        ctaText: "Discover",
+        tagline: "Commercial soul. Artisan scale. Unmatched steam performance.",
+        ctaText: "Meet Steam Single",
       },
       es: {
         chapterLabel: "Capítulo 03",
-        tagline: "Una máquina invisible. Un espresso sin compromisos.",
-        ctaText: "Descubrir",
+        tagline: "Alma comercial. Escala artesanal. Vapor sin comparación.",
+        ctaText: "Conoce la Steam Single",
       },
     },
   },
   {
-    id: "re-doppia",
-    brand: "Rocket Espresso",
-    title: "RE Doppia",
-    watermark: "RE DOPPIA",
-    href: "/products/re-doppia",
-    imageUrl: "/hero/re_doppia.webp",
-    lifestyleImageUrl: "/hero/re_doppia_1.webp",
+    id: "mahlkonig-x64",
+    brand: "Mahlkönig",
+    title: "X64",
+    watermark: "X64",
+    href: "/products/mahlkonig-x64",
+    imageUrl: "/hero/mahlkonig_x64.webp",
+    lifestyleImageUrl: "/hero/mahlkonig_x64_1.webp",
     i18n: {
       en: {
         chapterLabel: "Chapter 04",
-        tagline: "Dual boiler. Saturated groups. Touchscreen control.",
-        ctaText: "See the RE Doppia",
+        tagline: "64mm flat burrs. Silent grind. The heartbeat of the specialty bar.",
+        ctaText: "Explore the X64",
       },
       es: {
         chapterLabel: "Capítulo 04",
-        tagline: "Doble caldera. Grupos saturados. Control touchscreen.",
-        ctaText: "Conoce la RE Doppia",
+        tagline: "Fresas planas de 64mm. Molienda silenciosa. El pulso de la barra de especialidad.",
+        ctaText: "Explora la X64",
       },
     },
   },
   {
-    id: "boxer-evo",
-    brand: "Rocket Espresso",
-    title: "Boxer Evo",
-    watermark: "BOXER",
-    href: "/products/boxer-evo",
-    imageUrl: "/hero/boxer_evo.webp",
-    lifestyleImageUrl: "/hero/boxer_evo_1.webp",
+    id: "acaia-lunar",
+    brand: "Acaia",
+    title: "Lunar",
+    watermark: "LUNAR",
+    href: "/products/acaia-lunar",
+    imageUrl: "/hero/acaia_lunar.webp",
+    lifestyleImageUrl: "/hero/acaia_lunar_1.webp",
     i18n: {
       en: {
         chapterLabel: "Chapter 05",
-        tagline: "Heat exchanger heritage, refined for the modern bar.",
-        ctaText: "Meet the Boxer",
+        tagline: "Precision in the palm. Sub-0.1g resolution. Built for the bar.",
+        ctaText: "Discover Lunar",
       },
       es: {
         chapterLabel: "Capítulo 05",
-        tagline: "Herencia de intercambiador de calor, refinada para la barra moderna.",
-        ctaText: "Conoce la Boxer",
-      },
-    },
-  },
-  {
-    id: "spluga",
-    brand: "Rocket Grinders",
-    title: "Spluga",
-    watermark: "SPLUGA",
-    href: "/products/spluga",
-    imageUrl: "/hero/spluga_grinder.webp",
-    lifestyleImageUrl: "/hero/spluga_grinder_1.webp",
-    i18n: {
-      en: {
-        chapterLabel: "Chapter 06",
-        tagline: "Inspired by the Italian Alps. Engineered for the daily climb.",
-        ctaText: "Discover Spluga",
-      },
-      es: {
-        chapterLabel: "Capítulo 06",
-        tagline: "Inspirado en los Alpes italianos. Ingeniería para el ascenso diario.",
-        ctaText: "Descubre Spluga",
+        tagline: "Precisión en la palma. Resolución sub-0.1g. Hecha para la barra.",
+        ctaText: "Descubre la Lunar",
       },
     },
   },
