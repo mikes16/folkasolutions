@@ -74,19 +74,19 @@ const JOURNAL_REGISTRY: JournalEntry[] = [
         title: "Roberto Nal y el oficio de tostar muestras",
         eyebrow: "En conversación",
         description:
-          "Un tostador de Tres Fases nos habla del Link y de por qué el sample roasting decide qué cafés merecen llegar al menú.",
+          "Un Q-Grader de Tres Fases Tostadores cuenta cómo el Link encaja en su rutina: tiempos cortos, perfiles distintos, decisiones con poca cantidad de café.",
         publishedAt: "2026-04-25",
         author: {
           name: "Roberto Nal",
-          role: "Tostador",
+          role: "Q-Grader · Tostador",
           affiliation: "Tres Fases Tostadores",
         },
         coverImage: {
           url: ROBERTO_COVER_URL,
           alt: "Roberto Nal junto al sample roaster Link en Tres Fases Tostadores.",
         },
-        readingTimeMinutes: 3,
-        tags: ["Tueste", "Calidad", "Sample roasting"],
+        readingTimeMinutes: 2,
+        tags: ["Tueste", "Sample roasting", "Q-Grader"],
         videoEmbed: {
           provider: "cloudinary",
           publicId: "folka/journal/expert-link-roberto",
@@ -99,19 +99,19 @@ const JOURNAL_REGISTRY: JournalEntry[] = [
         title: "Roberto Nal on the craft of sample roasting",
         eyebrow: "In conversation",
         description:
-          "A roaster at Tres Fases walks us through The Link, and why sample roasting is what decides which coffees make it to the menu.",
+          "A Q-Grader at Tres Fases Tostadores on how the Link fits his routine: short cycles, different profiles, decisions made with very little coffee.",
         publishedAt: "2026-04-25",
         author: {
           name: "Roberto Nal",
-          role: "Roaster",
+          role: "Q-Grader · Roaster",
           affiliation: "Tres Fases Tostadores",
         },
         coverImage: {
           url: ROBERTO_COVER_URL,
           alt: "Roberto Nal at the Link sample roaster at Tres Fases Tostadores.",
         },
-        readingTimeMinutes: 3,
-        tags: ["Roasting", "Quality", "Sample roasting"],
+        readingTimeMinutes: 2,
+        tags: ["Roasting", "Sample roasting", "Q-Grader"],
         videoEmbed: {
           provider: "cloudinary",
           publicId: "folka/journal/expert-link-roberto",
@@ -136,14 +136,14 @@ const JOURNAL_REGISTRY: JournalEntry[] = [
     slug: "avenamar-gutierrez-xbloom-pour-over",
     i18n: {
       es: {
-        title: "Avenamar Gutiérrez y la receta automatizada",
+        title: "El catador que no podía replicar la taza en su casa",
         eyebrow: "En conversación",
         description:
-          "Un experto en calidad sobre el xBloom Studio: dónde termina el oficio del barista y dónde empieza la repetibilidad de la máquina.",
+          "Avenamar Gutiérrez es especialista en calidad de café. Aún así, en casa los sabores que catalogaba en cata no aparecían. Cómo el xBloom Studio cambió eso.",
         publishedAt: "2026-04-24",
         author: {
           name: "Avenamar Gutiérrez",
-          role: "Experto en calidad de café",
+          role: "Especialista en calidad de café · Catador",
         },
         coverImage: {
           url: AVENAMAR_COVER_URL,
@@ -160,14 +160,14 @@ const JOURNAL_REGISTRY: JournalEntry[] = [
         featuredProductHandles: ["xbloom-studio"],
       },
       en: {
-        title: "Avenamar Gutiérrez on the automated recipe",
+        title: "The cupper who couldn't replicate the cup at home",
         eyebrow: "In conversation",
         description:
-          "A coffee quality expert on xBloom Studio: where the barista's craft ends and where the machine's repeatability begins.",
+          "Avenamar Gutiérrez is a coffee quality specialist. Even so, at home the flavors he cataloged on the cupping table weren't showing up. How xBloom Studio changed that.",
         publishedAt: "2026-04-24",
         author: {
           name: "Avenamar Gutiérrez",
-          role: "Coffee quality expert",
+          role: "Coffee quality specialist · Cupper",
         },
         coverImage: {
           url: AVENAMAR_COVER_URL,
