@@ -30,6 +30,7 @@
     "brands": "Marcas",
     "coffeeAndMore": "Café y Más",
     "journal": "Journal",
+    "stories": "Historias",
     "espressoMachines": "Máquinas de Espresso",
     "grinders": "Molinos",
     "topBrands": "Marcas Destacadas",
@@ -111,6 +112,9 @@
     "heroPrev": "Slide anterior",
     "heroNext": "Siguiente slide",
     "heroSlideOf": "Slide {current} de {total}",
+    "onSale": "En Oferta",
+    "onSaleTitle": "Precios que no se quedan.",
+    "onSaleDescription": "Equipo seleccionado con descuento por tiempo limitado. Mientras dure el inventario.",
     "newArrivals": "Recién Llegados",
     "newArrivalsTitle": "Recién salido del piso.",
     "newArrivalsDescription": "Equipo que acaba de aterrizar en nuestras bodegas. Seleccionado de las importaciones de la semana, listo para salir.",
@@ -168,6 +172,24 @@
     "moreInJournal": "Más en Journal",
     "readArticle": "Leer el artículo",
     "emptyState": "Aún no hay entradas publicadas."
+  },
+  "stories": {
+    "indexEyebrow": "Historias",
+    "indexTitle": "Cafeterías que confían en Folka.",
+    "indexDescription": "Conversaciones con los equipos detrás de las barras que sirven el café que vendemos.",
+    "indexAbout": "Quién escribe",
+    "equipmentEyebrow": "Su equipo",
+    "equipmentTitle": "El equipo en su barra.",
+    "cafeVisit": "Visita",
+    "cafeInstagram": "Instagram",
+    "cafeWebsite": "Sitio web",
+    "moreStories": "Más historias",
+    "readStory": "Leer la historia",
+    "minRead": "MIN DE LECTURA",
+    "publishedOn": "Publicado",
+    "emptyEyebrow": "Próximamente",
+    "emptyTitle": "Las primeras historias, en camino.",
+    "emptyDescription": "Estamos armando las primeras historias. Conversaciones con cafeterías partner aterrizan aquí en las próximas semanas."
   },
   "categories": {
     "eyebrow": "Explora por Categoría",
@@ -366,11 +388,6 @@
     "increaseQuantity": "Aumentar cantidad",
     "removeItem": "Eliminar {item}",
     "selectImage": "Ver imagen {index} de {total}"
-  },
-  "announcement": {
-    "text": "Temporada de Ofertas · Equipo Seleccionado",
-    "linkText": "Ver Ofertas",
-    "dismiss": "Cerrar"
   },
   "language": {
     "en": "English",

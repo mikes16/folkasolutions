@@ -30,6 +30,7 @@
     "brands": "Brands",
     "coffeeAndMore": "Coffee & More",
     "journal": "Journal",
+    "stories": "Stories",
     "espressoMachines": "Espresso Machines",
     "grinders": "Grinders",
     "topBrands": "Top Brands",
@@ -111,6 +112,9 @@
     "heroPrev": "Previous slide",
     "heroNext": "Next slide",
     "heroSlideOf": "Slide {current} of {total}",
+    "onSale": "On Sale",
+    "onSaleTitle": "Prices that won't stick around.",
+    "onSaleDescription": "Hand-picked equipment at a discount, while supplies last.",
     "newArrivals": "New Arrivals",
     "newArrivalsTitle": "Fresh from the floor.",
     "newArrivalsDescription": "Equipment that just landed at our warehouse. Hand-picked from the week's imports, ready to ship.",
@@ -168,6 +172,24 @@
     "moreInJournal": "More in Journal",
     "readArticle": "Read the article",
     "emptyState": "No journal entries published yet."
+  },
+  "stories": {
+    "indexEyebrow": "Stories",
+    "indexTitle": "Cafés that work with us.",
+    "indexDescription": "Conversations with the teams behind the bars serving the coffee we sell.",
+    "indexAbout": "Who writes",
+    "equipmentEyebrow": "Their setup",
+    "equipmentTitle": "The equipment on their bar.",
+    "cafeVisit": "Visit",
+    "cafeInstagram": "Instagram",
+    "cafeWebsite": "Website",
+    "moreStories": "More stories",
+    "readStory": "Read the story",
+    "minRead": "MIN READ",
+    "publishedOn": "Published",
+    "emptyEyebrow": "Coming soon",
+    "emptyTitle": "First café spotlights, on the way.",
+    "emptyDescription": "We're putting the first stories together. Conversations with partner cafés land here in the coming weeks."
   },
   "categories": {
     "eyebrow": "Shop by Category",
@@ -366,11 +388,6 @@
     "increaseQuantity": "Increase quantity",
     "removeItem": "Remove {item}",
     "selectImage": "View image {index} of {total}"
-  },
-  "announcement": {
-    "text": "Seasonal Sale · Selected Equipment",
-    "linkText": "Shop Now",
-    "dismiss": "Dismiss"
   },
   "language": {
     "en": "English",
