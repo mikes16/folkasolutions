@@ -58,7 +58,7 @@ export function SocialProof({
                       &ldquo;{review.text}&rdquo;
                     </p>
                     <p className="text-[11px] uppercase tracking-[2px] text-muted mt-2 font-[family-name:var(--font-rajdhani)]">
-                      — {review.author}
+                      {review.author}
                     </p>
                   </div>
                 ))}

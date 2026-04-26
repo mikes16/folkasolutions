@@ -32,7 +32,7 @@ export interface JournalVideoEmbed {
   provider: "cloudinary";
   publicId: string;
   aspect: "16:9" | "9:16";
-  /** Cloudinary path under the `folka/` namespace (leading slash, no `folka/` prefix), e.g. "/journal/posters/expert-link-roberta". */
+  /** Cloudinary path under the `folka/` namespace (leading slash, no `folka/` prefix), e.g. "/journal/posters/expert-link-roberto". */
   poster?: string;
 }
 
@@ -61,62 +61,62 @@ interface JournalEntry {
   loadBody: (locale: Locale) => Promise<{ default: ComponentType }>;
 }
 
-const ROBERTA_COVER_URL = cloudinaryUrl("/journal/posters/expert-link-roberta");
+const ROBERTO_COVER_URL = cloudinaryUrl("/journal/posters/expert-link-roberto");
 const AVENAMAR_COVER_URL = cloudinaryUrl(
   "/journal/posters/expert-xbloom-avenamar",
 );
 
 const JOURNAL_REGISTRY: JournalEntry[] = [
   {
-    slug: "roberta-nal-link-sample-roasting",
+    slug: "roberto-nal-link-sample-roasting",
     i18n: {
       es: {
-        title: "Roberta Nal y el oficio de tostar muestras",
+        title: "Roberto Nal y el oficio de tostar muestras",
         eyebrow: "En conversación",
         description:
-          "Una tostadora de Tres Fases nos habla del Link y de por qué el sample roasting decide qué cafés merecen llegar al menú.",
+          "Un tostador de Tres Fases nos habla del Link y de por qué el sample roasting decide qué cafés merecen llegar al menú.",
         publishedAt: "2026-04-25",
         author: {
-          name: "Roberta Nal",
-          role: "Tostadora",
+          name: "Roberto Nal",
+          role: "Tostador",
           affiliation: "Tres Fases Tostadores",
         },
         coverImage: {
-          url: ROBERTA_COVER_URL,
-          alt: "Roberta Nal junto al sample roaster Link en Tres Fases Tostadores.",
+          url: ROBERTO_COVER_URL,
+          alt: "Roberto Nal junto al sample roaster Link en Tres Fases Tostadores.",
         },
         readingTimeMinutes: 3,
         tags: ["Tueste", "Calidad", "Sample roasting"],
         videoEmbed: {
           provider: "cloudinary",
-          publicId: "folka/journal/expert-link-roberta",
+          publicId: "folka/journal/expert-link-roberto",
           aspect: "9:16",
-          poster: "/journal/posters/expert-link-roberta",
+          poster: "/journal/posters/expert-link-roberto",
         },
         featuredProductHandles: ["the-link-sample-coffee-roaster"],
       },
       en: {
-        title: "Roberta Nal on the craft of sample roasting",
+        title: "Roberto Nal on the craft of sample roasting",
         eyebrow: "In conversation",
         description:
           "A roaster at Tres Fases walks us through The Link, and why sample roasting is what decides which coffees make it to the menu.",
         publishedAt: "2026-04-25",
         author: {
-          name: "Roberta Nal",
+          name: "Roberto Nal",
           role: "Roaster",
           affiliation: "Tres Fases Tostadores",
         },
         coverImage: {
-          url: ROBERTA_COVER_URL,
-          alt: "Roberta Nal at the Link sample roaster at Tres Fases Tostadores.",
+          url: ROBERTO_COVER_URL,
+          alt: "Roberto Nal at the Link sample roaster at Tres Fases Tostadores.",
         },
         readingTimeMinutes: 3,
         tags: ["Roasting", "Quality", "Sample roasting"],
         videoEmbed: {
           provider: "cloudinary",
-          publicId: "folka/journal/expert-link-roberta",
+          publicId: "folka/journal/expert-link-roberto",
           aspect: "9:16",
-          poster: "/journal/posters/expert-link-roberta",
+          poster: "/journal/posters/expert-link-roberto",
         },
         featuredProductHandles: ["the-link-sample-coffee-roaster"],
       },
@@ -124,11 +124,11 @@ const JOURNAL_REGISTRY: JournalEntry[] = [
     loadBody: async (locale) => {
       if (locale === "en") {
         return import(
-          "@/content/journal/en/roberta-nal-link-sample-roasting.mdx"
+          "@/content/journal/en/roberto-nal-link-sample-roasting.mdx"
         );
       }
       return import(
-        "@/content/journal/es/roberta-nal-link-sample-roasting.mdx"
+        "@/content/journal/es/roberto-nal-link-sample-roasting.mdx"
       );
     },
   },
