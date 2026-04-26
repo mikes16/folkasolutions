@@ -6,13 +6,14 @@
  * the Shopify catalog that renames or removes a handle here will 404 — re-run
  * the script to re-verify.
  *
- * Structure (6 top-level items):
+ * Structure (7 top-level items):
  *   1. Shop All        — independent link to /collections (no mega)
  *   2. Equipment       — mega: Espresso / Grinders / Top Brands / Featured card
  *   3. Brewing         — mega: Pour-Over / Batch & Drip / Kettles & Scales
  *   4. Accessories     — mega: Barista Tools / Care & Cleaning / Cups & Glassware
  *   5. Brands          — mega: Espresso / Grinders / Brewing & Tools
  *   6. Coffee & More   — mega: Folka Coffee / Beverages / Syrups & Powders
+ *   7. Journal         — independent link to /journal (no mega)
  */
 
 export interface MegaMenuLink {
@@ -246,4 +247,7 @@ export const mainMenu: NavItem[] = [
       },
     ],
   },
+
+  // 7. Journal — editorial, no mega
+  { labelKey: "journal", href: "/journal" },
 ];

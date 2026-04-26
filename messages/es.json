@@ -29,6 +29,7 @@
     "accessories": "Accesorios",
     "brands": "Marcas",
     "coffeeAndMore": "Café y Más",
+    "journal": "Journal",
     "espressoMachines": "Máquinas de Espresso",
     "grinders": "Molinos",
     "topBrands": "Marcas Destacadas",
@@ -149,7 +150,24 @@
     "baristaPicksEyebrow": "La Selección del Barista",
     "baristaPicksTitle": "Las herramientas que los profesionales eligen.",
     "baristaPicksDescription": "Una selección curada del equipo que confían en barras de especialidad y setups caseros — elegido por oficio, consistencia y resistencia al paso del tiempo.",
-    "baristaPicksViewAll": "Ver la selección"
+    "baristaPicksViewAll": "Ver la selección",
+    "journalFeatureEyebrow": "Journal",
+    "journalFeatureTitle": "Notas del oficio.",
+    "journalFeatureDescription": "Conversaciones con tostadores, baristas y expertos de calidad — y editoriales sobre el equipo que de verdad usan.",
+    "journalFeatureViewAll": "Leer el journal"
+  },
+  "journal": {
+    "indexEyebrow": "Journal",
+    "indexTitle": "Notas, técnica e historias del oficio.",
+    "indexDescription": "Conversaciones de campo con tostadores, baristas y expertos de calidad — y editoriales sobre el equipo en el que confían.",
+    "aboutAuthor": "Quién escribe",
+    "minRead": "MIN DE LECTURA",
+    "minReadLong": "min de lectura",
+    "publishedOn": "Publicado",
+    "relatedProducts": "Mencionados en este artículo",
+    "moreInJournal": "Más en Journal",
+    "readArticle": "Leer el artículo",
+    "emptyState": "Aún no hay entradas publicadas."
   },
   "categories": {
     "eyebrow": "Explora por Categoría",

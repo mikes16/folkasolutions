@@ -29,6 +29,7 @@
     "accessories": "Accessories",
     "brands": "Brands",
     "coffeeAndMore": "Coffee & More",
+    "journal": "Journal",
     "espressoMachines": "Espresso Machines",
     "grinders": "Grinders",
     "topBrands": "Top Brands",
@@ -149,7 +150,24 @@
     "baristaPicksEyebrow": "Barista Picks",
     "baristaPicksTitle": "Tools the pros actually reach for.",
     "baristaPicksDescription": "A curated shortlist of the equipment trusted at specialty bars and home setups — chosen for craft, consistency, and the long haul.",
-    "baristaPicksViewAll": "See the selection"
+    "baristaPicksViewAll": "See the selection",
+    "journalFeatureEyebrow": "Journal",
+    "journalFeatureTitle": "Notes from the craft.",
+    "journalFeatureDescription": "Field interviews, technique deep-dives, and the people behind the equipment we trust.",
+    "journalFeatureViewAll": "Read the journal"
+  },
+  "journal": {
+    "indexEyebrow": "Journal",
+    "indexTitle": "Notes, technique, and stories from the craft.",
+    "indexDescription": "Field conversations with roasters, baristas, and quality experts — and editorial features on the equipment they actually trust.",
+    "aboutAuthor": "Who writes",
+    "minRead": "MIN READ",
+    "minReadLong": "min read",
+    "publishedOn": "Published",
+    "relatedProducts": "Featured in this article",
+    "moreInJournal": "More in Journal",
+    "readArticle": "Read the article",
+    "emptyState": "No journal entries published yet."
   },
   "categories": {
     "eyebrow": "Shop by Category",

@@ -48,7 +48,8 @@ import { BrandLogos } from "@/components/sections/brand-logos";
 import { Reviews } from "@/components/sections/reviews";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { CommercialCta } from "@/components/sections/commercial-cta";
-import { BlogEditorial } from "@/components/sections/blog-editorial";
+import { JournalFeature } from "@/components/journal/journal-feature";
+import { getAllJournalPosts } from "@/lib/content/journal";
 import { Newsletter } from "@/components/sections/newsletter";
 import { ClosingCta } from "@/components/sections/closing-cta";
 
@@ -113,7 +114,7 @@ export default async function HomePage({
   const t = await getTranslations();
   const { country, language } = localeCountryMap[locale as Locale] ?? localeCountryMap.es;
 
-  const [featuredProducts, homeBarCollection, baristaPicksCollection, blog] =
+  const [featuredProducts, homeBarCollection, baristaPicksCollection, journalPosts] =
     await Promise.all([
       commerce.getProducts({
         first: 4,
@@ -133,7 +134,7 @@ export default async function HomePage({
         country,
         language,
       }),
-      commerce.getBlog("coffee-grounds", { first: 3, country, language }),
+      getAllJournalPosts(locale as Locale),
     ]);
 
   const heroSlides = getHeroSlides(locale as Locale);
@@ -262,15 +263,17 @@ export default async function HomePage({
         ]}
       />
 
-      {/* 9. Blog / Stories — editorial content */}
-      {blog && (
-        <BlogEditorial
-          title={t("home.stories")}
-          linkText={t("common.viewAll")}
-          blogHandle="coffee-grounds"
-          articles={blog.articles}
-        />
-      )}
+      {/* 9. Journal — editorial content from the in-house journal */}
+      <JournalFeature
+        eyebrow={t("home.journalFeatureEyebrow")}
+        title={t("home.journalFeatureTitle")}
+        description={t("home.journalFeatureDescription")}
+        viewAllText={t("home.journalFeatureViewAll")}
+        posts={journalPosts.slice(0, 3)}
+        locale={locale as Locale}
+        minReadLabel={t("journal.minRead")}
+      />
+
 
       {/* 10. Newsletter — email capture */}
       <Newsletter
