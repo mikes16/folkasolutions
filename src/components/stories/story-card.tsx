@@ -43,20 +43,12 @@ export interface StoryCardProps {
 }
 
 /**
- * Story index card. The 9:16 teaser plays muted-on-intersection inside a
- * native-aspect frame; below it sits a clean editorial caption block with
- * eyebrow, café name, location, and a "Read story" arrow link.
+ * Story index card. Vertical 4:5 portrait frame. Plays the 9:16 teaser
+ * video muted-on-intersection, falls back to the static cover poster when
+ * the user prefers reduced motion or the browser blocks playback.
  *
- * Why text-below instead of overlay: the source teasers carry burned-in
- * subtitles in the lower third. Overlaying the card identity in the same
- * zone collides visually. Letting the video keep its full frame and putting
- * the card's identity outside it reads as magazine layout (media object +
- * caption) and turns the burned-in subtitle from a bug into documentary
- * texture that teases the conversation.
- *
- * Editorial vocabulary: no rounded corners, no shadows, no gradient
- * overlays. The only motion is a subtle 700ms scale on the video and a
- * color/gap shift on the title/CTA when the card is hovered.
+ * Editorial vocabulary: no rounded corners, no shadows. The only motion is
+ * a subtle 700ms scale on the video as the card is hovered.
  */
 export function StoryCard({
   slug,
@@ -102,12 +94,10 @@ export function StoryCard({
   const posterSrc = cloudinaryUrl(coverImage.url);
 
   return (
-    <Link href={`/stories/${slug}`} className="group flex flex-col" aria-label={title}>
-      {/* Video frame — native 9:16 aspect, no overlay, no gradient.
-          Subtitles in the source remain visible as documentary texture. */}
+    <Link href={`/stories/${slug}`} className="group block" aria-label={title}>
       <div
         ref={containerRef}
-        className="relative aspect-[9/16] overflow-hidden bg-foreground/5"
+        className="relative aspect-[4/5] overflow-hidden bg-foreground/5"
       >
         {shouldAutoplay ? (
           <video
@@ -119,7 +109,7 @@ export function StoryCard({
             playsInline
             preload="none"
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
         ) : (
           // Reduced-motion fallback: render the poster as a still image.
@@ -131,27 +121,28 @@ export function StoryCard({
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-      </div>
 
-      {/* Caption — outside the video frame, magazine-style.
-          Eyebrow + café name + location + arrow link. */}
-      <div className="pt-5">
-        <p className="text-[10px] uppercase tracking-[3px] font-medium font-[family-name:var(--font-rajdhani)] text-foreground/55">
-          {eyebrow}
-        </p>
-        <h3
-          className="mt-2 text-2xl md:text-3xl tracking-tight leading-[1.05] font-[family-name:var(--font-rajdhani)] text-foreground transition-colors duration-300 group-hover:text-foreground/70"
-          style={{ fontWeight: 300 }}
-        >
-          {cafe.name}
-        </h3>
-        <p className="mt-2 text-[11px] uppercase tracking-[2.5px] font-[family-name:var(--font-rajdhani)] text-foreground/55">
-          {formatCafeLocation(cafe)}
-        </p>
-        <span className="inline-flex items-center gap-2 mt-4 text-[11px] uppercase tracking-[2.5px] font-medium font-[family-name:var(--font-rajdhani)] text-foreground transition-all duration-300 group-hover:gap-3">
-          {readLabel}
-          <span aria-hidden="true">&rarr;</span>
-        </span>
+        {/* Bottom gradient — keeps the overlaid copy legible against any frame. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/30 to-transparent"
+        />
+
+        <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 flex flex-col">
+          <p className="text-[10px] uppercase tracking-[3px] font-medium font-[family-name:var(--font-rajdhani)] text-background/85">
+            {eyebrow}
+          </p>
+          <h3 className="text-2xl md:text-3xl font-medium tracking-tight font-[family-name:var(--font-rajdhani)] text-background mt-2 leading-[1.1]">
+            {cafe.name}
+          </h3>
+          <p className="text-[11px] uppercase tracking-[2.5px] font-[family-name:var(--font-rajdhani)] text-background/70 mt-1">
+            {formatCafeLocation(cafe)}
+          </p>
+          <span className="inline-flex items-center gap-2 mt-5 text-[11px] uppercase tracking-[3px] font-semibold font-[family-name:var(--font-rajdhani)] text-background/80 group-hover:text-background transition-colors duration-300">
+            {readLabel}
+            <span aria-hidden="true">&rarr;</span>
+          </span>
+        </div>
       </div>
 
       {/* Off-screen description — present for screen readers, since the
