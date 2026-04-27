@@ -160,8 +160,8 @@
     "journalFeatureDescription": "Field interviews, technique deep-dives, and the people behind the equipment we trust.",
     "journalFeatureViewAll": "Read the journal",
     "storiesFeatureEyebrow": "Stories",
-    "storiesFeatureTitle": "The people behind the brands that work with us.",
-    "storiesFeatureDescription": "Three partners, three different crafts. A French pâtisserie, a design studio, and a wellness bar with their own take on what working with Folka looks like.",
+    "storiesFeatureTitle": "Stories from our friends.",
+    "storiesFeatureDescription": "Conversations about craft and effort. The road they took to get where they are.",
     "storiesFeatureViewAll": "Read all stories"
   },
   "journal": {
@@ -179,8 +179,8 @@
   },
   "stories": {
     "indexEyebrow": "Stories",
-    "indexTitle": "Conversations with the people working with us.",
-    "indexDescription": "A French pâtisserie, a design studio, a wellness bar. Three different crafts, one shared table.",
+    "indexTitle": "Stories from our friends.",
+    "indexDescription": "Conversations about craft and effort. The road they took to get where they are.",
     "indexAbout": "Who writes",
     "equipmentEyebrow": "Their setup",
     "equipmentTitle": "The equipment on their bar.",
