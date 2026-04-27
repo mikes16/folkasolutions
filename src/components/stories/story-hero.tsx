@@ -20,16 +20,17 @@ export interface StoryHeroProps {
 }
 
 /**
- * Story detail hero. Cinematic full-bleed treatment with eyebrow / title /
- * café meta overlaid bottom-left. The aspect adapts to the source media:
+ * Story detail hero. The treatment adapts to the source media:
  *
- * - 16:9 main video → ultra-wide cinematic frame.
- * - 9:16 main video → centered vertical column on desktop, full-bleed on
- *   mobile.
+ * - 16:9 main video → ultra-wide cinematic frame with bottom-left overlay.
+ * - 9:16 main video → split 50/50 layout. Video fills the left column at
+ *   full container height; eyebrow / title / café meta sit vertically
+ *   centered in the right column on a Desert White surface. Mobile stacks
+ *   vertically (video on top, copy below).
  * - No main video → cover image fills a wide editorial frame.
  *
- * The native video element is wrapped via a presentational `<video>` with
- * controls — the browser handles all the interaction, no client JS needed.
+ * The native `<video>` element handles playback in the browser — no client
+ * wrapper is needed.
  */
 export function StoryHero({
   eyebrow,
@@ -41,12 +42,59 @@ export function StoryHero({
   const posterUrl = cloudinaryUrl(coverImage.url);
   const isVertical = mainVideo?.aspect === "9:16";
 
-  // Outer frame aspect: vertical clips center on a max-width column to
-  // avoid dominating widescreen viewports.
+  // 9:16 takes a dedicated split layout. The remaining cases share the
+  // wide cinematic frame with overlaid copy.
+  if (isVertical && mainVideo) {
+    return (
+      <header className="relative w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[640px] lg:h-[calc(100vh-100px)]">
+          {/* Left column — video. On mobile this keeps the intrinsic 9:16
+              aspect (tall portrait, expected for vertical content). On
+              desktop it fills the column height via object-cover. */}
+          <div className="relative w-full aspect-[9/16] lg:aspect-auto lg:h-full bg-foreground/5">
+            <video
+              src={cloudinaryVideoUrl(mainVideo.publicId)}
+              poster={posterUrl}
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Right column — editorial copy on Desert White. */}
+          <div className="flex items-center justify-start bg-background px-6 py-14 md:px-10 md:py-16 lg:px-16 xl:px-20">
+            <div className="w-full max-w-xl">
+              <p className="text-[11px] uppercase tracking-[4px] font-medium font-[family-name:var(--font-rajdhani)] text-foreground/75">
+                {eyebrow}
+              </p>
+              <h1
+                className="font-[family-name:var(--font-rajdhani)] tracking-tight leading-[1.02] text-foreground mt-6"
+                style={{
+                  fontWeight: 300,
+                  fontSize: "clamp(2.5rem, 5vw, 5rem)",
+                }}
+              >
+                {title}
+              </h1>
+              <p className="text-[11px] uppercase tracking-[3px] font-[family-name:var(--font-rajdhani)] text-foreground/75 mt-6">
+                {cafe.name}
+                <span aria-hidden="true"> · </span>
+                {formatCafeLocation(cafe)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
+  // 16:9 video and cover-image fallback share the cinematic overlay frame.
   const frameAspect = mainVideo
-    ? isVertical
-      ? "aspect-[9/16] max-w-[480px] mx-auto"
-      : "aspect-video lg:aspect-[21/9]"
+    ? "aspect-video lg:aspect-[21/9]"
     : "aspect-[16/9] lg:aspect-[16/8]";
 
   return (
@@ -78,68 +126,36 @@ export function StoryHero({
           />
         )}
 
-        {/* Editorial gradient — readability for the overlaid copy. We keep
-            the gradient OFF the vertical layout so the centered video
-            doesn't get a dimmed band on each side. */}
-        {!isVertical && (
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/40 to-foreground/20 pointer-events-none"
-          />
-        )}
+        {/* Editorial gradient — readability for the overlaid copy. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/40 to-foreground/20 pointer-events-none"
+        />
 
-        {!isVertical && (
-          <div className="absolute inset-x-0 bottom-0 pointer-events-none">
-            <div className="container-page pb-12 md:pb-20 lg:pb-24">
-              <div className="max-w-3xl">
-                <p className="text-[11px] uppercase tracking-[4px] font-medium font-[family-name:var(--font-rajdhani)] text-background/85">
-                  {eyebrow}
-                </p>
-                <h1
-                  className="font-[family-name:var(--font-rajdhani)] tracking-tight leading-[1.02] text-background mt-5"
-                  style={{
-                    fontWeight: 300,
-                    fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                  }}
-                >
-                  {title}
-                </h1>
-                <p className="text-[11px] uppercase tracking-[3px] font-[family-name:var(--font-rajdhani)] text-background/75 mt-4">
-                  {cafe.name}
-                  <span aria-hidden="true"> · </span>
-                  {formatCafeLocation(cafe)}
-                </p>
-              </div>
+        <div className="absolute inset-x-0 bottom-0 pointer-events-none">
+          <div className="container-page pb-12 md:pb-20 lg:pb-24">
+            <div className="max-w-3xl">
+              <p className="text-[11px] uppercase tracking-[4px] font-medium font-[family-name:var(--font-rajdhani)] text-background/85">
+                {eyebrow}
+              </p>
+              <h1
+                className="font-[family-name:var(--font-rajdhani)] tracking-tight leading-[1.02] text-background mt-5"
+                style={{
+                  fontWeight: 300,
+                  fontSize: "clamp(2.5rem, 5vw, 5rem)",
+                }}
+              >
+                {title}
+              </h1>
+              <p className="text-[11px] uppercase tracking-[3px] font-[family-name:var(--font-rajdhani)] text-background/75 mt-4">
+                {cafe.name}
+                <span aria-hidden="true"> · </span>
+                {formatCafeLocation(cafe)}
+              </p>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* For 9:16 layouts the title block lives BELOW the video, since
-          overlaying it would crowd a portrait frame. */}
-      {isVertical && (
-        <div className="container-page py-12 md:py-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-[11px] uppercase tracking-[4px] font-medium font-[family-name:var(--font-rajdhani)] text-foreground/65">
-              {eyebrow}
-            </p>
-            <h1
-              className="font-[family-name:var(--font-rajdhani)] tracking-tight leading-[1.02] mt-5"
-              style={{
-                fontWeight: 300,
-                fontSize: "clamp(2.5rem, 5vw, 5rem)",
-              }}
-            >
-              {title}
-            </h1>
-            <p className="text-[11px] uppercase tracking-[3px] font-[family-name:var(--font-rajdhani)] text-foreground/65 mt-5">
-              {cafe.name}
-              <span aria-hidden="true"> · </span>
-              {formatCafeLocation(cafe)}
-            </p>
-          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

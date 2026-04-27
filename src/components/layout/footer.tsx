@@ -16,11 +16,18 @@ export async function Footer() {
       ],
     },
     {
+      title: t("editorial"),
+      links: [
+        { label: t("journal"), href: "/journal" },
+        { label: t("stories"), href: "/stories" },
+        { label: t("blog"), href: "/blogs/coffee-grounds" },
+      ],
+    },
+    {
       title: t("companyAndSupport"),
       links: [
         { label: t("about"), href: "/pages/about" },
         { label: t("contact"), href: "/pages/contact" },
-        { label: t("blog"), href: "/blogs/coffee-grounds" },
         { label: t("shippingReturns"), href: "/pages/shipping" },
         { label: t("warrantyService"), href: "/pages/warranty" },
         { label: t("faq"), href: "/pages/faq" },
@@ -91,7 +98,7 @@ export async function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
+          <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
             {linkColumns.map((col) => (
               <div key={col.title}>
                 <h3 className="text-[11px] uppercase tracking-[3px] font-medium text-primary-foreground/40 mb-5 font-[family-name:var(--font-rajdhani)]">
