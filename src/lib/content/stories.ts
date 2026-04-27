@@ -126,10 +126,166 @@ export function formatCafeLocation(cafe: StoryCafe): string {
 }
 
 /**
- * The registry. Phase 3.A ships an empty array — the infrastructure must work
- * with zero stories registered. Phase 3.B populates this with the launch set.
+ * The registry. Phase 3.B launch set: three café spotlights authored from
+ * real video transcripts (sources in `docs/stories-source/`).
+ *
+ * Slug ↔ Cloudinary publicId asymmetry: the URL slug names the *café*
+ * (`jardin-sucre`), while the Cloudinary publicId names the *partnership*
+ * (`folka-x-jardin-sucre-main`). Posters live under
+ * `folka/stories/posters/folka-x-{slug}`.
  */
-const STORIES_REGISTRY: StoryEntry[] = [];
+const STORIES_REGISTRY: StoryEntry[] = [
+  {
+    slug: "jardin-sucre",
+    publishedAt: "2026-04-26",
+    cafe: {
+      name: "Jardín Sucre",
+      city: "San Pedro Garza García",
+      country: "MX",
+      instagram: "jardinsucre.mx",
+      website: "https://jardinsucre.mx",
+      foundedYear: 2024,
+    },
+    coverImage: {
+      url: "/stories/posters/folka-x-jardin-sucre",
+      alt: "Samim en el obrador de Jardín Sucre, una pastelería francesa en San Pedro Garza García.",
+    },
+    mainVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-jardin-sucre-main",
+      aspect: "9:16",
+    },
+    teaserVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-jardin-sucre-teaser",
+      aspect: "9:16",
+    },
+    featuredProductHandles: [],
+    i18n: {
+      es: {
+        title: "Jardín Sucre: una pastelería francesa que escucha al barrio",
+        eyebrow: "En conversación",
+        description:
+          "Samim regresó de Luxemburgo a Monterrey con una idea precisa: traer la pastelería francesa sin pisar la cultura mexicana. Dos años después, Jardín Sucre opera con esa premisa.",
+        tags: ["Pastelería", "Cultura", "Monterrey"],
+        readingTimeMinutes: 3,
+      },
+      en: {
+        title: "Jardín Sucre: a French pâtisserie that listens to its block",
+        eyebrow: "In conversation",
+        description:
+          "Samim came back from Luxembourg to Monterrey with one clear idea: bring French pastry without stepping on Mexican culture. Two years in, Jardín Sucre runs on that premise.",
+        tags: ["Pastry", "Culture", "Monterrey"],
+        readingTimeMinutes: 3,
+      },
+    },
+    loadBody: async (locale) => {
+      if (locale === "en") {
+        return import("@/content/stories/en/jardin-sucre.mdx");
+      }
+      return import("@/content/stories/es/jardin-sucre.mdx");
+    },
+  },
+  {
+    slug: "radical",
+    publishedAt: "2026-04-26",
+    cafe: {
+      name: "Radical Design Co.",
+      city: "Monterrey",
+      country: "MX",
+      instagram: "radical.mx",
+      website: "https://radicaldesignco.mx",
+    },
+    coverImage: {
+      url: "/stories/posters/folka-x-radical",
+      alt: "Jorge Campos y Abraham Jaramillo, fundadores de Radical Design Co., el estudio que diseñó la identidad de Folka.",
+    },
+    mainVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-radical-main",
+      aspect: "9:16",
+    },
+    teaserVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-radical-teaser",
+      aspect: "9:16",
+    },
+    featuredProductHandles: [],
+    i18n: {
+      es: {
+        title: "Radical Design Co.: el estudio detrás de la marca de Folka",
+        eyebrow: "En conversación",
+        description:
+          "Jorge Campos y Abraham Jaramillo dirigen Radical desde Monterrey. Vienen del skate, diseñan para marcas locales y firmaron el refresh de identidad de Folka.",
+        tags: ["Diseño", "Identidad", "Monterrey"],
+        readingTimeMinutes: 3,
+      },
+      en: {
+        title: "Radical Design Co.: the studio behind Folka's brand",
+        eyebrow: "In conversation",
+        description:
+          "Jorge Campos and Abraham Jaramillo run Radical out of Monterrey. They come from skate, design for local brands, and shaped Folka's identity refresh.",
+        tags: ["Design", "Identity", "Monterrey"],
+        readingTimeMinutes: 3,
+      },
+    },
+    loadBody: async (locale) => {
+      if (locale === "en") {
+        return import("@/content/stories/en/radical.mdx");
+      }
+      return import("@/content/stories/es/radical.mdx");
+    },
+  },
+  {
+    slug: "yuzo",
+    publishedAt: "2026-04-26",
+    cafe: {
+      name: "Yuzo",
+      city: "Saltillo",
+      country: "MX",
+      instagram: "getyuzo_",
+    },
+    coverImage: {
+      url: "/stories/posters/folka-x-yuzo",
+      alt: "Yuzo, wellness bar en Saltillo: smoothies, desayunos saludables, café y matcha.",
+    },
+    mainVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-yuzo-main",
+      aspect: "9:16",
+    },
+    teaserVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-yuzo-teaser",
+      aspect: "9:16",
+    },
+    featuredProductHandles: [],
+    i18n: {
+      es: {
+        title: "Yuzo: un wellness bar que toma en serio el café y el matcha",
+        eyebrow: "En conversación",
+        description:
+          "En Saltillo, Yuzo construye una barra alrededor de comer rico, saludable y rápido. La calidad del café y el matcha entró al estándar desde el primer día.",
+        tags: ["Wellness bar", "Matcha", "Saltillo"],
+        readingTimeMinutes: 3,
+      },
+      en: {
+        title: "Yuzo: a wellness bar that takes coffee and matcha seriously",
+        eyebrow: "In conversation",
+        description:
+          "In Saltillo, Yuzo builds its bar around eating well, healthy, and fast. Coffee and matcha quality joined the standard from day one.",
+        tags: ["Wellness bar", "Matcha", "Saltillo"],
+        readingTimeMinutes: 3,
+      },
+    },
+    loadBody: async (locale) => {
+      if (locale === "en") {
+        return import("@/content/stories/en/yuzo.mdx");
+      }
+      return import("@/content/stories/es/yuzo.mdx");
+    },
+  },
+];
 
 /** Composes a flat `StorySummary` from an entry + locale. */
 function toSummary(entry: StoryEntry, locale: Locale): StorySummary {
