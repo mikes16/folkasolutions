@@ -160,8 +160,8 @@
     "journalFeatureDescription": "Conversaciones con tostadores, baristas y expertos de calidad, más editoriales sobre el equipo que de verdad usan.",
     "journalFeatureViewAll": "Leer el journal",
     "storiesFeatureEyebrow": "Historias",
-    "storiesFeatureTitle": "Cafeterías que confían en Folka.",
-    "storiesFeatureDescription": "Conversaciones con cafeterías partner. Su oficio, su barra, su perspectiva sobre el equipo que usan.",
+    "storiesFeatureTitle": "La gente detrás de las marcas que trabajan con Folka.",
+    "storiesFeatureDescription": "Tres partners, tres oficios distintos. Una pastelería francesa, un estudio de diseño, y una barra de wellness con su propia forma de trabajar con Folka.",
     "storiesFeatureViewAll": "Leer todas las historias"
   },
   "journal": {
@@ -179,8 +179,8 @@
   },
   "stories": {
     "indexEyebrow": "Historias",
-    "indexTitle": "Cafeterías que confían en Folka.",
-    "indexDescription": "Conversaciones con los equipos detrás de las barras que sirven el café que vendemos.",
+    "indexTitle": "Conversaciones con quienes trabajan con Folka.",
+    "indexDescription": "Una pastelería francesa, un estudio de diseño, una barra de wellness. Tres oficios distintos, una mesa común.",
     "indexAbout": "Quién escribe",
     "equipmentEyebrow": "Su equipo",
     "equipmentTitle": "El equipo en su barra.",
