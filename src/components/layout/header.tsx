@@ -6,7 +6,6 @@ import { mainMenu } from "@/lib/menu";
 import { CartButton, LocaleSwitcher } from "./header-actions";
 import { DesktopNav } from "./desktop-nav";
 import { MobileMenu } from "./mobile-menu";
-import { AnnouncementBar } from "./announcement-bar";
 import { HeaderShell } from "./header-shell";
 
 export async function Header() {
@@ -14,12 +13,6 @@ export async function Header() {
 
   return (
     <HeaderShell>
-      <AnnouncementBar
-        text={t("announcement.text")}
-        linkText={t("announcement.linkText")}
-        href="/collections/sale"
-        dismissLabel={t("announcement.dismiss")}
-      />
       <div className="container-page">
         <div className="flex items-center justify-between h-[70px]">
           {/* Left: hamburger (mobile) | logo + nav (desktop) */}

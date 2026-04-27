@@ -5,6 +5,7 @@ import { isProductOnSale } from "@/lib/commerce/sale";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { getHeroSlides } from "@/lib/hero-slides";
 import { siteConfig } from "@/lib/site-config";
+import { cloudinaryUrl, cloudinaryVideoUrl } from "@/lib/cloudinary";
 
 export async function generateMetadata({
   params,
@@ -83,26 +84,26 @@ const brands = [
 ];
 
 // Locale-independent review metadata: video URL, poster image, café name.
-// Text/author/role come from i18n. Videos live in /public/videos/ for now —
-// swap to Cloudinary URLs when ready for CDN adaptive delivery. Leave
-// videoUrl empty to fall back to the pull-quote layout per slide.
+// Text/author/role come from i18n. Assets are served from Cloudinary
+// (`folka/reviews/*`). Leave `videoUrl` empty to fall back to the
+// pull-quote layout per slide.
 const reviewsMeta = [
   {
     key: "review1",
-    videoUrl: "/videos/testimonial-1.mp4",
-    image: "/videos/posters/testimonial-1.jpg",
+    videoUrl: cloudinaryVideoUrl("folka/reviews/testimonial-1"),
+    image: cloudinaryUrl("/reviews/posters/testimonial-1"),
     cafeName: "",
   },
   {
     key: "review2",
-    videoUrl: "/videos/testimonial-2.mp4",
-    image: "/videos/posters/testimonial-2.jpg",
+    videoUrl: cloudinaryVideoUrl("folka/reviews/testimonial-2"),
+    image: cloudinaryUrl("/reviews/posters/testimonial-2"),
     cafeName: "",
   },
   {
     key: "review3",
-    videoUrl: "/videos/testimonial-3.mp4",
-    image: "/videos/posters/testimonial-3.jpg",
+    videoUrl: cloudinaryVideoUrl("folka/reviews/testimonial-3"),
+    image: cloudinaryUrl("/reviews/posters/testimonial-3"),
     cafeName: "",
   },
 ] as const;
@@ -338,7 +339,7 @@ export default async function HomePage({
         description={t("home.ctaDescription")}
         ctaText={t("common.shopNow")}
         ctaHref="/shop"
-        imageUrl="/hero/hf_20260424_231041_d5c47494-e52b-47a5-9c34-43f15ba71b58.png"
+        imageUrl="/banners/hf_20260424_231041_d5c47494-e52b-47a5-9c34-43f15ba71b58.webp"
         imageAlt={t("home.ctaTitle")}
       />
     </>

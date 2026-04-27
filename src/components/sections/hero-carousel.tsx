@@ -453,8 +453,9 @@ function Slide({
       </div>
       </div>
 
-      {/* Lifestyle image — right side (desktop only) */}
-      {slide.lifestyleImageUrl && (
+      {/* Lifestyle slot — right side (desktop only). Renders video loop when
+        * available, falls back to static image otherwise. */}
+      {(slide.lifestyleVideoUrl || slide.lifestyleImageUrl) && (
         <div
           className="hidden lg:block absolute right-16 xl:right-24 top-[28%] z-[3] w-[200px] xl:w-[230px]"
           style={{
@@ -469,19 +470,90 @@ function Slide({
               transition: "opacity 700ms ease-in-out 200ms, transform 700ms ease-in-out 200ms",
             }}
           >
-            <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden">
-              <NextImage
-                src={slide.lifestyleImageUrl}
-                alt={`${slide.title} in context`}
-                fill
-                className="object-cover"
-                sizes="230px"
-                draggable={false}
-              />
+            <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#101C2E]/5">
+              {slide.lifestyleVideoUrl ? (
+                <LifestyleVideo
+                  src={slide.lifestyleVideoUrl}
+                  poster={slide.lifestyleVideoPosterUrl ?? slide.lifestyleImageUrl ?? undefined}
+                  isActive={isActive}
+                  alt={`${slide.title} in context`}
+                />
+              ) : (
+                <NextImage
+                  src={slide.lifestyleImageUrl!}
+                  alt={`${slide.title} in context`}
+                  fill
+                  className="object-cover"
+                  sizes="230px"
+                  draggable={false}
+                />
+              )}
             </div>
           </div>
         </div>
       )}
     </div>
+  );
+}
+
+function LifestyleVideo({
+  src,
+  poster,
+  isActive,
+  alt,
+}: {
+  src: string;
+  poster: string | undefined;
+  isActive: boolean;
+  alt: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // Pause inactive slides to save resources; play when active.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || reducedMotion) return;
+    if (isActive) {
+      video.play().catch(() => {
+        // Autoplay blocked — poster stays visible, that's the graceful path.
+      });
+    } else {
+      video.pause();
+    }
+  }, [isActive, reducedMotion]);
+
+  if (reducedMotion) {
+    return poster ? (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={poster}
+        alt={alt}
+        className="absolute inset-0 w-full h-full object-cover"
+        draggable={false}
+      />
+    ) : null;
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-label={alt}
+      className="absolute inset-0 w-full h-full object-cover"
+    />
   );
 }
