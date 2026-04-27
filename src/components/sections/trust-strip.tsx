@@ -1,39 +1,32 @@
-import Image from "next/image";
-
-interface TrustItem {
-  label: string;
-  imageUrl: string;
-}
-
 interface TrustStripProps {
-  items: TrustItem[];
+  labels: string[];
 }
 
-export function TrustStrip({ items }: TrustStripProps) {
+// Editorial hairline version — tracking-heavy Rajdhani labels separated by
+// thin vertical rules. No icons, no grid, no card. Intentional opposite of
+// the SaaS "feature grid" pattern.
+export function TrustStrip({ labels }: TrustStripProps) {
   return (
-    <section className="border-y border-border bg-card/40 py-12 md:py-16">
-      <div className="container-page">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-4 md:gap-x-4">
-          {items.map((item, i) => (
-            <div
+    <section className="border-y border-border">
+      <div className="container-page py-6 md:py-7">
+        <ul className="flex flex-wrap items-center justify-center gap-y-3 text-center">
+          {labels.map((label, i) => (
+            <li
               key={i}
-              className="flex flex-col items-center text-center gap-4 md:border-r md:border-border md:last:border-r-0 md:px-4"
+              className="flex items-center"
             >
-              <div className="relative w-12 h-12 md:w-14 md:h-14">
-                <Image
-                  src={item.imageUrl}
-                  alt=""
-                  fill
-                  className="object-contain"
-                  sizes="56px"
-                />
-              </div>
-              <span className="text-[11px] md:text-[12px] uppercase tracking-[1.5px] font-medium text-foreground leading-snug font-[family-name:var(--font-rajdhani)]">
-                {item.label}
+              <span className="text-[11px] md:text-[12px] uppercase tracking-[2.5px] font-medium text-foreground/70 font-[family-name:var(--font-rajdhani)] px-5 md:px-8">
+                {label}
               </span>
-            </div>
+              {i < labels.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="h-3 w-px bg-foreground/15"
+                />
+              )}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

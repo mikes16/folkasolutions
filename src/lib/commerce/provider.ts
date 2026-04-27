@@ -16,7 +16,9 @@ export type ProductSortKey =
   | "CREATED_AT"
   | "TITLE"
   | "PRICE"
-  | "UPDATED_AT";
+  | "UPDATED_AT"
+  /** Collection-only: respects the merchant's manual curation order in Shopify admin. */
+  | "MANUAL";
 
 export interface ProductsPage {
   products: Product[];

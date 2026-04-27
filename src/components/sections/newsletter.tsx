@@ -35,45 +35,51 @@ export function Newsletter({
   }
 
   return (
-    <section className="bg-secondary py-16 md:py-24">
-      <div className="container-page max-w-2xl mx-auto text-center">
-        <p className="text-[11px] uppercase tracking-[4px] font-medium text-secondary-foreground/50 mb-5 font-[family-name:var(--font-rajdhani)]">
-          {eyebrow}
-        </p>
-        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-secondary-foreground mb-4 font-[family-name:var(--font-rajdhani)]">
-          {title}
-        </h2>
-        <p className="text-sm md:text-base text-secondary-foreground/60 leading-relaxed mb-10 max-w-md mx-auto">
-          {description}
-        </p>
+    <section className="bg-secondary py-24 md:py-32">
+      <div className="container-page">
+        <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-end max-w-5xl mx-auto">
+          <div>
+            <p className="text-[11px] uppercase tracking-[4px] font-medium text-secondary-foreground/55 font-[family-name:var(--font-rajdhani)]">
+              {eyebrow}
+            </p>
+            <h2 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-secondary-foreground font-[family-name:var(--font-rajdhani)] leading-[1.02]">
+              {title}
+            </h2>
+            <p className="mt-6 text-[15px] text-secondary-foreground/65 leading-relaxed max-w-sm">
+              {description}
+            </p>
+          </div>
 
-        {submitted ? (
-          <p className="text-sm font-medium text-secondary-foreground/80">
-            {successMessage}
-          </p>
-        ) : (
-          <form onSubmit={handleSubmit} className="flex gap-3 max-w-md mx-auto">
-            <label htmlFor="newsletter-email" className="sr-only">
-              {placeholder}
-            </label>
-            <input
-              id="newsletter-email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={placeholder}
-              className="flex-1 px-5 py-3.5 bg-white rounded-full border-0 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow"
-            />
-            <button
-              type="submit"
-              className="shrink-0 bg-primary text-primary-foreground rounded-full px-6 py-3.5 text-[11px] uppercase tracking-[2px] font-medium hover:opacity-90 transition-opacity duration-300 flex items-center gap-2"
-            >
-              {buttonText}
-              <Icon name="arrow-right" size={14} />
-            </button>
-          </form>
-        )}
+          <div className="md:pb-2">
+            {submitted ? (
+              <p className="text-[15px] text-secondary-foreground/80 font-medium">
+                {successMessage}
+              </p>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <label htmlFor="newsletter-email" className="sr-only">
+                  {placeholder}
+                </label>
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={placeholder}
+                  className="w-full bg-transparent border-0 border-b border-secondary-foreground/30 pt-3 pb-4 text-lg text-secondary-foreground placeholder:text-secondary-foreground/45 focus:outline-none focus:border-secondary-foreground transition-colors duration-300"
+                />
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-3 self-start text-[11px] uppercase tracking-[3px] font-semibold font-[family-name:var(--font-rajdhani)] text-secondary-foreground hover:gap-4 transition-all duration-300 cursor-pointer"
+                >
+                  {buttonText}
+                  <Icon name="arrow-right" size={14} />
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

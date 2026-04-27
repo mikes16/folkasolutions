@@ -65,3 +65,9 @@ logs/
 
 # Claude Code
 .claude/
+
+# Local-only media — heavy assets live on Cloudinary, not git
+/public/videos/
+
+# Temp output of scripts/optimize-and-upload.ts
+/.optimized-media/

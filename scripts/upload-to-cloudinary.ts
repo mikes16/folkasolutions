@@ -1,4 +1,4 @@
-import { readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import { v2 as cloudinary } from "cloudinary";
 import { CLOUDINARY_FOLDER } from "../src/lib/cloudinary";
@@ -13,6 +13,7 @@ cloudinary.config({
 });
 
 function walk(dir: string): string[] {
+  if (!existsSync(dir)) return [];
   const out: string[] = [];
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);

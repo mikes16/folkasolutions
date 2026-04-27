@@ -11,7 +11,11 @@ export default function imageLoader({ src, width, quality }: LoaderArgs): string
     return src;
   }
 
-  if (src.startsWith("/hero/") || src.startsWith("/backs/")) {
+  if (
+    src.startsWith("/hero/") ||
+    src.startsWith("/backs/") ||
+    src.startsWith("/banners/")
+  ) {
     return cloudinaryUrl(src, ["f_auto", `q_${quality || "auto"}`, `w_${width}`, "c_limit"]);
   }
 

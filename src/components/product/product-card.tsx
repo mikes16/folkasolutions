@@ -35,14 +35,14 @@ export function ProductCard({ product }: ProductCardProps) {
         });
       }}
     >
-      {/* Image */}
-      <div className="relative aspect-square bg-card rounded-[24px] overflow-hidden mb-4 hover:shadow-md transition-shadow duration-300">
+      {/* Image — chromeless surface; the object is the design */}
+      <div className="relative aspect-square bg-card/60 overflow-hidden mb-4">
         {product.featuredImage ? (
           <Image
             src={product.featuredImage.url}
             alt={product.featuredImage.altText || product.title}
             fill
-            className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+            className="object-contain p-8 group-hover:scale-105 transition-transform duration-700 ease-out"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         ) : (
@@ -60,10 +60,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* Info */}
       <div className="flex flex-col gap-1">
-        <p className="text-[10px] uppercase tracking-[2px] text-secondary font-[family-name:var(--font-rajdhani)]">
+        <p className="text-[10px] uppercase tracking-[2px] text-foreground/55 font-[family-name:var(--font-rajdhani)]">
           {product.vendor}
         </p>
-        <h3 className="text-sm font-medium leading-snug group-hover:underline">
+        <h3 className="text-sm font-medium leading-snug transition-colors duration-300 group-hover:text-foreground/70">
           {product.title}
         </h3>
         <div className="flex items-baseline gap-2 mt-1">

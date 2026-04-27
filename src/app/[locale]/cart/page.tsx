@@ -7,6 +7,7 @@ import { useCart } from "@/components/cart/cart-context";
 import { formatMoney } from "@/lib/utils/format";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { EmptyState } from "@/components/ui/empty-state";
 
 export default function CartPage() {
   const t = useTranslations();
@@ -22,12 +23,13 @@ export default function CartPage() {
           </h1>
 
           {isEmpty ? (
-            <div className="text-center py-20">
-              <p className="text-muted mb-6">{t("cart.empty")}</p>
-              <Link href="/">
-                <Button variant="outline">{t("common.continueShopping")}</Button>
-              </Link>
-            </div>
+            <EmptyState
+              eyebrow={t("emptyState.cartEyebrow")}
+              title={t("emptyState.cartTitle")}
+              description={t("emptyState.cartDescription")}
+              ctaHref="/shop"
+              ctaText={t("emptyState.browseCatalog")}
+            />
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Line items */}

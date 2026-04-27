@@ -13,6 +13,9 @@
  *   4. Accessories     — mega: Barista Tools / Care & Cleaning / Cups & Glassware
  *   5. Brands          — mega: Espresso / Grinders / Brewing & Tools
  *   6. Coffee & More   — mega: Folka Coffee / Beverages / Syrups & Powders
+ *
+ * Editorial routes (`/journal`, `/stories`) remain live but are surfaced via
+ * the footer + homepage features rather than the top-level menu.
  */
 
 export interface MegaMenuLink {

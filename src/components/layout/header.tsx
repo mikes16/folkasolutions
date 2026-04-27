@@ -6,19 +6,13 @@ import { mainMenu } from "@/lib/menu";
 import { CartButton, LocaleSwitcher } from "./header-actions";
 import { DesktopNav } from "./desktop-nav";
 import { MobileMenu } from "./mobile-menu";
-import { AnnouncementBar } from "./announcement-bar";
+import { HeaderShell } from "./header-shell";
 
 export async function Header() {
   const t = await getTranslations();
 
   return (
-    <header className="sticky top-0 z-50 bg-header-bg/85 backdrop-blur-[12px] transition-shadow duration-300">
-      <AnnouncementBar
-        text={t("announcement.text")}
-        linkText={t("announcement.linkText")}
-        href="/collections/sale"
-        dismissLabel={t("announcement.dismiss")}
-      />
+    <HeaderShell>
       <div className="container-page">
         <div className="flex items-center justify-between h-[70px]">
           {/* Left: hamburger (mobile) | logo + nav (desktop) */}
@@ -63,6 +57,6 @@ export async function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }

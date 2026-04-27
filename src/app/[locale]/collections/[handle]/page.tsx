@@ -14,6 +14,7 @@ import { localeCountryMap, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
 import { getCuratedCategory } from "@/lib/curated-categories";
 import { isProductOnSale, isSaleCollectionHandle } from "@/lib/commerce/sale";
+import { EmptyState } from "@/components/ui/empty-state";
 
 export const revalidate = 60;
 
@@ -152,9 +153,13 @@ export default async function CollectionPage({ params, searchParams }: Props) {
           price={price}
         />
       ) : (
-        <p className="text-muted py-20 text-center">
-          {t("product.noProducts")}
-        </p>
+        <EmptyState
+          eyebrow={t("emptyState.collectionEyebrow")}
+          title={t("emptyState.collectionTitle")}
+          description={t("emptyState.collectionDescription")}
+          ctaHref="/shop"
+          ctaText={t("emptyState.browseCatalog")}
+        />
       )}
     </div>
   );

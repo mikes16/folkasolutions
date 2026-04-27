@@ -5,6 +5,13 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Icon } from "@/components/ui/icon";
 
+interface CommercialStat {
+  /** Specific, non-rounded figure — reads as premium when concrete. */
+  value: string;
+  /** Supporting label (single line). */
+  label: string;
+}
+
 interface CommercialCtaProps {
   eyebrow: string;
   title: string;
@@ -13,6 +20,7 @@ interface CommercialCtaProps {
   ctaHref: string;
   imageUrl?: string;
   imageAlt?: string;
+  stats?: CommercialStat[];
 }
 
 export function CommercialCta({
@@ -23,6 +31,7 @@ export function CommercialCta({
   ctaHref,
   imageUrl,
   imageAlt = "",
+  stats,
 }: CommercialCtaProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -101,25 +110,23 @@ export function CommercialCta({
           </Link>
         </div>
 
-        {/* Right — trust indicators */}
-        <div className="flex flex-col gap-6 lg:items-end lg:text-right">
-          <div className="flex flex-col gap-5">
-            {[
-              { value: "100+", label: "Brands" },
-              { value: "500+", label: "Products" },
-              { value: "10+", label: "Years of experience" },
-            ].map((stat) => (
-              <div key={stat.label} className="flex items-baseline gap-3 lg:flex-row-reverse">
-                <span className="text-4xl md:text-5xl font-bold text-primary-foreground font-[family-name:var(--font-rajdhani)]">
-                  {stat.value}
-                </span>
-                <span className="text-[11px] uppercase tracking-[2px] text-primary-foreground/40 font-[family-name:var(--font-rajdhani)]">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
+        {/* Right — specific facts, not rounded marketing numbers */}
+        {stats && stats.length > 0 && (
+          <div className="flex flex-col gap-6 lg:items-end lg:text-right">
+            <div className="flex flex-col gap-7 md:gap-8">
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex flex-col lg:items-end gap-1.5">
+                  <span className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground tracking-tight font-[family-name:var(--font-rajdhani)] tabular-nums">
+                    {stat.value}
+                  </span>
+                  <span className="text-[11px] uppercase tracking-[2px] text-primary-foreground/50 font-[family-name:var(--font-rajdhani)] max-w-[18ch]">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
