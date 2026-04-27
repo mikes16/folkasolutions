@@ -148,7 +148,7 @@ const STORIES_REGISTRY: StoryEntry[] = [
     },
     coverImage: {
       url: "/stories/posters/folka-x-jardin-sucre",
-      alt: "Samim en el obrador de Jardín Sucre, una pastelería francesa en San Pedro Garza García.",
+      alt: "Samy en el obrador de Jardín Sucre, una pastelería francesa en San Pedro Garza García.",
     },
     mainVideo: {
       provider: "cloudinary",
@@ -163,18 +163,18 @@ const STORIES_REGISTRY: StoryEntry[] = [
     featuredProductHandles: [],
     i18n: {
       es: {
-        title: "Jardín Sucre: una pastelería francesa que escucha al barrio",
+        title: "Jardín Sucre: una pastelería francesa en San Pedro",
         eyebrow: "En conversación",
         description:
-          "Samim regresó de Luxemburgo a Monterrey con una idea precisa: traer la pastelería francesa sin pisar la cultura mexicana. Dos años después, Jardín Sucre opera con esa premisa.",
+          "Samy regresó a Monterrey con la idea de abrir una pastelería francesa. Año y medio después, junto con Dominique de Ginebra y la familia Villarreal, abrieron Jardín Sucre en Río Guadalquivir 136.",
         tags: ["Pastelería", "Cultura", "Monterrey"],
         readingTimeMinutes: 3,
       },
       en: {
-        title: "Jardín Sucre: a French pâtisserie that listens to its block",
+        title: "Jardín Sucre: a French pâtisserie in San Pedro",
         eyebrow: "In conversation",
         description:
-          "Samim came back from Luxembourg to Monterrey with one clear idea: bring French pastry without stepping on Mexican culture. Two years in, Jardín Sucre runs on that premise.",
+          "Samy came back to Monterrey with the idea of opening a French pâtisserie. A year and a half later, with Dominique from Geneva and the Villarreal family, Jardín Sucre opened on Río Guadalquivir 136.",
         tags: ["Pastry", "Culture", "Monterrey"],
         readingTimeMinutes: 3,
       },
