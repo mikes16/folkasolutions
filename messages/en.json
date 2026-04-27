@@ -158,7 +158,11 @@
     "journalFeatureEyebrow": "Journal",
     "journalFeatureTitle": "Notes from the craft.",
     "journalFeatureDescription": "Field interviews, technique deep-dives, and the people behind the equipment we trust.",
-    "journalFeatureViewAll": "Read the journal"
+    "journalFeatureViewAll": "Read the journal",
+    "storiesFeatureEyebrow": "Stories",
+    "storiesFeatureTitle": "Cafés that work with us.",
+    "storiesFeatureDescription": "Conversations with partner cafés. Their craft, their bar, their take on the gear they use.",
+    "storiesFeatureViewAll": "Read all stories"
   },
   "journal": {
     "indexEyebrow": "Journal",

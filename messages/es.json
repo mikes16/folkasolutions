@@ -158,7 +158,11 @@
     "journalFeatureEyebrow": "Journal",
     "journalFeatureTitle": "Notas del oficio.",
     "journalFeatureDescription": "Conversaciones con tostadores, baristas y expertos de calidad, más editoriales sobre el equipo que de verdad usan.",
-    "journalFeatureViewAll": "Leer el journal"
+    "journalFeatureViewAll": "Leer el journal",
+    "storiesFeatureEyebrow": "Historias",
+    "storiesFeatureTitle": "Cafeterías que confían en Folka.",
+    "storiesFeatureDescription": "Conversaciones con cafeterías partner. Su oficio, su barra, su perspectiva sobre el equipo que usan.",
+    "storiesFeatureViewAll": "Leer todas las historias"
   },
   "journal": {
     "indexEyebrow": "Journal",
