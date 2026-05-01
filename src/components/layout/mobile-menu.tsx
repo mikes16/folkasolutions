@@ -209,7 +209,7 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
 
               <div className="border-t border-border mt-6 pt-6 space-y-1">
                 <a
-                  href="https://cafe-folka.myshopify.com/account"
+                  href="https://account.folkasolutions.com/"
                   className="flex items-center gap-3 py-3 text-sm text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
                 >
                   <Icon name="user" size={18} />

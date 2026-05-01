@@ -50,7 +50,7 @@ export async function Header() {
             </Link>
 
             <a
-              href="https://cafe-folka.myshopify.com/account"
+              href="https://account.folkasolutions.com/"
               className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 hidden lg:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
             >
               <Icon name="user" size={18} />
