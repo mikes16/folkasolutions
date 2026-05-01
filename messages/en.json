@@ -342,6 +342,7 @@
     "warrantyService": "Warranty & Service",
     "termsOfService": "Terms of Service",
     "refundPolicy": "Refund Policy",
+    "privacyPolicy": "Privacy Notice",
     "copyright": "© {year} Folka Coffee",
     "paymentsNote": "We pay half your shipping · Same-day support"
   },
@@ -524,6 +525,11 @@
       "eyebrow": "Legal",
       "title": "Refund Policy",
       "intro": "How returns, refunds, and damaged-shipment claims work at Folka."
+    },
+    "privacy": {
+      "eyebrow": "Legal",
+      "title": "Privacy Notice",
+      "intro": "What data we collect, what we use it for, who we share it with, and how to exercise your rights."
     }
   }
 }

@@ -38,6 +38,7 @@ export async function Footer() {
       links: [
         { label: t("termsOfService"), href: "/pages/terms-of-service" },
         { label: t("refundPolicy"), href: "/pages/refund-policy" },
+        { label: t("privacyPolicy"), href: "/pages/privacy-policy" },
       ],
     },
   ];

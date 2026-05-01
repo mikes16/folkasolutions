@@ -342,6 +342,7 @@
     "warrantyService": "Garantía y Servicio",
     "termsOfService": "Términos y Condiciones",
     "refundPolicy": "Política de Devoluciones",
+    "privacyPolicy": "Aviso de Privacidad",
     "copyright": "© {year} Folka Coffee",
     "paymentsNote": "Pagamos la mitad de tu envío · Atención el mismo día"
   },
@@ -524,6 +525,11 @@
       "eyebrow": "Legal",
       "title": "Política de Devoluciones",
       "intro": "Cómo funcionan las devoluciones, los reembolsos y los reclamos por paquetería dañada en Folka."
+    },
+    "privacy": {
+      "eyebrow": "Legal",
+      "title": "Aviso de Privacidad",
+      "intro": "Qué datos recolectamos, para qué los usamos, con quién los compartimos, y cómo ejercer tus derechos."
     }
   }
 }
