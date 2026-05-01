@@ -15,7 +15,8 @@ export function CartButton() {
   return (
     <button
       onClick={openCart}
-      className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 relative"
+      aria-label={t("cart")}
+      className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 relative focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
     >
       <Icon name="cart" size={18} />
       <span className="sr-only">{t("cart")}</span>
@@ -46,21 +47,31 @@ export function LocaleSwitcher() {
   };
 
   useEffect(() => {
+    if (!isOpen) return;
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     }
-    if (isOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsOpen(false);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen]);
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 flex items-center gap-1.5"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
         aria-label={`Language: ${localeLabels[currentLocale].lang}, Currency: ${localeCountryMap[currentLocale].currency}`}
+        className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
       >
         <Icon name="globe" size={18} />
         <span className="text-[11px] uppercase font-medium tracking-wider hidden sm:inline">
@@ -77,7 +88,8 @@ export function LocaleSwitcher() {
               <button
                 key={locale}
                 onClick={() => switchLocale(locale)}
-                className={`w-full text-left px-4 py-3 transition-colors flex items-center justify-between ${
+                aria-current={isActive ? "true" : undefined}
+                className={`w-full text-left px-4 py-3 transition-colors flex items-center justify-between focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${
                   isActive
                     ? "bg-foreground/5 font-medium"
                     : "hover:bg-foreground/5"

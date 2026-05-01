@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { commerce } from "@/lib/commerce";
-import { isProductOnSale } from "@/lib/commerce/sale";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { getHeroSlides } from "@/lib/hero-slides";
 import { siteConfig } from "@/lib/site-config";
@@ -119,26 +118,14 @@ export default async function HomePage({
   const { country, language } = localeCountryMap[locale as Locale] ?? localeCountryMap.es;
 
   const [
-    saleCollection,
-    newArrivals,
+    commercialEspressoCollection,
     homeBarCollection,
     baristaPicksCollection,
     journalPosts,
     stories,
   ] = await Promise.all([
-    // Fetch a buffer because the `sale` collection in Shopify holds the
-    // global on-sale set; in any given market only a subset has a real
-    // discount (compareAtPrice > price). Filter post-fetch with
-    // isProductOnSale, then trim to 4.
-    commerce.getCollection("sale", {
-      first: 16,
-      country,
-      language,
-    }),
-    commerce.getProducts({
-      first: 4,
-      sortKey: "CREATED_AT",
-      reverse: true,
+    commerce.getCollection("commercial-espresso-machines", {
+      first: 8,
       country,
       language,
     }),
@@ -156,11 +143,6 @@ export default async function HomePage({
     getAllJournalPosts(locale as Locale),
     getAllStories(locale as Locale),
   ]);
-
-  const saleProducts = (saleCollection?.products ?? [])
-    .filter(isProductOnSale)
-    .slice(0, 4);
-  const showSale = saleProducts.length > 0;
 
   const heroSlides = getHeroSlides(locale as Locale);
 
@@ -183,26 +165,19 @@ export default async function HomePage({
         nextLabel={t("home.heroNext")}
       />
 
-      {/* 2. On Sale (or New Arrivals fallback) — above-the-fold taster */}
-      {showSale ? (
+      {/* 2. Commercial Espresso Machines — above-the-fold editorial taster.
+          Sale carousel removed until real, market-specific discounts exist.
+          The 8th product card receives a "View all" overlay only when the
+          collection has more items than the rail can show. */}
+      {commercialEspressoCollection && commercialEspressoCollection.products.length > 0 && (
         <ProductCarousel
-          eyebrow={t("home.onSale")}
-          title={t("home.onSaleTitle")}
-          description={t("home.onSaleDescription")}
+          eyebrow={t("home.commercialEspressoEyebrow")}
+          title={t("home.commercialEspressoTitle")}
+          description={t("home.commercialEspressoDescription")}
           viewAllText={t("common.viewAll")}
-          viewAllHref="/collections/sale"
-          products={saleProducts}
-          layout="grid"
-        />
-      ) : (
-        <ProductCarousel
-          eyebrow={t("home.newArrivals")}
-          title={t("home.newArrivalsTitle")}
-          description={t("home.newArrivalsDescription")}
-          viewAllText={t("common.viewAll")}
-          viewAllHref="/new-arrivals"
-          products={newArrivals}
-          layout="grid"
+          viewAllHref="/collections/commercial-espresso-machines"
+          products={commercialEspressoCollection.products}
+          viewAllOverlay={commercialEspressoCollection.pageInfo.hasNextPage}
         />
       )}
 
@@ -238,6 +213,7 @@ export default async function HomePage({
           viewAllText={t("home.homeBarViewAll")}
           viewAllHref="/collections/best-seller"
           products={homeBarCollection.products}
+          viewAllOverlay={homeBarCollection.pageInfo.hasNextPage}
         />
       )}
 
@@ -272,6 +248,7 @@ export default async function HomePage({
           viewAllText={t("home.baristaPicksViewAll")}
           viewAllHref="/collections/barista-picks"
           products={baristaPicksCollection.products}
+          viewAllOverlay={baristaPicksCollection.pageInfo.hasNextPage}
         />
       )}
 

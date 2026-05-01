@@ -6,16 +6,15 @@
  * the Shopify catalog that renames or removes a handle here will 404 — re-run
  * the script to re-verify.
  *
- * Structure (6 top-level items):
- *   1. Shop All        — independent link to /collections (no mega)
- *   2. Equipment       — mega: Espresso / Grinders / Top Brands / Featured card
- *   3. Brewing         — mega: Pour-Over / Batch & Drip / Kettles & Scales
- *   4. Accessories     — mega: Barista Tools / Care & Cleaning / Cups & Glassware
- *   5. Brands          — mega: Espresso / Grinders / Brewing & Tools
- *   6. Coffee & More   — mega: Folka Coffee / Beverages / Syrups & Powders
+ * Structure (4 top-level items):
+ *   1. Equipment       — mega: Espresso / Grinders / Top Brands / Featured card
+ *   2. Brewing         — mega: Pour-Over / Batch & Drip / Kettles & Scales
+ *   3. Accessories     — mega: Barista Tools / Care & Cleaning / Cups & Glassware
+ *   4. Coffee & More   — mega: Folka Coffee / Beverages / Syrups & Powders
  *
- * Editorial routes (`/journal`, `/stories`) remain live but are surfaced via
- * the footer + homepage features rather than the top-level menu.
+ * Catalog-wide routes ("Shop all", "All brands index") and editorial routes
+ * (`/journal`, `/stories`) live in the footer + tail-links inside each mega
+ * panel rather than crowding the top-level bar.
  */
 
 export interface MegaMenuLink {
@@ -45,10 +44,7 @@ export interface NavItem {
 }
 
 export const mainMenu: NavItem[] = [
-  // 1. Shop All — independent, no mega
-  { labelKey: "shopAllTop", href: "/shop" },
-
-  // 2. Equipment
+  // 1. Equipment
   {
     labelKey: "equipment",
     href: "/collections/maquinaria",
@@ -82,10 +78,10 @@ export const mainMenu: NavItem[] = [
       },
     ],
     promoCard: {
-      imageUrl: "/hero/r9v.webp",
-      labelKey: "featuredR9vTitle",
-      sublabelKey: "featuredR9vSub",
-      href: "/collections/rocket",
+      imageUrl: "/hero/slayer_steam_single.webp",
+      labelKey: "featuredEquipmentTitle",
+      sublabelKey: "featuredEquipmentSub",
+      href: "/collections/slayer",
     },
   },
 
@@ -168,52 +164,7 @@ export const mainMenu: NavItem[] = [
     ],
   },
 
-  // 5. Brands
-  {
-    labelKey: "brands",
-    href: "/collections",
-    columns: [
-      {
-        headingKey: "espresso",
-        links: [
-          { labelKey: "rocket", href: "/collections/rocket" },
-          { labelKey: "profitec", href: "/collections/profitec" },
-          { labelKey: "laMarzocco", href: "/collections/la-marzocco" },
-          { labelKey: "slayer", href: "/collections/slayer" },
-          { labelKey: "rancilio", href: "/collections/rancilio" },
-          { labelKey: "breville", href: "/collections/breville" },
-          { labelKey: "lelit", href: "/collections/lelit" },
-          { labelKey: "faema", href: "/collections/faema" },
-        ],
-      },
-      {
-        headingKey: "grinders",
-        links: [
-          { labelKey: "mazzer", href: "/collections/mazzer" },
-          { labelKey: "eureka", href: "/collections/eureka" },
-          { labelKey: "baratza", href: "/collections/baratza" },
-          { labelKey: "niche", href: "/collections/niche-coffee-ltd" },
-          { labelKey: "df64", href: "/collections/df64-coffee-grinders" },
-          { labelKey: "mahlkonig", href: "/collections/mahlkonig" },
-          { labelKey: "fiorenzato", href: "/collections/fiorenzato" },
-        ],
-      },
-      {
-        headingKey: "brewingTools",
-        links: [
-          { labelKey: "fellow", href: "/collections/fellow" },
-          { labelKey: "acaia", href: "/collections/acaia" },
-          { labelKey: "hario", href: "/collections/hario" },
-          { labelKey: "chemex", href: "/collections/chemex" },
-          { labelKey: "aeropress", href: "/collections/aeropress" },
-          { labelKey: "timemore", href: "/collections/timemore" },
-          { labelKey: "moccamaster", href: "/collections/technivorm-moccamaster" },
-        ],
-      },
-    ],
-  },
-
-  // 6. Coffee & More
+  // 4. Coffee & More
   {
     labelKey: "coffeeAndMore",
     href: "/collections/cafe",

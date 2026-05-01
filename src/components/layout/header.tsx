@@ -19,7 +19,11 @@ export async function Header() {
           <div className="flex items-center gap-8">
             <MobileMenu items={mainMenu} />
 
-            <Link href="/" className="shrink-0" aria-label="Folka Coffee Solutions">
+            <Link
+              href="/"
+              className="shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground rounded-sm"
+              aria-label="Folka Coffee Solutions"
+            >
               <Image
                 src="/logos/logo.webp"
                 alt="Folka Coffee Solutions"
@@ -39,7 +43,7 @@ export async function Header() {
 
             <Link
               href="/search"
-              className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 hidden lg:flex"
+              className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 hidden lg:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
             >
               <Icon name="search" size={18} />
               <span className="sr-only">{t("common.search")}</span>
@@ -47,7 +51,7 @@ export async function Header() {
 
             <a
               href="https://cafe-folka.myshopify.com/account"
-              className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 hidden lg:flex"
+              className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 hidden lg:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
             >
               <Icon name="user" size={18} />
               <span className="sr-only">{t("common.account")}</span>
