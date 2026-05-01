@@ -1,0 +1,94 @@
+# Jardín Sucre — Interview transcript (w3788.MP4)
+
+Source: video file w3788.MP4. Provided by client. Bilingual interview with Samy
+(co-founder, Jardín Sucre). Format: Samy responds first in French, then in
+his own Spanish. Both versions captured below; quotes pulled into the MDX must
+map verbatim (or near-verbatim) to one of these versions.
+
+Note on names: transcript shows "Sami". Canonical brand spelling per the
+existing `jardin-sucre-history.md` source is "Samy". Use "Samy" in MDX. The
+shop name "Jardin Sucré" appears with mixed diacritics in different sources;
+the MDX currently uses "Jardín Sucre" in PullQuote attribution.
+
+---
+
+[0:00 — 0:33] PRESENTATION
+
+FR: Bonjour à tous, je m'appelle Sami, j'ai 28 ans, je suis français, je viens
+de Paris et ça fait maintenant plus de deux ans qu'on travaille sur ce projet
+avec Dominique et Mauricio et c'est un plaisir de vous recevoir ici aujourd'hui.
+
+ES: Me llamo Sami, tengo 28 años. Yo soy de aquí, trabajo en este proyecto
+desde más de dos años con el chef Dominique y el otro socio que se llama
+Mauricio y es un placer de ser con ustedes el día de hoy.
+
+[0:33 — 1:19] HOW HE CAME TO MEXICO
+
+FR: La première fois que je suis venu au Mexique c'était il y a trois quatre
+ans pour étudier au TEC de Monterrey et j'ai adoré la culture, j'ai adoré
+les gens et quand je suis rentré en France je suis parti un peu travailler
+au Luxembourg et après je me suis dit que j'aurais bien aimé revenir à
+Monterrey et c'est de là que l'idée de Jardin Sucré est née et qu'on a
+commencé à travailler dessus.
+
+ES: La primera vez que me fui aquí fue hace tres cuatro años para terminar
+mi carrera en el TEC de Monterrey y me gusta mucho la cultura, la gente y
+la ciudad y después cuando yo regreso en Francia empecé a pensar en este
+proyecto y aquí somos otra vez en Monterrey.
+
+[1:29 — 2:23] PROJECT BIRTH
+
+FR: Le projet est né il y a deux ans parce que quand j'étais ici à Monterrey
+je me disais qu'il n'y avait pas énormément de pâtisserie française qui
+existait et du coup j'ai voulu amener un peu ma culture ici à Monterrey
+mais nous ce qu'on essaye de faire c'est d'amener notre culture française
+en partageant la culture mexicaine. Par exemple on crée des nouveaux
+produits comme le croissant de muertos, on essaye de voir comment on peut
+allier la culture française avec la culture mexicaine pour ne pas
+s'approprier votre culture mais au contraire la partager.
+
+ES: Cuando empezamos este proyecto hace dos años, cuando empecé aquí vi que
+no había muchas pastelerías francesas y quería venir con nuestras culturas
+francesas pero también compartir la cultura mexicana que tienen ustedes.
+Por eso creamos productos, por ejemplo, algo que se llama el croissant
+de muertos y es una combinación de la cultura francesa con la cultura
+mexicana.
+
+[2:23 — 3:17] BREAD CULTURE: MEXICO AND FRANCE
+
+FR: Ici c'est un peu comme en France, c'est une culture super importante.
+Bien sûr le pain est un peu différent, par exemple ici vous avez quelque
+chose qui s'appelle concha et nous en France on a la brioche mais sur le
+fond c'est pareil, les deux pays sont très consommateurs de pain et ici
+pas mal de tortas mais dans le fond c'est un peu la même base.
+
+ES: Aquí en México y en Francia, son dos países que consumen mucho pan y
+café y aquí por ejemplo tienes la concha que en Francia se llama la
+brioche y aquí hacemos como un tipo de concha francesa también para
+este sujeto, y los dos países consumen mucho lo cual es muy bueno.
+
+[3:26 — 4:23] WHAT ACCOMPANIES HIM DAILY FROM FRANCE
+
+FR: Il y a deux choses, d'abord les produits, premièrement c'est les
+produits qu'on fait ici qui sont typiquement de la culture française et
+qu'on a apporté ici et la deuxième c'est le chef Dominique qui parle
+français donc tous les jours on parle français avec lui et ça nous
+rappelle beaucoup le pays et il y a aussi la rigueur, on essaye d'être
+le plus rigoureux possible tous les jours dans le business pour qu'on
+puisse sortir la meilleure qualité de produits tous les jours.
+
+ES: Hay dos cosas, pero en realidad hay tres. La primera son los productos
+que son franceses, la segunda es el chef Dominique que habla francés,
+hablamos francés todos los días y la tercera es — no sé cómo decir en
+español — la rigueur (rigor), es muy estructurado para que esperamos que
+todos los días tengamos la misma calidad de productos, con el mismo sabor
+y la misma presentación, lo cual es muy importante para nosotros.
+
+[4:40 — 5:15] FINAL INVITATION + FOLKA MACHINE
+
+ES: Le invitamos a todos a venir aquí en Jardín Sucré para compartir con
+nosotros la experiencia del pan pero también el café. Y muchas gracias a
+Folka que nos mandó la máquina y con eso esperamos que para ustedes
+hacemos el mejor café con esta nueva máquina que llega a México hace muy
+poco — creo que es la cuarta o tercera que instalamos en todo el país.
+Muchas gracias a Folka y nos vemos pronto aquí.
