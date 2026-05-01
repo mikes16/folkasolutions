@@ -32,6 +32,26 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // Shopify mints customer-auth URLs on the primary domain. Now that
+      // primary_domain (folkasolutions.com) lives on Vercel, those paths
+      // 404 here. Bounce them to the .myshopify.com host so Shopify can
+      // run its SSO flow and end at account.folkasolutions.com.
+      {
+        source: "/customer_authentication/:path*",
+        destination:
+          "https://cafe-folka.myshopify.com/customer_authentication/:path*",
+        permanent: false,
+      },
+      {
+        source: "/services/customer_account/:path*",
+        destination:
+          "https://cafe-folka.myshopify.com/services/customer_account/:path*",
+        permanent: false,
+      },
+    ];
+  },
   // Required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
   images: {
