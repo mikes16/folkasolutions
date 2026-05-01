@@ -85,6 +85,9 @@ export const CART_FRAGMENT = `
     id
     checkoutUrl
     totalQuantity
+    buyerIdentity {
+      countryCode
+    }
     lines(first: 100) {
       edges {
         node {

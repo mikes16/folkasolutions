@@ -1,9 +1,30 @@
 import { CART_FRAGMENT } from "../fragments";
 
+// IMPORTANT: We pass `buyerIdentity.countryCode` on creation so Shopify
+// calculates line costs using the buyer's market (incl. Markets price
+// adjustments like a +8% import surcharge). Relying on `@inContext` alone
+// only affects query-time variant.price, not the cart's transactional
+// pricing — those use `cart.buyerIdentity.countryCode` at the cart level.
 export const CREATE_CART = `
-  mutation CreateCart($country: CountryCode, $language: LanguageCode)
+  mutation CreateCart($input: CartInput, $country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    cartCreate {
+    cartCreate(input: $input) {
+      cart {
+        ...CartFragment
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+  ${CART_FRAGMENT}
+`;
+
+export const UPDATE_BUYER_IDENTITY = `
+  mutation UpdateBuyerIdentity($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
       cart {
         ...CartFragment
       }

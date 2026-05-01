@@ -27,6 +27,7 @@ import {
   UPDATE_CART_LINES,
   UPDATE_CART_ATTRIBUTES,
   REMOVE_FROM_CART,
+  UPDATE_BUYER_IDENTITY,
 } from "./mutations/cart";
 import { UserError } from "../errors";
 
@@ -199,9 +200,17 @@ export const shopifyProvider: CommerceProvider = {
   // ── Cart ─────────────────────────────────────────────
 
   async createCart(options?: LocaleOptions): Promise<Cart> {
+    // Pass buyerIdentity.countryCode at creation so Shopify computes line
+    // costs in the buyer's market context (incl. Markets price adjustments).
     const data = await shopifyFetch<{ cartCreate: { cart: any } }>({
       query: CREATE_CART,
-      variables: { country: options?.country, language: options?.language },
+      variables: {
+        input: options?.country
+          ? { buyerIdentity: { countryCode: options.country } }
+          : undefined,
+        country: options?.country,
+        language: options?.language,
+      },
       country: options?.country,
       language: options?.language,
     });
@@ -283,6 +292,30 @@ export const shopifyProvider: CommerceProvider = {
       throw new UserError(data.cartAttributesUpdate.userErrors[0].message);
     }
     return mapCart(data.cartAttributesUpdate.cart);
+  },
+
+  async updateBuyerIdentity(
+    cartId: string,
+    countryCode: string,
+    options?: LocaleOptions
+  ): Promise<Cart> {
+    const data = await shopifyFetch<{
+      cartBuyerIdentityUpdate: { cart: any; userErrors: { message: string; field?: string[] }[] };
+    }>({
+      query: UPDATE_BUYER_IDENTITY,
+      variables: {
+        cartId,
+        buyerIdentity: { countryCode },
+        country: options?.country,
+        language: options?.language,
+      },
+      country: options?.country,
+      language: options?.language,
+    });
+    if (data.cartBuyerIdentityUpdate.userErrors?.length) {
+      throw new UserError(data.cartBuyerIdentityUpdate.userErrors[0].message);
+    }
+    return mapCart(data.cartBuyerIdentityUpdate.cart);
   },
 
   // ── Navigation ───────────────────────────────────────

@@ -101,6 +101,11 @@ export interface CommerceProvider {
     attributes: { key: string; value: string }[],
     options?: LocaleOptions
   ): Promise<Cart>;
+  updateBuyerIdentity(
+    cartId: string,
+    countryCode: string,
+    options?: LocaleOptions
+  ): Promise<Cart>;
 
   // Navigation
   getMenu(handle: string, options?: LocaleOptions): Promise<Menu>;

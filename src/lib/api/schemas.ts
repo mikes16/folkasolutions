@@ -44,6 +44,12 @@ export const CartActionSchema = z.discriminatedUnion("action", [
       .min(1),
     ...localeFields,
   }),
+  z.object({
+    action: z.literal("updateBuyerIdentity"),
+    cartId: z.string().min(1),
+    countryCode: z.string().min(1),
+    ...localeFields,
+  }),
 ]);
 
 export type CartAction = z.infer<typeof CartActionSchema>;

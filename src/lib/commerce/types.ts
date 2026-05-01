@@ -106,6 +106,12 @@ export interface Cart {
   id: string;
   checkoutUrl: string;
   totalQuantity: number;
+  /**
+   * The buyer's market context. When set, Shopify computes line costs in
+   * this country's market (incl. Markets price adjustments). When null, the
+   * cart falls back to base prices without market adjustments.
+   */
+  buyerIdentity: { countryCode: string | null };
   lines: CartLine[];
   cost: {
     subtotalAmount: Money;

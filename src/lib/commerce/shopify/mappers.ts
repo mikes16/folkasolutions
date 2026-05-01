@@ -133,6 +133,9 @@ export function mapCart(cart: any): Cart {
     id: cart.id,
     checkoutUrl: cart.checkoutUrl,
     totalQuantity: cart.totalQuantity,
+    buyerIdentity: {
+      countryCode: cart.buyerIdentity?.countryCode ?? null,
+    },
     lines: removeEdges(cart.lines).map(mapCartLine),
     cost: {
       subtotalAmount: mapMoney(cart.cost.subtotalAmount),

@@ -105,6 +105,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Sync cart's buyerIdentity.countryCode with the active locale. Without
+  // this, line costs are calculated against whatever country the cart was
+  // created with (or the shop default), so Markets price adjustments like
+  // a +8% import surcharge get dropped silently from the cart total.
+  useEffect(() => {
+    if (!cart) return;
+    if (cart.buyerIdentity.countryCode === locale.country) return;
+    cartFetch(
+      "updateBuyerIdentity",
+      { cartId: cart.id, countryCode: locale.country },
+      locale
+    )
+      .then(setCart)
+      .catch((err) => {
+        console.error("[Cart] updateBuyerIdentity failed:", err);
+      });
+  }, [cart, locale]);
+
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
 

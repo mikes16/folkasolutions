@@ -79,6 +79,14 @@ export async function POST(req: Request) {
         );
         return NextResponse.json(cart);
       }
+      case "updateBuyerIdentity": {
+        const cart = await commerce.updateBuyerIdentity(
+          data.cartId,
+          data.countryCode,
+          locale
+        );
+        return NextResponse.json(cart);
+      }
     }
   } catch (error) {
     return formatApiError(error);
