@@ -11,6 +11,6 @@ export const config = {
     // SSO flow. They land on the apex because primary_domain points here, but
     // need to be redirected to the .myshopify.com host (see next.config.ts) so
     // Shopify can complete the flow and bounce to account.folkasolutions.com.
-    "/((?!api|ingest|_next|_vercel|customer_authentication|services/customer_account|.*\\..*).*)",
+    "/((?!api|ingest|_next|_vercel|customer_authentication|customer_identity|services/customer_account|.*\\..*).*)",
   ],
 };

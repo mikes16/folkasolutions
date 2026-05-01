@@ -45,6 +45,12 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: "/customer_identity/:path*",
+        destination:
+          "https://cafe-folka.myshopify.com/customer_identity/:path*",
+        permanent: false,
+      },
+      {
         source: "/services/customer_account/:path*",
         destination:
           "https://cafe-folka.myshopify.com/services/customer_account/:path*",
