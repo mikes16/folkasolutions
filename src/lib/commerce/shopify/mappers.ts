@@ -40,6 +40,14 @@ function rewriteCheckoutUrl(url: string): string {
     const parsed = new URL(url);
     if (parsed.hostname !== SHOPIFY_STORE_DOMAIN) {
       parsed.hostname = SHOPIFY_STORE_DOMAIN;
+      // Shopify Markets injects a locale prefix (e.g. `/en-us/`, `/es-mx/`,
+      // or just `/en/`) on the customer-facing domain. The .myshopify.com
+      // host does not serve those prefixed paths, so strip them. The cart's
+      // `buyerIdentity.countryCode` still drives market pricing at checkout.
+      parsed.pathname = parsed.pathname.replace(
+        /^\/[a-z]{2}(-[a-z]{2})?(?=\/)/,
+        "",
+      );
     }
     return parsed.toString();
   } catch {
