@@ -20,6 +20,33 @@ function removeEdges<T>(connection: { edges: { node: T }[] }): T[] {
   return connection.edges.map((edge) => edge.node);
 }
 
+/**
+ * Shopify mints `checkoutUrl` using whatever is configured as the primary
+ * domain in Shopify Admin. After we pointed `folkasolutions.com` at Vercel
+ * (which does not host checkout), those URLs land on a Vercel page that
+ * the i18n middleware then mangles into a 404 (e.g. `/en/en-us/cart/...`).
+ * Rewrite to the canonical `*.myshopify.com` host so checkout actually
+ * loads on Shopify's edge.
+ *
+ * Long-term fix: set up a dedicated checkout subdomain in Shopify (e.g.
+ * `checkout.folkasolutions.com` → CNAME to `shops.myshopify.com`) and
+ * configure Shopify to mint URLs there.
+ */
+const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN ?? "";
+
+function rewriteCheckoutUrl(url: string): string {
+  if (!url || !SHOPIFY_STORE_DOMAIN) return url;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname !== SHOPIFY_STORE_DOMAIN) {
+      parsed.hostname = SHOPIFY_STORE_DOMAIN;
+    }
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+}
+
 function mapImage(img: any): Image {
   return {
     url: img.url,
@@ -131,7 +158,7 @@ function mapCartLine(line: any): CartLine {
 export function mapCart(cart: any): Cart {
   return {
     id: cart.id,
-    checkoutUrl: cart.checkoutUrl,
+    checkoutUrl: rewriteCheckoutUrl(cart.checkoutUrl),
     totalQuantity: cart.totalQuantity,
     buyerIdentity: {
       countryCode: cart.buyerIdentity?.countryCode ?? null,
