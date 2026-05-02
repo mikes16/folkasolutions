@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "translate": "tsx scripts/translate-shopify.ts",
     "translate:dry": "tsx scripts/translate-shopify.ts --dry-run",
     "translate:force": "tsx scripts/translate-shopify.ts --force"
@@ -38,11 +41,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/ui": "^4.1.5",
     "cloudinary": "^2.9.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }
