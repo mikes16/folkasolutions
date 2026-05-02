@@ -12,6 +12,6 @@ export const config = {
     // (`_t`) and cart-recovery URLs (`cart/c/...`) get forwarded to the
     // .myshopify.com host via redirects in next.config.ts so abandoned cart
     // emails actually restore the cart.
-    "/((?!api|ingest|_next|_vercel|customer_authentication|customer_identity|services/customer_account|_t|cart/c|.*\\..*).*)",
+    "/((?!api|ingest|_next|_vercel|customer_authentication|customer_identity|services/customer_account|services/login_with_shop|_t|cart/c|.*\\..*).*)",
   ],
 };
