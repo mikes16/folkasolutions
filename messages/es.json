@@ -522,6 +522,16 @@
       "addresses": "Direcciones",
       "logout": "Cerrar sesión"
     },
+    "dashboard": {
+      "greeting": "Hola",
+      "greetingNoName": "Bienvenido a tu cuenta",
+      "recentOrderEyebrow": "PEDIDO RECIENTE",
+      "defaultAddressEyebrow": "DIRECCIÓN PREDETERMINADA",
+      "viewOrder": "Ver detalle",
+      "editAddress": "Editar",
+      "emptyOrders": "Aún no tienes pedidos.",
+      "emptyAddresses": "No tienes direcciones guardadas."
+    },
     "login": {
       "eyebrow": "ACCESO MIEMBROS",
       "title": "Inicia sesión",

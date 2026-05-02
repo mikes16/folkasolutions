@@ -522,6 +522,16 @@
       "addresses": "Addresses",
       "logout": "Sign out"
     },
+    "dashboard": {
+      "greeting": "Hello",
+      "greetingNoName": "Welcome to your account",
+      "recentOrderEyebrow": "RECENT ORDER",
+      "defaultAddressEyebrow": "DEFAULT ADDRESS",
+      "viewOrder": "View order",
+      "editAddress": "Edit",
+      "emptyOrders": "You don't have any orders yet.",
+      "emptyAddresses": "No saved addresses yet."
+    },
     "login": {
       "eyebrow": "MEMBER ACCESS",
       "title": "Sign in",
