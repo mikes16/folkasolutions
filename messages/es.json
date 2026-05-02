@@ -532,6 +532,46 @@
       "emptyOrders": "Aún no tienes pedidos.",
       "emptyAddresses": "No tienes direcciones guardadas."
     },
+    "orders": {
+      "title": "Pedidos",
+      "tableHeaders": {
+        "orderNumber": "Pedido",
+        "date": "Fecha",
+        "items": "Artículos",
+        "total": "Total",
+        "status": "Estado"
+      },
+      "empty": {
+        "headline": "Aún no tienes pedidos.",
+        "body": "Cuando completes tu primera compra, aparecerá aquí.",
+        "cta": "Explorar la tienda"
+      },
+      "pagination": {
+        "previous": "Página anterior",
+        "next": "Siguiente"
+      },
+      "status": {
+        "fulfilled": "Entregado",
+        "partial": "Parcial",
+        "unfulfilled": "En curso",
+        "restocked": "Reabastecido"
+      }
+    },
+    "orderDetail": {
+      "headline": "Pedido #{number}",
+      "statusEyebrow": "ESTADO",
+      "lineItemsEyebrow": "ARTÍCULOS",
+      "totalLabel": "Total",
+      "viewInShopify": "Ver pedido en Shopify",
+      "qty": "Cantidad",
+      "back": "← Volver a pedidos",
+      "status": {
+        "fulfilled": "Entregado",
+        "partial": "Parcial",
+        "unfulfilled": "En curso",
+        "restocked": "Reabastecido"
+      }
+    },
     "login": {
       "eyebrow": "ACCESO MIEMBROS",
       "title": "Inicia sesión",

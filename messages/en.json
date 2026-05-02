@@ -532,6 +532,46 @@
       "emptyOrders": "You don't have any orders yet.",
       "emptyAddresses": "No saved addresses yet."
     },
+    "orders": {
+      "title": "Orders",
+      "tableHeaders": {
+        "orderNumber": "Order",
+        "date": "Date",
+        "items": "Items",
+        "total": "Total",
+        "status": "Status"
+      },
+      "empty": {
+        "headline": "No orders yet.",
+        "body": "When you complete your first purchase, it will appear here.",
+        "cta": "Visit the shop"
+      },
+      "pagination": {
+        "previous": "Previous page",
+        "next": "Next"
+      },
+      "status": {
+        "fulfilled": "Delivered",
+        "partial": "Partial",
+        "unfulfilled": "In progress",
+        "restocked": "Restocked"
+      }
+    },
+    "orderDetail": {
+      "headline": "Order #{number}",
+      "statusEyebrow": "STATUS",
+      "lineItemsEyebrow": "ITEMS",
+      "totalLabel": "Total",
+      "viewInShopify": "View order in Shopify",
+      "qty": "Qty",
+      "back": "← Back to orders",
+      "status": {
+        "fulfilled": "Delivered",
+        "partial": "Partial",
+        "unfulfilled": "In progress",
+        "restocked": "Restocked"
+      }
+    },
     "login": {
       "eyebrow": "MEMBER ACCESS",
       "title": "Sign in",
