@@ -32,6 +32,24 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // Shopify email click trackers and cart-recovery URLs get minted on
+      // the primary domain (folkasolutions.com), but the apex now lives on
+      // Vercel. Forward them to the .myshopify.com host so abandoned cart
+      // emails and Shopify Email links actually work.
+      {
+        source: "/_t/:path*",
+        destination: "https://cafe-folka.myshopify.com/_t/:path*",
+        permanent: false,
+      },
+      {
+        source: "/cart/c/:path*",
+        destination: "https://cafe-folka.myshopify.com/cart/c/:path*",
+        permanent: false,
+      },
+    ];
+  },
   // Required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
   images: {

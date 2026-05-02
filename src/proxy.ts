@@ -7,10 +7,11 @@ export const config = {
   matcher: [
     "/",
     "/(es|en)/:path*",
-    // Exclude paths Shopify hits during customer auth / new-customer-account
-    // SSO flow. They land on the apex because primary_domain points here, but
-    // need to be redirected to the .myshopify.com host (see next.config.ts) so
-    // Shopify can complete the flow and bounce to account.folkasolutions.com.
-    "/((?!api|ingest|_next|_vercel|customer_authentication|customer_identity|services/customer_account|.*\\..*).*)",
+    // Exclude paths Shopify owns on the primary domain. Customer auth lives
+    // on account.folkasolutions.com (see header link). Email click trackers
+    // (`_t`) and cart-recovery URLs (`cart/c/...`) get forwarded to the
+    // .myshopify.com host via redirects in next.config.ts so abandoned cart
+    // emails actually restore the cart.
+    "/((?!api|ingest|_next|_vercel|customer_authentication|customer_identity|services/customer_account|_t|cart/c|.*\\..*).*)",
   ],
 };
