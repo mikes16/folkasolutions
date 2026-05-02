@@ -7,11 +7,10 @@ export const config = {
   matcher: [
     "/",
     "/(es|en)/:path*",
-    // Exclude paths Shopify owns on the primary domain. Customer auth lives
-    // on account.folkasolutions.com (see header link). Email click trackers
-    // (`_t`) and cart-recovery URLs (`cart/c/...`) get forwarded to the
-    // .myshopify.com host via redirects in next.config.ts so abandoned cart
-    // emails actually restore the cart.
-    "/((?!api|ingest|_next|_vercel|customer_authentication|customer_identity|services/customer_account|services/login_with_shop|_t|cart/c|.*\\..*).*)",
+    // Exclude paths Shopify still owns on the primary domain. Email click
+    // trackers (`_t`) and cart-recovery URLs (`cart/c/...`) get forwarded to
+    // the .myshopify.com host via redirects in next.config.ts so abandoned
+    // cart emails actually restore the cart.
+    "/((?!api|ingest|_next|_vercel|_t|cart/c|.*\\..*).*)",
   ],
 };
