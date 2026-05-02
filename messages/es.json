@@ -514,6 +514,29 @@
     "ctaWhatsapp": "Escribir por WhatsApp",
     "ctaContact": "Ver contacto"
   },
+  "account": {
+    "nav": {
+      "dashboard": "Panel",
+      "orders": "Pedidos",
+      "profile": "Perfil",
+      "addresses": "Direcciones",
+      "logout": "Cerrar sesión"
+    },
+    "login": {
+      "eyebrow": "ACCESO MIEMBROS",
+      "title": "Inicia sesión",
+      "body": "Accede a tu historial de pedidos, direcciones guardadas y preferencias.",
+      "cta": "Continuar",
+      "helper": "Te llevaremos brevemente a Shopify para verificar tu identidad. Tu sesión vuelve aquí en cuanto termines.",
+      "errors": {
+        "missing_params": "Faltan datos en la solicitud. Vuelve a intentar.",
+        "session_expired": "La sesión expiró. Vuelve a intentar.",
+        "state_mismatch": "Hubo un problema de seguridad en la solicitud. Vuelve a intentar.",
+        "token_exchange_failed": "No pudimos completar el inicio de sesión. Vuelve a intentar.",
+        "access_denied": "Cancelaste el inicio de sesión."
+      }
+    }
+  },
   "legal": {
     "updated": "Última actualización",
     "terms": {

@@ -514,6 +514,29 @@
     "ctaWhatsapp": "Message on WhatsApp",
     "ctaContact": "See contact"
   },
+  "account": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "profile": "Profile",
+      "addresses": "Addresses",
+      "logout": "Sign out"
+    },
+    "login": {
+      "eyebrow": "MEMBER ACCESS",
+      "title": "Sign in",
+      "body": "View your order history, saved addresses, and account preferences.",
+      "cta": "Continue",
+      "helper": "We'll take you to Shopify briefly to verify your identity. Your session returns here as soon as you're done.",
+      "errors": {
+        "missing_params": "The request is missing parameters. Please try again.",
+        "session_expired": "Your session expired. Please try again.",
+        "state_mismatch": "There was a security problem with your request. Please try again.",
+        "token_exchange_failed": "We couldn't complete sign-in. Please try again.",
+        "access_denied": "You cancelled sign-in."
+      }
+    }
+  },
   "legal": {
     "updated": "Last updated",
     "terms": {
