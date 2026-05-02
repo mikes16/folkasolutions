@@ -57,6 +57,23 @@ const nextConfig: NextConfig = {
         destination: "https://cafe-folka.myshopify.com/cart/c/:path*",
         permanent: false,
       },
+      // Shopify checkout recovery URLs use the form
+      // /<shop-id>/checkouts/ac/<token>/recover (with optional locale
+      // prefix that Shopify Email injects). Forward the whole pattern to
+      // cafe-folka.myshopify.com so click-throughs from abandoned cart
+      // emails actually restore checkout.
+      {
+        source: "/:locale(es|en)/:shopId(\\d+)/checkouts/:rest*",
+        destination:
+          "https://cafe-folka.myshopify.com/:shopId/checkouts/:rest*",
+        permanent: false,
+      },
+      {
+        source: "/:shopId(\\d+)/checkouts/:rest*",
+        destination:
+          "https://cafe-folka.myshopify.com/:shopId/checkouts/:rest*",
+        permanent: false,
+      },
     ];
   },
   // Required to support PostHog trailing slash API requests
