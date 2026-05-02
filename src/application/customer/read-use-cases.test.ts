@@ -130,15 +130,18 @@ describe("ListCustomerAddresses", () => {
   it("calls gateway.listAddresses with refreshed access token", async () => {
     const payload = {
       addresses: [
-        Address.create({
-          firstName: "M",
-          lastName: "L",
-          address1: "Av Garza Sada 6518",
-          city: "Monterrey",
-          countryCode: "MX",
-          zip: "64960",
-          provinceCode: "NLE",
-        }),
+        {
+          id: "gid://shopify/MailingAddress/1",
+          address: Address.create({
+            firstName: "M",
+            lastName: "L",
+            address1: "Av Garza Sada 6518",
+            city: "Monterrey",
+            countryCode: "MX",
+            zip: "64960",
+            provinceCode: "NLE",
+          }),
+        },
       ],
       defaultAddressId: "gid://shopify/MailingAddress/1",
     };

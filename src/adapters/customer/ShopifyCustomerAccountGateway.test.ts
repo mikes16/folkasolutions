@@ -270,7 +270,7 @@ describe("ShopifyCustomerAccountGateway", () => {
   });
 
   describe("listAddresses", () => {
-    it("returns addresses with defaultAddressId", async () => {
+    it("returns addresses paired with their GID and defaultAddressId", async () => {
       mockJson({
         data: {
           customer: {
@@ -282,7 +282,8 @@ describe("ShopifyCustomerAccountGateway", () => {
       const gateway = new ShopifyCustomerAccountGateway(apiUrl);
       const result = await gateway.listAddresses("tok");
       expect(result.addresses).toHaveLength(1);
-      expect(result.addresses[0].city).toBe("Monterrey");
+      expect(result.addresses[0].id).toBe("gid://shopify/CustomerAddress/9");
+      expect(result.addresses[0].address.city).toBe("Monterrey");
       expect(result.defaultAddressId).toBe(
         "gid://shopify/CustomerAddress/9",
       );

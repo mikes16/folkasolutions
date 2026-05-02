@@ -69,9 +69,10 @@ export interface CustomerAccountGateway {
     hasNextPage: boolean;
   }>;
   getOrder(args: { accessToken: string; orderId: string }): Promise<Order>;
-  listAddresses(
-    accessToken: string,
-  ): Promise<{ addresses: Address[]; defaultAddressId: string | null }>;
+  listAddresses(accessToken: string): Promise<{
+    addresses: Array<{ id: string; address: Address }>;
+    defaultAddressId: string | null;
+  }>;
   createAddress(args: {
     accessToken: string;
     input: AddressInput;

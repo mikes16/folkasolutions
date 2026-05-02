@@ -17,7 +17,7 @@ export class ListCustomerAddresses {
   ) {}
 
   async execute(): Promise<{
-    addresses: Address[];
+    addresses: Array<{ id: string; address: Address }>;
     defaultAddressId: string | null;
   }> {
     const tokens = await this.refresh.execute();

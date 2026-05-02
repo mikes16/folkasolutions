@@ -14,6 +14,7 @@ import {
 } from "./queries";
 import {
   mapAddress,
+  mapAddressWithId,
   mapCustomer,
   mapOrder,
   type AddressNode,
@@ -265,15 +266,16 @@ export class ShopifyCustomerAccountGateway implements CustomerAccountGateway {
     return mapOrder(data.order);
   }
 
-  async listAddresses(
-    accessToken: string,
-  ): Promise<{ addresses: Address[]; defaultAddressId: string | null }> {
+  async listAddresses(accessToken: string): Promise<{
+    addresses: Array<{ id: string; address: Address }>;
+    defaultAddressId: string | null;
+  }> {
     const data = await this.query<AddressesQueryData>(
       accessToken,
       ADDRESSES_QUERY,
     );
     const addresses = data.customer.addresses.edges.map((edge) =>
-      mapAddress(edge.node),
+      mapAddressWithId(edge.node),
     );
     return {
       addresses,

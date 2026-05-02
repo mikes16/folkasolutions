@@ -43,16 +43,19 @@ export default async function AccountDashboardPage({
     ordersResult.status === "fulfilled" && ordersResult.value.orders.length > 0
       ? ordersResult.value.orders[0]
       : null;
-  // The domain Address value object intentionally drops the Shopify
-  // address id, so id-keyed default lookup is not available here. The
-  // dashboard surface only needs a representative address; show the
-  // first one returned. The dedicated addresses page does the real
-  // id-keyed correlation when editing.
-  const defaultAddress =
-    addressesResult.status === "fulfilled" &&
-    addressesResult.value.addresses.length > 0
-      ? addressesResult.value.addresses[0]
-      : null;
+  // Prefer the address whose id matches `defaultAddressId`. When that is
+  // absent (no default set, or list is empty) fall back to the first
+  // address so the dashboard still surfaces something useful.
+  const defaultAddress = (() => {
+    if (addressesResult.status !== "fulfilled") return null;
+    const { addresses, defaultAddressId } = addressesResult.value;
+    if (addresses.length === 0) return null;
+    if (defaultAddressId) {
+      const match = addresses.find((entry) => entry.id === defaultAddressId);
+      if (match) return match.address;
+    }
+    return addresses[0].address;
+  })();
 
   const greeting = customer?.firstName
     ? `${t("greeting")}, ${customer.firstName}.`
