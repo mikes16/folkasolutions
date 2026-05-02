@@ -34,6 +34,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Strip Shopify Markets locale segment (e.g. /es/en-us/, /en/es-mx/)
+      // from URLs people may have bookmarked from the legacy Shopify
+      // storefront. The apex `/:locale/:rest*` already handles language;
+      // the second segment was Shopify's market code and is no longer used.
+      {
+        source: "/:locale(es|en)/:market([a-z]{2}-[a-z]{2})/:rest*",
+        destination: "/:locale/:rest*",
+        permanent: true,
+      },
       // Shopify email click trackers and cart-recovery URLs get minted on
       // the primary domain (folkasolutions.com), but the apex now lives on
       // Vercel. Forward them to the .myshopify.com host so abandoned cart
