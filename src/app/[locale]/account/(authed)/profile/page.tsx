@@ -28,17 +28,14 @@ export default async function ProfilePage({
           firstName: customer.firstName ?? "",
           lastName: customer.lastName ?? "",
           phone: customer.phone ?? "",
-          acceptsMarketing: customer.acceptsMarketing,
         }}
         labels={{
           firstName: t("labels.firstName"),
           lastName: t("labels.lastName"),
           phone: t("labels.phone"),
-          acceptsMarketing: t("labels.acceptsMarketing"),
         }}
         helpers={{
-          phone: t("phoneHelper"),
-          marketing: t("marketingHelper"),
+          phoneReadOnly: t("phoneReadOnly"),
         }}
         actions={{
           save: t("save"),
@@ -48,9 +45,6 @@ export default async function ProfilePage({
         errorMessages={{
           firstNameRequired: t("errors.firstNameRequired"),
           lastNameRequired: t("errors.lastNameRequired"),
-          phoneInvalid: t("errors.phoneInvalid"),
-          phoneTooShort: t("errors.phoneTooShort"),
-          phoneTooLong: t("errors.phoneTooLong"),
           generic: t("errors.generic"),
         }}
       />

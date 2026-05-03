@@ -9,9 +9,6 @@ import {
 interface ErrorMessages {
   firstNameRequired: string;
   lastNameRequired: string;
-  phoneInvalid: string;
-  phoneTooShort: string;
-  phoneTooLong: string;
   generic: string;
 }
 
@@ -20,22 +17,20 @@ interface Props {
     firstName: string;
     lastName: string;
     phone: string;
-    acceptsMarketing: boolean;
   };
   labels: {
     firstName: string;
     lastName: string;
     phone: string;
-    acceptsMarketing: string;
   };
-  helpers: { phone: string; marketing: string };
+  helpers: { phoneReadOnly: string };
   actions: { save: string; saving: string; success: string };
   errorMessages: ErrorMessages;
 }
 
 const initialState: ProfileActionState = { status: "idle" };
 
-type FieldName = "firstName" | "lastName" | "phone";
+type FieldName = "firstName" | "lastName";
 
 export function ProfileForm(props: Props) {
   const [state, formAction, isPending] = useActionState(
@@ -98,25 +93,6 @@ export function ProfileForm(props: Props) {
       clearError("lastName");
       return;
     }
-    // phone: empty is allowed (clears the field server-side)
-    if (value.trim() === "") {
-      clearError("phone");
-      return;
-    }
-    if (!/^\+?[0-9 ]+$/.test(value)) {
-      setError("phone", props.errorMessages.phoneInvalid);
-      return;
-    }
-    const digits = value.replace(/\s/g, "").replace(/^\+/, "");
-    if (digits.length < 10) {
-      setError("phone", props.errorMessages.phoneTooShort);
-      return;
-    }
-    if (digits.length > 15) {
-      setError("phone", props.errorMessages.phoneTooLong);
-      return;
-    }
-    clearError("phone");
   }
 
   const serverErrors =
@@ -150,29 +126,24 @@ export function ProfileForm(props: Props) {
         error={errorFor("lastName")}
         onBlur={(v) => blurValidate("lastName", v)}
       />
-      <Field
-        id="phone"
-        name="phone"
-        type="tel"
-        label={props.labels.phone}
-        defaultValue={props.initial.phone}
-        helper={props.helpers.phone}
-        error={errorFor("phone")}
-        onBlur={(v) => blurValidate("phone", v)}
-      />
-
       <div>
-        <label className="flex items-start gap-3 text-foreground cursor-pointer">
-          <input
-            type="checkbox"
-            name="acceptsMarketing"
-            defaultChecked={props.initial.acceptsMarketing}
-            className="mt-1 h-4 w-4 border border-foreground/40 cursor-pointer accent-primary"
-          />
-          <span className="text-sm">{props.labels.acceptsMarketing}</span>
+        <label
+          htmlFor="phone"
+          className="block font-[family-name:var(--font-rajdhani)] uppercase tracking-[0.15em] text-[11px] text-foreground/70 mb-2"
+        >
+          {props.labels.phone}
         </label>
-        <p className="mt-2 ml-7 text-xs text-foreground/60">
-          {props.helpers.marketing}
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          defaultValue={props.initial.phone}
+          disabled
+          aria-describedby="phone-helper"
+          className="w-full px-4 py-3 bg-foreground/5 border border-foreground/20 text-foreground/60 cursor-not-allowed"
+        />
+        <p id="phone-helper" className="mt-2 text-xs text-foreground/60">
+          {props.helpers.phoneReadOnly}
         </p>
       </div>
 

@@ -591,20 +591,15 @@
       "labels": {
         "firstName": "First name",
         "lastName": "Last name",
-        "phone": "Phone",
-        "acceptsMarketing": "Email me news and offers"
+        "phone": "Phone"
       },
-      "phoneHelper": "Include the country code. Example: +52 81 1234 5678.",
-      "marketingHelper": "We only email you when you opt in.",
+      "phoneReadOnly": "To change your phone, contact us. Updating this field requires verification.",
       "save": "Save changes",
       "saving": "Saving...",
       "success": "Your profile was updated.",
       "errors": {
         "firstNameRequired": "Please enter your first name.",
         "lastNameRequired": "Please enter your last name.",
-        "phoneInvalid": "Invalid phone. Use digits and an optional leading +.",
-        "phoneTooShort": "Phone is too short.",
-        "phoneTooLong": "Phone is too long.",
         "generic": "We couldn't save your changes. Please try again."
       }
     },

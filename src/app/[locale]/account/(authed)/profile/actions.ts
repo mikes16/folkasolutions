@@ -3,28 +3,13 @@
 import { z } from "zod";
 import { makeContainer } from "@/infrastructure/customer/container";
 
-/**
- * Phone format: optional leading +, then digits and spaces. Min 10 / max 16
- * counted on the digit-only normalized form (E.164 allows up to 15 digits;
- * 16 leaves a small buffer for stored formatting). Empty string is allowed
- * and treated as "clear the phone" downstream.
- */
+// Only firstName + lastName are editable via this mutation. Phone changes
+// require a separate SMS verification flow in the Customer Account API;
+// marketing consent goes through emailMarketingConsent. Both surface in
+// the Profile UI as read-only / hidden until those flows are wired up.
 const ProfileSchema = z.object({
   firstName: z.string().trim().min(1, "firstNameRequired").max(50),
   lastName: z.string().trim().min(1, "lastNameRequired").max(50),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^\+?[0-9 ]*$/, "phoneInvalid")
-    .refine(
-      (v) => v === "" || v.replace(/\s/g, "").replace(/^\+/, "").length >= 10,
-      "phoneTooShort",
-    )
-    .refine(
-      (v) => v === "" || v.replace(/\s/g, "").replace(/^\+/, "").length <= 15,
-      "phoneTooLong",
-    ),
-  acceptsMarketing: z.boolean(),
 });
 
 export interface ProfileActionState {
@@ -40,8 +25,6 @@ export async function updateProfileAction(
   const parsed = ProfileSchema.safeParse({
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
-    phone: formData.get("phone"),
-    acceptsMarketing: formData.get("acceptsMarketing") === "on",
   });
 
   if (!parsed.success) {
@@ -60,8 +43,6 @@ export async function updateProfileAction(
     await updateProfile.execute({
       firstName: parsed.data.firstName,
       lastName: parsed.data.lastName,
-      phone: parsed.data.phone === "" ? null : parsed.data.phone,
-      acceptsMarketing: parsed.data.acceptsMarketing,
     });
     return { status: "success" };
   } catch (error) {

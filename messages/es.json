@@ -591,20 +591,15 @@
       "labels": {
         "firstName": "Nombre",
         "lastName": "Apellido",
-        "phone": "Teléfono",
-        "acceptsMarketing": "Recibir novedades y ofertas por correo"
+        "phone": "Teléfono"
       },
-      "phoneHelper": "Incluye el código del país. Ejemplo: +52 81 1234 5678.",
-      "marketingHelper": "Solo te enviaremos correos si lo aceptas explícitamente.",
+      "phoneReadOnly": "Para cambiar tu teléfono, contáctanos. Cambiar este dato requiere verificación.",
       "save": "Guardar cambios",
       "saving": "Guardando...",
       "success": "Tu perfil se actualizó.",
       "errors": {
         "firstNameRequired": "Ingresa tu nombre.",
         "lastNameRequired": "Ingresa tu apellido.",
-        "phoneInvalid": "Teléfono inválido. Usa solo dígitos y un + opcional.",
-        "phoneTooShort": "El teléfono es muy corto.",
-        "phoneTooLong": "El teléfono es muy largo.",
         "generic": "No pudimos guardar los cambios. Intenta de nuevo."
       }
     },

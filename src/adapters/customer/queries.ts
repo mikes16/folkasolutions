@@ -119,7 +119,7 @@ export const ADDRESSES_QUERY = `
             address2
             city
             provinceCode: zoneCode
-            countryCode
+            countryCode: territoryCode
             zip
             phoneNumber
           }
