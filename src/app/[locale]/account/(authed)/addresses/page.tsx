@@ -1,7 +1,32 @@
 import Link from "next/link";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { makeContainer } from "@/infrastructure/customer/container";
-import { AddressCard } from "@/components/account/AddressCard";
+import {
+  AddressCard,
+  type AddressCardView,
+} from "@/components/account/AddressCard";
+import type { Address } from "@/domain/customer/Address";
+
+/**
+ * Domain `Address` is a class with a private constructor; Next.js RSC
+ * cannot serialize it across the Server→Client boundary. Convert to a
+ * plain object before passing to <AddressCard /> (which is a client
+ * component because of the delete <dialog>).
+ */
+function toView(address: Address): AddressCardView {
+  return {
+    firstName: address.firstName,
+    lastName: address.lastName,
+    company: address.company,
+    address1: address.address1,
+    address2: address.address2,
+    city: address.city,
+    provinceCode: address.provinceCode,
+    countryCode: address.countryCode,
+    zip: address.zip,
+    phone: address.phone,
+  };
+}
 
 export default async function AddressesPage({
   params,
@@ -57,7 +82,7 @@ export default async function AddressesPage({
             <AddressCard
               key={entry.id}
               addressId={entry.id}
-              address={entry.address}
+              address={toView(entry.address)}
               isDefault={entry.id === defaultAddressId}
               editHref={`/${locale}/account/addresses/${encodeURIComponent(entry.id)}/edit`}
               labels={{

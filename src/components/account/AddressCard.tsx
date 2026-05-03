@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import type { Address } from "@/domain/customer/Address";
 import { deleteAddressAction } from "@/app/[locale]/account/(authed)/addresses/actions";
 
 interface CardLabels {
@@ -18,9 +17,28 @@ interface DialogLabels {
   cancel: string;
 }
 
+/**
+ * Plain-object shape of an Address suitable for the Server → Client
+ * Component boundary. The domain `Address` is a class with a private
+ * constructor, which Next.js RSC refuses to serialize. The page presenter
+ * converts each domain Address into this shape before passing to the card.
+ */
+export interface AddressCardView {
+  firstName: string;
+  lastName: string;
+  company: string | null;
+  address1: string;
+  address2: string | null;
+  city: string;
+  provinceCode: string;
+  countryCode: string;
+  zip: string;
+  phone: string | null;
+}
+
 interface Props {
   addressId: string;
-  address: Address;
+  address: AddressCardView;
   isDefault: boolean;
   editHref: string;
   labels: CardLabels;
