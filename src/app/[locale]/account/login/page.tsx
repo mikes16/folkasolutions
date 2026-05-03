@@ -32,7 +32,7 @@ export default async function LoginPage({
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
       <div className="relative hidden lg:block bg-primary">
         <Image
-          src="/login-hero/espresso-pour.jpg"
+          src="https://res.cloudinary.com/insightcollective/image/upload/f_auto,q_auto/folka/account/login-hero"
           alt=""
           fill
           priority
