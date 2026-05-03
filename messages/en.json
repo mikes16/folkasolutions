@@ -514,6 +514,140 @@
     "ctaWhatsapp": "Message on WhatsApp",
     "ctaContact": "See contact"
   },
+  "account": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "profile": "Profile",
+      "addresses": "Addresses",
+      "logout": "Sign out"
+    },
+    "dashboard": {
+      "greeting": "Hello",
+      "greetingNoName": "Welcome to your account",
+      "recentOrderEyebrow": "RECENT ORDER",
+      "defaultAddressEyebrow": "DEFAULT ADDRESS",
+      "viewOrder": "View order",
+      "editAddress": "Edit",
+      "emptyOrders": "You don't have any orders yet.",
+      "emptyAddresses": "No saved addresses yet."
+    },
+    "orders": {
+      "title": "Orders",
+      "tableHeaders": {
+        "orderNumber": "Order",
+        "date": "Date",
+        "items": "Items",
+        "total": "Total",
+        "status": "Status"
+      },
+      "empty": {
+        "headline": "No orders yet.",
+        "body": "When you complete your first purchase, it will appear here.",
+        "cta": "Visit the shop"
+      },
+      "pagination": {
+        "previous": "Previous page",
+        "next": "Next"
+      },
+      "status": {
+        "fulfilled": "Delivered",
+        "partial": "Partial",
+        "unfulfilled": "In progress",
+        "restocked": "Restocked"
+      }
+    },
+    "orderDetail": {
+      "headline": "Order #{number}",
+      "statusEyebrow": "STATUS",
+      "lineItemsEyebrow": "ITEMS",
+      "totalLabel": "Total",
+      "viewInShopify": "View order in Shopify",
+      "qty": "Qty",
+      "back": "← Back to orders",
+      "status": {
+        "fulfilled": "Delivered",
+        "partial": "Partial",
+        "unfulfilled": "In progress",
+        "restocked": "Restocked"
+      }
+    },
+    "login": {
+      "eyebrow": "MEMBER ACCESS",
+      "title": "Sign in",
+      "body": "View your order history, saved addresses, and account preferences.",
+      "cta": "Continue",
+      "helper": "We'll take you to Shopify briefly to verify your identity. Your session returns here as soon as you're done.",
+      "errors": {
+        "missing_params": "The request is missing parameters. Please try again.",
+        "session_expired": "Your session expired. Please try again.",
+        "state_mismatch": "There was a security problem with your request. Please try again.",
+        "token_exchange_failed": "We couldn't complete sign-in. Please try again.",
+        "access_denied": "You cancelled sign-in."
+      }
+    },
+    "profile": {
+      "title": "Your profile",
+      "labels": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone"
+      },
+      "phoneReadOnly": "To change your phone, contact us. Updating this field requires verification.",
+      "save": "Save changes",
+      "saving": "Saving...",
+      "success": "Your profile was updated.",
+      "errors": {
+        "firstNameRequired": "Please enter your first name.",
+        "lastNameRequired": "Please enter your last name.",
+        "generic": "We couldn't save your changes. Please try again."
+      }
+    },
+    "addresses": {
+      "title": "Addresses",
+      "newCta": "Add new address",
+      "default": "DEFAULT",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": {
+        "headline": "No saved addresses yet.",
+        "body": "Save an address to make checkout faster next time."
+      },
+      "form": {
+        "newTitle": "New address",
+        "editTitle": "Edit address",
+        "labels": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "company": "Company (optional)",
+          "address1": "Street address",
+          "address2": "Apartment, suite, etc. (optional)",
+          "city": "City",
+          "provinceCode": "State / province",
+          "countryCode": "Country",
+          "zip": "ZIP / postal code",
+          "phone": "Phone (optional)",
+          "setDefault": "Set as default"
+        },
+        "save": "Save address",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "errors": {
+          "required": "This field is required.",
+          "phoneInvalid": "Invalid phone.",
+          "zipInvalid": "Invalid postal code.",
+          "countryInvalid": "Select a valid country.",
+          "generic": "We couldn't save the address. Please try again."
+        }
+      },
+      "deleteDialog": {
+        "title": "Delete this address?",
+        "body": "This action cannot be undone.",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      }
+    }
+  },
   "legal": {
     "updated": "Last updated",
     "terms": {

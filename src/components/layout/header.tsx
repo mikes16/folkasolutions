@@ -49,13 +49,13 @@ export async function Header() {
               <span className="sr-only">{t("common.search")}</span>
             </Link>
 
-            <a
-              href="https://account.folkasolutions.com/"
+            <Link
+              href="/account"
               className="p-2 text-foreground/65 hover:text-foreground transition-opacity duration-300 hidden lg:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
             >
               <Icon name="user" size={18} />
               <span className="sr-only">{t("common.account")}</span>
-            </a>
+            </Link>
 
             <CartButton />
           </div>

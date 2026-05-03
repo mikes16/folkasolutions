@@ -7,6 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
     "translate": "tsx scripts/translate-shopify.ts",
     "translate:dry": "tsx scripts/translate-shopify.ts --dry-run",
     "translate:force": "tsx scripts/translate-shopify.ts --force"
@@ -17,6 +23,7 @@
     "@next/mdx": "^16.2.4",
     "@types/mdx": "^2.0.13",
     "clsx": "^2.1.1",
+    "jose": "^6.2.3",
     "js-cookie": "^3.0.5",
     "next": "16.2.2",
     "next-intl": "^4.9.0",
@@ -33,16 +40,19 @@
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/ui": "^4.1.5",
     "cloudinary": "^2.9.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }

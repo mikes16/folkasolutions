@@ -514,6 +514,140 @@
     "ctaWhatsapp": "Escribir por WhatsApp",
     "ctaContact": "Ver contacto"
   },
+  "account": {
+    "nav": {
+      "dashboard": "Panel",
+      "orders": "Pedidos",
+      "profile": "Perfil",
+      "addresses": "Direcciones",
+      "logout": "Cerrar sesión"
+    },
+    "dashboard": {
+      "greeting": "Hola",
+      "greetingNoName": "Bienvenido a tu cuenta",
+      "recentOrderEyebrow": "PEDIDO RECIENTE",
+      "defaultAddressEyebrow": "DIRECCIÓN PREDETERMINADA",
+      "viewOrder": "Ver detalle",
+      "editAddress": "Editar",
+      "emptyOrders": "Aún no tienes pedidos.",
+      "emptyAddresses": "No tienes direcciones guardadas."
+    },
+    "orders": {
+      "title": "Pedidos",
+      "tableHeaders": {
+        "orderNumber": "Pedido",
+        "date": "Fecha",
+        "items": "Artículos",
+        "total": "Total",
+        "status": "Estado"
+      },
+      "empty": {
+        "headline": "Aún no tienes pedidos.",
+        "body": "Cuando completes tu primera compra, aparecerá aquí.",
+        "cta": "Explorar la tienda"
+      },
+      "pagination": {
+        "previous": "Página anterior",
+        "next": "Siguiente"
+      },
+      "status": {
+        "fulfilled": "Entregado",
+        "partial": "Parcial",
+        "unfulfilled": "En curso",
+        "restocked": "Reabastecido"
+      }
+    },
+    "orderDetail": {
+      "headline": "Pedido #{number}",
+      "statusEyebrow": "ESTADO",
+      "lineItemsEyebrow": "ARTÍCULOS",
+      "totalLabel": "Total",
+      "viewInShopify": "Ver pedido en Shopify",
+      "qty": "Cantidad",
+      "back": "← Volver a pedidos",
+      "status": {
+        "fulfilled": "Entregado",
+        "partial": "Parcial",
+        "unfulfilled": "En curso",
+        "restocked": "Reabastecido"
+      }
+    },
+    "login": {
+      "eyebrow": "ACCESO MIEMBROS",
+      "title": "Inicia sesión",
+      "body": "Accede a tu historial de pedidos, direcciones guardadas y preferencias.",
+      "cta": "Continuar",
+      "helper": "Te llevaremos brevemente a Shopify para verificar tu identidad. Tu sesión vuelve aquí en cuanto termines.",
+      "errors": {
+        "missing_params": "Faltan datos en la solicitud. Vuelve a intentar.",
+        "session_expired": "La sesión expiró. Vuelve a intentar.",
+        "state_mismatch": "Hubo un problema de seguridad en la solicitud. Vuelve a intentar.",
+        "token_exchange_failed": "No pudimos completar el inicio de sesión. Vuelve a intentar.",
+        "access_denied": "Cancelaste el inicio de sesión."
+      }
+    },
+    "profile": {
+      "title": "Tu perfil",
+      "labels": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "phone": "Teléfono"
+      },
+      "phoneReadOnly": "Para cambiar tu teléfono, contáctanos. Cambiar este dato requiere verificación.",
+      "save": "Guardar cambios",
+      "saving": "Guardando...",
+      "success": "Tu perfil se actualizó.",
+      "errors": {
+        "firstNameRequired": "Ingresa tu nombre.",
+        "lastNameRequired": "Ingresa tu apellido.",
+        "generic": "No pudimos guardar los cambios. Intenta de nuevo."
+      }
+    },
+    "addresses": {
+      "title": "Direcciones",
+      "newCta": "Crear nueva dirección",
+      "default": "PREDETERMINADA",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "empty": {
+        "headline": "Aún no tienes direcciones guardadas.",
+        "body": "Guarda una dirección para que el checkout sea más rápido la próxima vez."
+      },
+      "form": {
+        "newTitle": "Nueva dirección",
+        "editTitle": "Editar dirección",
+        "labels": {
+          "firstName": "Nombre",
+          "lastName": "Apellido",
+          "company": "Empresa (opcional)",
+          "address1": "Calle y número",
+          "address2": "Departamento, suite, etc. (opcional)",
+          "city": "Ciudad",
+          "provinceCode": "Estado",
+          "countryCode": "País",
+          "zip": "Código postal",
+          "phone": "Teléfono (opcional)",
+          "setDefault": "Establecer como predeterminada"
+        },
+        "save": "Guardar dirección",
+        "saving": "Guardando...",
+        "cancel": "Cancelar",
+        "errors": {
+          "required": "Este campo es obligatorio.",
+          "phoneInvalid": "Teléfono inválido.",
+          "zipInvalid": "Código postal inválido.",
+          "countryInvalid": "Selecciona un país válido.",
+          "generic": "No pudimos guardar la dirección. Intenta de nuevo."
+        }
+      },
+      "deleteDialog": {
+        "title": "¿Eliminar esta dirección?",
+        "body": "Esta acción no se puede deshacer.",
+        "confirm": "Eliminar",
+        "cancel": "Cancelar"
+      }
+    }
+  },
   "legal": {
     "updated": "Última actualización",
     "terms": {

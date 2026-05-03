@@ -74,21 +74,6 @@ const nextConfig: NextConfig = {
           "https://cafe-folka.myshopify.com/:shopId/checkouts/:rest*",
         permanent: false,
       },
-      // Shop Pay social-login handoff used by new customer accounts.
-      // Forward to .myshopify.com so the OAuth flow can complete and
-      // bounce back to account.folkasolutions.com with the auth code.
-      {
-        source: "/:locale(es|en)/services/login_with_shop/:rest*",
-        destination:
-          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
-        permanent: false,
-      },
-      {
-        source: "/services/login_with_shop/:rest*",
-        destination:
-          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
-        permanent: false,
-      },
     ];
   },
   // Required to support PostHog trailing slash API requests
