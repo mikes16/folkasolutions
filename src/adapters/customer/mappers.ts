@@ -51,7 +51,6 @@ export interface OrderLineItemNode {
   variantTitle: string | null;
   quantity: number;
   price: MoneyNode;
-  product: { handle: string } | null;
   image: { url: string } | null;
 }
 
@@ -62,7 +61,9 @@ export interface OrderNode {
   financialStatus: string;
   fulfillmentStatus: string;
   totalPrice: MoneyNode;
-  customerOrderUrl: string;
+  // Customer Account API exposes the order detail URL as `statusPageUrl`,
+  // not `customerOrderUrl`. Mapped to `customerOrderUrl` on the domain side.
+  statusPageUrl: string;
   lineItems: { edges: Array<{ node: OrderLineItemNode }> };
 }
 
@@ -129,7 +130,10 @@ export function mapOrderLineItem(node: OrderLineItemNode): OrderLineItem {
     variantTitle: node.variantTitle,
     quantity: node.quantity,
     unitPrice: mapMoney(node.price),
-    productHandle: node.product?.handle ?? null,
+    // Customer Account API line items don't expose a product reference, so
+    // we can't deep-link from an order back to the product detail page.
+    // Acceptable limitation: order detail still shows title + image + price.
+    productHandle: null,
     imageUrl: node.image?.url ?? null,
   });
 }
@@ -152,6 +156,6 @@ export function mapOrder(node: OrderNode): Order {
     fulfillmentStatus: node.fulfillmentStatus.toLowerCase() as FulfillmentStatus,
     totalPrice: mapMoney(node.totalPrice),
     lineItems: node.lineItems.edges.map((edge) => mapOrderLineItem(edge.node)),
-    customerOrderUrl: node.customerOrderUrl,
+    customerOrderUrl: node.statusPageUrl,
   });
 }

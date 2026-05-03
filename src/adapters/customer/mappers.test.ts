@@ -113,27 +113,26 @@ describe("mappers", () => {
   });
 
   describe("mapOrderLineItem", () => {
-    it("maps line item with optional product/image", () => {
+    it("maps line item title, variant, quantity, price, image", () => {
       const item = mapOrderLineItem({
         title: "Slayer Steam Single",
         variantTitle: "Black",
         quantity: 1,
         price: { amount: "1500.00", currencyCode: "USD" },
-        product: { handle: "slayer-steam" },
         image: { url: "https://cdn.shopify.com/x.jpg" },
       });
       expect(item.title).toBe("Slayer Steam Single");
-      expect(item.productHandle).toBe("slayer-steam");
       expect(item.imageUrl).toBe("https://cdn.shopify.com/x.jpg");
+      // Customer Account API doesn't expose a product reference on line items
+      expect(item.productHandle).toBeNull();
     });
 
-    it("falls back to null when product/image are absent", () => {
+    it("falls back to null when image is absent", () => {
       const item = mapOrderLineItem({
         title: "Niche Zero",
         variantTitle: null,
         quantity: 2,
         price: { amount: "100.00", currencyCode: "USD" },
-        product: null,
         image: null,
       });
       expect(item.productHandle).toBeNull();
@@ -150,7 +149,7 @@ describe("mappers", () => {
         financialStatus: "PAID",
         fulfillmentStatus: "FULFILLED",
         totalPrice: { amount: "250.00", currencyCode: "USD" },
-        customerOrderUrl: "https://shop.com/account/orders/12345",
+        statusPageUrl: "https://shop.com/account/orders/12345",
         lineItems: {
           edges: [
             {
@@ -159,7 +158,6 @@ describe("mappers", () => {
                 variantTitle: null,
                 quantity: 1,
                 price: { amount: "250.00", currencyCode: "USD" },
-                product: { handle: "chiapas-1kg" },
                 image: null,
               },
             },
@@ -171,6 +169,7 @@ describe("mappers", () => {
       expect(order.financialStatus).toBe("paid");
       expect(order.fulfillmentStatus).toBe("fulfilled");
       expect(order.totalPrice.amount).toBe("250.00");
+      expect(order.customerOrderUrl).toBe("https://shop.com/account/orders/12345");
       expect(order.lineItems).toHaveLength(1);
     });
   });

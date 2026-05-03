@@ -56,7 +56,7 @@ export const ORDERS_QUERY = `
             financialStatus
             fulfillmentStatus
             totalPrice { amount currencyCode }
-            customerOrderUrl
+            statusPageUrl
             lineItems(first: 50) {
               edges {
                 node {
@@ -64,7 +64,6 @@ export const ORDERS_QUERY = `
                   variantTitle
                   quantity
                   price { amount currencyCode }
-                  product { handle }
                   image { url }
                 }
               }
@@ -86,7 +85,7 @@ export const ORDER_QUERY = `
       financialStatus
       fulfillmentStatus
       totalPrice { amount currencyCode }
-      customerOrderUrl
+      statusPageUrl
       lineItems(first: 50) {
         edges {
           node {
@@ -94,7 +93,6 @@ export const ORDER_QUERY = `
             variantTitle
             quantity
             price { amount currencyCode }
-            product { handle }
             image { url }
           }
         }

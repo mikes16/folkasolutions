@@ -63,7 +63,7 @@ function buildOrderNode(id = "gid://shopify/Order/12345") {
     financialStatus: "PAID",
     fulfillmentStatus: "FULFILLED",
     totalPrice: { amount: "250.00", currencyCode: "USD" },
-    customerOrderUrl: "https://shop.com/account/orders/12345",
+    statusPageUrl: "https://shop.com/account/orders/12345",
     lineItems: {
       edges: [
         {
@@ -72,7 +72,6 @@ function buildOrderNode(id = "gid://shopify/Order/12345") {
             variantTitle: null,
             quantity: 1,
             price: { amount: "250.00", currencyCode: "USD" },
-            product: { handle: "chiapas-1kg" },
             image: null,
           },
         },
