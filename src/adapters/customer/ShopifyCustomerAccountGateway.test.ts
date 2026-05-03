@@ -119,6 +119,7 @@ describe("ShopifyCustomerAccountGateway", () => {
         ok: false,
         status: 401,
         json: async () => ({}),
+        text: async () => "Unauthorized",
       });
       const gateway = new ShopifyCustomerAccountGateway(apiUrl);
       await expect(gateway.getProfile("bad-token")).rejects.toThrow(

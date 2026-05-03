@@ -199,7 +199,10 @@ export class ShopifyCustomerAccountGateway implements CustomerAccountGateway {
       body: JSON.stringify({ query, variables }),
     });
     if (!res.ok) {
-      throw new Error(`Customer Account API ${res.status}`);
+      // Capture the response body so the actual GraphQL error (field name
+      // mismatch, scope issue, etc.) shows up in Vercel runtime logs.
+      const body = await res.text().catch(() => "<unable to read body>");
+      throw new Error(`Customer Account API ${res.status}: ${body}`);
     }
     const json = (await res.json()) as GraphQLResponse<T>;
     if (json.errors?.length) {
