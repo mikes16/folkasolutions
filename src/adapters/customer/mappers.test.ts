@@ -17,14 +17,14 @@ describe("mappers", () => {
         firstName: "Miguel",
         lastName: "López",
         phoneNumber: { phoneNumber: "+528112345678" },
-        acceptsMarketing: true,
       });
       expect(customer.id.value).toBe("gid://shopify/Customer/42");
       expect(customer.email.value).toBe("miguel@folka.com");
       expect(customer.firstName).toBe("Miguel");
       expect(customer.lastName).toBe("López");
       expect(customer.phone).toBe("+528112345678");
-      expect(customer.acceptsMarketing).toBe(true);
+      // Marketing consent isn't fetched yet; mapper hardcodes false
+      expect(customer.acceptsMarketing).toBe(false);
     });
 
     it("maps a null phoneNumber wrapper to null phone", () => {
@@ -34,7 +34,6 @@ describe("mappers", () => {
         firstName: null,
         lastName: null,
         phoneNumber: null,
-        acceptsMarketing: false,
       });
       expect(customer.phone).toBeNull();
       expect(customer.firstName).toBeNull();

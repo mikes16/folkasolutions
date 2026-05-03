@@ -35,7 +35,6 @@ function buildCustomerNode() {
     firstName: "Miguel",
     lastName: "López",
     phoneNumber: { phoneNumber: "+528112345678" },
-    acceptsMarketing: false,
   };
 }
 
@@ -342,7 +341,7 @@ describe("ShopifyCustomerAccountGateway", () => {
           address2: null,
           city: "Monterrey",
           zoneCode: "NLE",
-          countryCode: "MX",
+          territoryCode: "MX",
           zip: "64000",
           phoneNumber: "+528112345678",
         },
@@ -413,7 +412,7 @@ describe("ShopifyCustomerAccountGateway", () => {
           address2: null,
           city: "Monterrey",
           zoneCode: "NLE",
-          countryCode: "MX",
+          territoryCode: "MX",
           zip: "64000",
           phoneNumber: null,
         },

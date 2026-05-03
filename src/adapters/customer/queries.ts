@@ -14,6 +14,11 @@
  *   adapter translates `AddressInput.phone` and `.provinceCode` accordingly.
  */
 
+// NOTE: acceptsMarketing isn't a top-level field on Customer in this API.
+// The Customer Account API exposes marketing consent through a nested
+// emailMarketingConsent object (likely { marketingState }). We don't read
+// or write it for now; the Profile UI checkbox is a no-op pending a
+// follow-up that adds the correct field selection and mutation input.
 export const PROFILE_QUERY = `
   query CustomerProfile {
     customer {
@@ -22,7 +27,6 @@ export const PROFILE_QUERY = `
       firstName
       lastName
       phoneNumber { phoneNumber }
-      acceptsMarketing
     }
   }
 `;
@@ -36,7 +40,6 @@ export const UPDATE_PROFILE_MUTATION = `
         firstName
         lastName
         phoneNumber { phoneNumber }
-        acceptsMarketing
       }
       userErrors { field message }
     }
@@ -138,7 +141,7 @@ export const CREATE_ADDRESS_MUTATION = `
         address2
         city
         provinceCode: zoneCode
-        countryCode
+        countryCode: territoryCode
         zip
         phoneNumber
       }
@@ -159,7 +162,7 @@ export const UPDATE_ADDRESS_MUTATION = `
         address2
         city
         provinceCode: zoneCode
-        countryCode
+        countryCode: territoryCode
         zip
         phoneNumber
       }

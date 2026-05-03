@@ -24,7 +24,10 @@ export interface CustomerNode {
   firstName: string | null;
   lastName: string | null;
   phoneNumber: { phoneNumber: string } | null;
-  acceptsMarketing: boolean;
+  // acceptsMarketing isn't fetched yet (Customer Account API exposes it via
+  // a different shape, emailMarketingConsent.marketingState). The domain
+  // Customer.acceptsMarketing is set to false by the mapper until we wire
+  // the real selection in a follow-up.
 }
 
 export interface AddressNode {
@@ -81,7 +84,9 @@ export function mapCustomer(node: CustomerNode): Customer {
     firstName: node.firstName,
     lastName: node.lastName,
     phone: node.phoneNumber?.phoneNumber ?? null,
-    acceptsMarketing: node.acceptsMarketing,
+    // Pending wiring of emailMarketingConsent.marketingState; defaulting
+    // to false so the domain shape is satisfied without lying about state.
+    acceptsMarketing: false,
   });
 }
 

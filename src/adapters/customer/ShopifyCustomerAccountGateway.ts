@@ -99,15 +99,17 @@ interface CustomerUpdateInput {
   firstName?: string | null;
   lastName?: string | null;
   phoneNumber?: { phoneNumber: string } | null;
-  acceptsMarketing?: boolean;
+  // acceptsMarketing isn't accepted by this input type; the Customer Account
+  // API expects emailMarketingConsent instead. Pending follow-up.
 }
 
 /**
  * GraphQL input shape for `customerAddressCreate` / `customerAddressUpdate`.
- * Note the field name translation from `AddressInput`:
+ * Field name translations from the domain `AddressInput`:
  *   - `phone` becomes `phoneNumber`
  *   - `provinceCode` becomes `zoneCode`
- * This matches the Customer Account API's input type exactly.
+ *   - `countryCode` becomes `territoryCode`
+ * This matches the Customer Account API's `CustomerAddressInput` exactly.
  */
 interface CustomerAddressInput {
   firstName: string;
@@ -117,7 +119,7 @@ interface CustomerAddressInput {
   address2?: string | null;
   city: string;
   zoneCode: string;
-  countryCode: string;
+  territoryCode: string;
   zip: string;
   phoneNumber?: string | null;
 }
@@ -132,9 +134,7 @@ function toCustomerUpdateInput(update: ProfileUpdate): CustomerUpdateInput {
         ? null
         : { phoneNumber: update.phone };
   }
-  if ("acceptsMarketing" in update && update.acceptsMarketing !== undefined) {
-    input.acceptsMarketing = update.acceptsMarketing;
-  }
+  // acceptsMarketing intentionally not forwarded (not a field on this input).
   return input;
 }
 
@@ -147,7 +147,7 @@ function toCustomerAddressInput(input: AddressInput): CustomerAddressInput {
     address2: input.address2 ?? null,
     city: input.city,
     zoneCode: input.provinceCode,
-    countryCode: input.countryCode,
+    territoryCode: input.countryCode,
     zip: input.zip,
     phoneNumber: input.phone ?? null,
   };
