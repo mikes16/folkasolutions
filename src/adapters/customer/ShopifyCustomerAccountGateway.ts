@@ -98,9 +98,13 @@ interface DeleteAddressMutationData {
 interface CustomerUpdateInput {
   firstName?: string | null;
   lastName?: string | null;
-  phoneNumber?: { phoneNumber: string } | null;
-  // acceptsMarketing isn't accepted by this input type; the Customer Account
-  // API expects emailMarketingConsent instead. Pending follow-up.
+  // phoneNumber and acceptsMarketing aren't fields on CustomerUpdateInput.
+  // - Phone changes require a separate verification flow in the Customer
+  //   Account API (SMS verification) to prevent account takeover.
+  // - Marketing consent goes through emailMarketingConsent.
+  // Both are read-only via the basic updateProfile mutation. The Profile UI
+  // surfaces them but writes are silently dropped. Wiring the verification
+  // flow and consent mutation is a follow-up.
 }
 
 /**
@@ -128,13 +132,9 @@ function toCustomerUpdateInput(update: ProfileUpdate): CustomerUpdateInput {
   const input: CustomerUpdateInput = {};
   if ("firstName" in update) input.firstName = update.firstName ?? null;
   if ("lastName" in update) input.lastName = update.lastName ?? null;
-  if ("phone" in update) {
-    input.phoneNumber =
-      update.phone === null || update.phone === undefined
-        ? null
-        : { phoneNumber: update.phone };
-  }
-  // acceptsMarketing intentionally not forwarded (not a field on this input).
+  // phone and acceptsMarketing intentionally dropped (see CustomerUpdateInput
+  // comment above). Profile UI accepts them but they no-op until proper
+  // verification + consent flows are implemented.
   return input;
 }
 

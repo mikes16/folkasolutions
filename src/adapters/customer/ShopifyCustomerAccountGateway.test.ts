@@ -139,7 +139,7 @@ describe("ShopifyCustomerAccountGateway", () => {
       const gateway = new ShopifyCustomerAccountGateway(apiUrl);
       const customer = await gateway.updateProfile({
         accessToken: "tok",
-        update: { firstName: "Updated", phone: "+1234567" },
+        update: { firstName: "Updated", lastName: "Lopez" },
       });
       expect(customer.firstName).toBe("Updated");
       const call = getCall();
@@ -147,16 +147,16 @@ describe("ShopifyCustomerAccountGateway", () => {
       expect(call.body.variables).toEqual({
         input: {
           firstName: "Updated",
-          phoneNumber: { phoneNumber: "+1234567" },
+          lastName: "Lopez",
         },
       });
     });
 
-    it("wraps a null phone update as a null phoneNumber", async () => {
+    it("drops phone and acceptsMarketing keys (not editable via this mutation)", async () => {
       mockJson({
         data: {
           customerUpdate: {
-            customer: { ...buildCustomerNode(), phoneNumber: null },
+            customer: buildCustomerNode(),
             userErrors: [],
           },
         },
@@ -164,11 +164,15 @@ describe("ShopifyCustomerAccountGateway", () => {
       const gateway = new ShopifyCustomerAccountGateway(apiUrl);
       await gateway.updateProfile({
         accessToken: "tok",
-        update: { phone: null },
+        update: {
+          firstName: "Miguel",
+          phone: "+528112345678",
+          acceptsMarketing: true,
+        },
       });
       const call = getCall();
       expect(call.body.variables).toEqual({
-        input: { phoneNumber: null },
+        input: { firstName: "Miguel" },
       });
     });
 
