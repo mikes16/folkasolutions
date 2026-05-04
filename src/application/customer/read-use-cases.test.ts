@@ -50,7 +50,6 @@ function makeOrder(): Order {
         imageUrl: null,
       }),
     ],
-    customerOrderUrl: "https://example.com/orders/1",
   });
 }
 

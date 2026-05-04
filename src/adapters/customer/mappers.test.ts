@@ -148,7 +148,6 @@ describe("mappers", () => {
         financialStatus: "PAID",
         fulfillmentStatus: "FULFILLED",
         totalPrice: { amount: "250.00", currencyCode: "USD" },
-        statusPageUrl: "https://shop.com/account/orders/12345",
         lineItems: {
           edges: [
             {
@@ -168,7 +167,6 @@ describe("mappers", () => {
       expect(order.financialStatus).toBe("paid");
       expect(order.fulfillmentStatus).toBe("fulfilled");
       expect(order.totalPrice.amount).toBe("250.00");
-      expect(order.customerOrderUrl).toBe("https://shop.com/account/orders/12345");
       expect(order.lineItems).toHaveLength(1);
     });
   });

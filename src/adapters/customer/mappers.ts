@@ -64,9 +64,6 @@ export interface OrderNode {
   financialStatus: string;
   fulfillmentStatus: string;
   totalPrice: MoneyNode;
-  // Customer Account API exposes the order detail URL as `statusPageUrl`,
-  // not `customerOrderUrl`. Mapped to `customerOrderUrl` on the domain side.
-  statusPageUrl: string;
   lineItems: { edges: Array<{ node: OrderLineItemNode }> };
 }
 
@@ -161,6 +158,5 @@ export function mapOrder(node: OrderNode): Order {
     fulfillmentStatus: node.fulfillmentStatus.toLowerCase() as FulfillmentStatus,
     totalPrice: mapMoney(node.totalPrice),
     lineItems: node.lineItems.edges.map((edge) => mapOrderLineItem(edge.node)),
-    customerOrderUrl: node.statusPageUrl,
   });
 }

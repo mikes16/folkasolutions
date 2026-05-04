@@ -62,7 +62,6 @@ function buildOrderNode(id = "gid://shopify/Order/12345") {
     financialStatus: "PAID",
     fulfillmentStatus: "FULFILLED",
     totalPrice: { amount: "250.00", currencyCode: "USD" },
-    statusPageUrl: "https://shop.com/account/orders/12345",
     lineItems: {
       edges: [
         {

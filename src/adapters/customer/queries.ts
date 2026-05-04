@@ -59,7 +59,6 @@ export const ORDERS_QUERY = `
             financialStatus
             fulfillmentStatus
             totalPrice { amount currencyCode }
-            statusPageUrl
             lineItems(first: 50) {
               edges {
                 node {
@@ -88,7 +87,6 @@ export const ORDER_QUERY = `
       financialStatus
       fulfillmentStatus
       totalPrice { amount currencyCode }
-      statusPageUrl
       lineItems(first: 50) {
         edges {
           node {

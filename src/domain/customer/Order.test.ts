@@ -21,7 +21,6 @@ describe("Order", () => {
     fulfillmentStatus: "fulfilled" as const,
     totalPrice: Money.of("108476.48", "MXN"),
     lineItems: [lineItem],
-    customerOrderUrl: "https://shopify.com/123/account/orders/foo",
   };
 
   it("constructs from input", () => {

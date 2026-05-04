@@ -49,7 +49,6 @@ export interface OrderInput {
   fulfillmentStatus: FulfillmentStatus;
   totalPrice: Money;
   lineItems: ReadonlyArray<OrderLineItem>;
-  customerOrderUrl: string;
 }
 
 /**
@@ -72,7 +71,6 @@ export class Order {
     public readonly fulfillmentStatus: FulfillmentStatus,
     public readonly totalPrice: Money,
     public readonly lineItems: ReadonlyArray<OrderLineItem>,
-    public readonly customerOrderUrl: string,
   ) {}
 
   static create(input: OrderInput): Order {
@@ -95,7 +93,6 @@ export class Order {
       input.fulfillmentStatus,
       input.totalPrice,
       input.lineItems,
-      input.customerOrderUrl,
     );
   }
 

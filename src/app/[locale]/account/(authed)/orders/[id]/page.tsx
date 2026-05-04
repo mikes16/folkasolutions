@@ -85,17 +85,6 @@ export default async function OrderDetailPage({ params }: PageProps) {
           {totalLabel}
         </p>
       </section>
-
-      {order.customerOrderUrl ? (
-        <a
-          href={order.customerOrderUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-8 font-[family-name:var(--font-rajdhani)] uppercase tracking-[0.15em] text-[12px] text-foreground hover:text-foreground/70 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-        >
-          {t("viewInShopify")} <span aria-hidden="true">&rarr;</span>
-        </a>
-      ) : null}
     </div>
   );
 }
