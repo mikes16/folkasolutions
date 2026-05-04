@@ -59,7 +59,7 @@ export interface OrderLineItemNode {
 
 export interface OrderNode {
   id: string;
-  number: string;
+  number: number;
   processedAt: string;
   financialStatus: string;
   fulfillmentStatus: string;
@@ -155,7 +155,7 @@ export function mapOrderLineItem(node: OrderLineItemNode): OrderLineItem {
 export function mapOrder(node: OrderNode): Order {
   return Order.create({
     id: node.id,
-    orderNumber: node.number,
+    orderNumber: String(node.number),
     processedAt: node.processedAt,
     financialStatus: node.financialStatus.toLowerCase() as FinancialStatus,
     fulfillmentStatus: node.fulfillmentStatus.toLowerCase() as FulfillmentStatus,

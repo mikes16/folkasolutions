@@ -57,7 +57,7 @@ function buildAddressNode(id = "gid://shopify/CustomerAddress/9") {
 function buildOrderNode(id = "gid://shopify/Order/12345") {
   return {
     id,
-    number: "1001",
+    number: 1001,
     processedAt: "2026-04-01T12:00:00Z",
     financialStatus: "PAID",
     fulfillmentStatus: "FULFILLED",

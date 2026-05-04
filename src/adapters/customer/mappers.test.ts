@@ -143,7 +143,7 @@ describe("mappers", () => {
     it("maps an order node and lowercases enum statuses", () => {
       const order = mapOrder({
         id: "gid://shopify/Order/12345",
-        number: "1001",
+        number: 1001,
         processedAt: "2026-04-01T12:00:00Z",
         financialStatus: "PAID",
         fulfillmentStatus: "FULFILLED",
