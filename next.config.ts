@@ -30,6 +30,24 @@ const nextConfig: NextConfig = {
         source: "/ingest/:path*",
         destination: "https://us.i.posthog.com/:path*",
       },
+      // Shop Pay's "Login with Shop" OAuth handshake. Shopify hardcodes
+      // the OAuth `redirect_uri` to the configured primary domain
+      // (folkasolutions.com) regardless of which host received the
+      // initial authorize request. A 30x redirect to cafe-folka.myshopify
+      // would change the URL bar and cause the OAuth host validation to
+      // fail. Proxy server-side instead so the URL stays on the apex,
+      // session cookies stick to folkasolutions.com, and redirect_uri
+      // matches what shop.app expects on callback.
+      {
+        source: "/:locale(es|en)/services/login_with_shop/:rest*",
+        destination:
+          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
+      },
+      {
+        source: "/services/login_with_shop/:rest*",
+        destination:
+          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
+      },
     ];
   },
   async redirects() {
@@ -72,23 +90,6 @@ const nextConfig: NextConfig = {
         source: "/:shopId(\\d+)/checkouts/:rest*",
         destination:
           "https://cafe-folka.myshopify.com/:shopId/checkouts/:rest*",
-        permanent: false,
-      },
-      // Shop Pay's "Login with Shop" OAuth handshake. Shopify mints these
-      // URLs against the configured primary domain (folkasolutions.com),
-      // but the apex now lives on Vercel. Forward the handshake to
-      // cafe-folka.myshopify.com (with or without a Markets locale
-      // prefix) so the Shop Pay button at checkout actually completes.
-      {
-        source: "/:locale(es|en)/services/login_with_shop/:rest*",
-        destination:
-          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
-        permanent: false,
-      },
-      {
-        source: "/services/login_with_shop/:rest*",
-        destination:
-          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
         permanent: false,
       },
     ];
