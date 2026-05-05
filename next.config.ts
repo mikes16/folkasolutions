@@ -61,6 +61,44 @@ const nextConfig: NextConfig = {
         destination: "/:locale/:rest*",
         permanent: true,
       },
+      // Shopify Markets as a single-segment prefix (e.g. /en-us/products/...,
+      // /es-mx/collections/...). Map the language portion to our i18n locale
+      // and drop the country, so old Google index entries and external links
+      // land on the correct localized page instead of the [locale] catch-all.
+      {
+        source: "/:market(en-[a-z]{2})/:rest*",
+        destination: "/en/:rest*",
+        permanent: true,
+      },
+      {
+        source: "/:market(es-[a-z]{2})/:rest*",
+        destination: "/es/:rest*",
+        permanent: true,
+      },
+      // Shopify oEmbed metadata endpoints (used by Slack/Discord/embed.ly to
+      // render link previews). We don't serve oEmbed JSON, but redirecting
+      // to the canonical page lets external embedders fall back to the
+      // OpenGraph tags on the product/collection HTML.
+      {
+        source: "/products/:handle.oembed",
+        destination: "/products/:handle",
+        permanent: true,
+      },
+      {
+        source: "/:locale(es|en)/products/:handle.oembed",
+        destination: "/:locale/products/:handle",
+        permanent: true,
+      },
+      {
+        source: "/collections/:handle.oembed",
+        destination: "/collections/:handle",
+        permanent: true,
+      },
+      {
+        source: "/:locale(es|en)/collections/:handle.oembed",
+        destination: "/:locale/collections/:handle",
+        permanent: true,
+      },
       // Shopify email click trackers and cart-recovery URLs get minted on
       // the primary domain (folkasolutions.com), but the apex now lives on
       // Vercel. Forward them to the .myshopify.com host so abandoned cart

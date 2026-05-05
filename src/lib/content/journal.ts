@@ -204,10 +204,12 @@ const JOURNAL_REGISTRY: JournalEntry[] = [
 export async function getAllJournalPosts(
   locale: Locale,
 ): Promise<JournalSummary[]> {
-  return JOURNAL_REGISTRY.map((entry) => ({
-    slug: entry.slug,
-    ...entry.i18n[locale],
-  })).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  return JOURNAL_REGISTRY.filter((entry) => entry.i18n[locale])
+    .map((entry) => ({
+      slug: entry.slug,
+      ...entry.i18n[locale],
+    }))
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 /**
