@@ -74,6 +74,23 @@ const nextConfig: NextConfig = {
           "https://cafe-folka.myshopify.com/:shopId/checkouts/:rest*",
         permanent: false,
       },
+      // Shop Pay's "Login with Shop" OAuth handshake. Shopify mints these
+      // URLs against the configured primary domain (folkasolutions.com),
+      // but the apex now lives on Vercel. Forward the handshake to
+      // cafe-folka.myshopify.com (with or without a Markets locale
+      // prefix) so the Shop Pay button at checkout actually completes.
+      {
+        source: "/:locale(es|en)/services/login_with_shop/:rest*",
+        destination:
+          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
+        permanent: false,
+      },
+      {
+        source: "/services/login_with_shop/:rest*",
+        destination:
+          "https://cafe-folka.myshopify.com/services/login_with_shop/:rest*",
+        permanent: false,
+      },
     ];
   },
   // Required to support PostHog trailing slash API requests
