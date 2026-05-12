@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { Product } from "@/lib/commerce/types";
+import { localeCountryMap, type Locale } from "@/i18n/config";
 import { formatMoney } from "@/lib/utils/format";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,8 @@ export function ProductInfo({ product, selectedVariantIndex: externalIndex, onVa
   const setSelectedVariantIndex = onVariantChange ?? setInternalIndex;
   const t = useTranslations("common");
   const tp = useTranslations("product");
+  const locale = useLocale() as Locale;
+  const country = localeCountryMap[locale]?.country;
   const { addItem, isLoading } = useCart();
   const variant = product.variants[selectedVariantIndex];
 
@@ -75,18 +78,23 @@ export function ProductInfo({ product, selectedVariantIndex: externalIndex, onVa
       </div>
 
       {/* Price */}
-      <div className="flex items-baseline gap-3">
-        {variant && (
-          <>
-            <span className="text-2xl font-bold">
-              {formatMoney(variant.price)}
-            </span>
-            {isOnSale && variant.compareAtPrice && (
-              <span className="text-lg text-muted line-through">
-                {formatMoney(variant.compareAtPrice)}
+      <div className="flex flex-col gap-1">
+        <div className="flex items-baseline gap-3">
+          {variant && (
+            <>
+              <span className="text-2xl font-bold">
+                {formatMoney(variant.price)}
               </span>
-            )}
-          </>
+              {isOnSale && variant.compareAtPrice && (
+                <span className="text-lg text-muted line-through">
+                  {formatMoney(variant.compareAtPrice)}
+                </span>
+              )}
+            </>
+          )}
+        </div>
+        {country === "MX" && (
+          <p className="text-xs text-muted">{tp("taxNote")}</p>
         )}
       </div>
 
