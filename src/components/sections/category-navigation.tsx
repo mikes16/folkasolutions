@@ -57,13 +57,13 @@ export function CategoryNavigation({
               className="group flex flex-col items-center gap-4"
             >
               <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px] lg:w-[180px] lg:h-[180px] rounded-full border border-foreground/15 flex items-center justify-center bg-background transition-all duration-500 group-hover:border-foreground/40 group-hover:shadow-[0_0_0_6px_rgba(16,28,46,0.04)] group-hover:-translate-y-1">
-                <div className="relative w-16 h-16 md:w-24 md:h-24 lg:w-28 lg:h-28">
+                <div className="relative w-20 h-20 md:w-32 md:h-32 lg:w-36 lg:h-36">
                   {category.imageUrl ? (
                     <Image
                       src={category.imageUrl}
                       alt={category.label}
                       fill
-                      sizes="(max-width: 768px) 64px, (max-width: 1024px) 96px, 112px"
+                      sizes="(max-width: 768px) 80px, (max-width: 1024px) 128px, 144px"
                       className="object-contain transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (

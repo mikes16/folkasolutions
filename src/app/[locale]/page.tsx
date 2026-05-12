@@ -60,9 +60,9 @@ export const revalidate = 120;
 
 const categoryKeys = [
   { key: "espresso", href: "/collections/espresso-machines", imageUrl: "/icons/ic_espresso.webp" },
-  { key: "grinders", href: "/collections/domestic-grinders", imageUrl: "/icons/ic_grinders.webp" },
+  { key: "grinders", href: "/collections/domestic-grinders", imageUrl: "/icons/ic_grinder.webp" },
   { key: "brewing", href: "/collections/brewing", imageUrl: "/icons/ic_brewing.webp" },
-  { key: "accessories", href: "/collections/coffee-bar-accessories", imageUrl: "/icons/ic_accesories.webp" },
+  { key: "accessories", href: "/collections/coffee-bar-accessories", imageUrl: "/icons/ic_accessories.webp" },
   { key: "coffee", href: "/collections/cafe", imageUrl: "/icons/ic_coffee.webp" },
   { key: "care", href: "/collections/cleaning-stuff", imageUrl: "/icons/ic_care.webp" },
 ] as const;
