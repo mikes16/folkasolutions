@@ -10,6 +10,7 @@ import { getCuratedCategoryForProduct } from "@/lib/product-category-mapping";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
 import { ProductViewedTracker } from "@/components/product/product-viewed-tracker";
+import { getTaxMode } from "@/lib/tax-display";
 
 export const revalidate = 60;
 
@@ -123,6 +124,15 @@ export default async function ProductPage({ params }: Props) {
         url: `${siteConfig.siteUrl}/${locale}/products/${handle}`,
         priceCurrency: variant.price.currencyCode,
         price: variant.price.amount,
+        // Declares whether the listed amount already carries tax. Google
+        // requires the amount here to match the `price` above, so this only
+        // qualifies the number, it never restates it.
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: variant.price.amount,
+          priceCurrency: variant.price.currencyCode,
+          valueAddedTaxIncluded: getTaxMode() === "inclusive",
+        },
         availability: product.availableForSale
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
