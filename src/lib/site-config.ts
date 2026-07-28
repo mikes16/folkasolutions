@@ -16,7 +16,7 @@ export const siteConfig = {
     contact: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hola@folkasolutions.com",
     commercial:
       process.env.NEXT_PUBLIC_COMMERCIAL_EMAIL ??
-      "comercial@folkasolutions.com",
+      "contacto@folkasolutions.com",
   },
   social: {
     instagram:

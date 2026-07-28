@@ -112,7 +112,7 @@ export const faqContent: FaqContent = {
         {
           question: "¿Ayudan a montar un café desde cero?",
           answer: [
-            "Sí. Trabajamos con cafés independientes desde el concepto hasta la instalación: selección de equipo, diseño de barra, capacitación de baristas y soporte postventa. Escríbenos a comercial@folkasolutions.com para agendar una asesoría.",
+            "Sí. Trabajamos con cafés independientes desde el concepto hasta la instalación: selección de equipo, diseño de barra, capacitación de baristas y soporte postventa. Escríbenos a contacto@folkasolutions.com para agendar una asesoría.",
           ],
         },
         {
@@ -225,7 +225,7 @@ export const faqContent: FaqContent = {
         {
           question: "Do you help open a café from scratch?",
           answer: [
-            "Yes. We work with independent cafés from concept to installation: equipment selection, bar design, barista training, and post-sale support. Email comercial@folkasolutions.com to book a consultation.",
+            "Yes. We work with independent cafés from concept to installation: equipment selection, bar design, barista training, and post-sale support. Email contacto@folkasolutions.com to book a consultation.",
           ],
         },
         {
