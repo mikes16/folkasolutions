@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/components/cart/cart-context";
+import { CartSummary } from "@/components/cart/cart-summary";
+import { CheckoutButton } from "@/components/cart/checkout-button";
 import { formatMoney } from "@/lib/utils/format";
-import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { EmptyState } from "@/components/ui/empty-state";
 
@@ -120,20 +121,9 @@ export default function CartPage() {
               {/* Summary */}
               {cart && (
                 <div className="bg-white rounded-[24px] p-8 h-fit space-y-6">
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted">{t("common.subtotal")}</span>
-                    <span className="text-xl font-bold">
-                      {formatMoney(cart.cost.subtotalAmount)}
-                    </span>
-                  </div>
+                  <CartSummary cart={cart} />
 
-                  <p className="text-xs text-muted">{t("common.taxesShipping")}</p>
-
-                  <a href={cart.checkoutUrl} className="block">
-                    <Button size="lg" className="w-full">
-                      {t("common.checkout")}
-                    </Button>
-                  </a>
+                  <CheckoutButton cart={cart} />
 
                   {/* Trust badges */}
                   <div className="pt-4 border-t border-border space-y-2">

@@ -31,6 +31,7 @@ interface CartContextType {
   addItem: (line: CartLineInput) => Promise<void>;
   updateItem: (lineId: string, quantity: number) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
+  prepareCheckout: () => Promise<void>;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -269,6 +270,38 @@ export function CartProvider({ children }: { children: ReactNode }) {
     [cart?.id, cart?.lines, handleError, locale]
   );
 
+  // Re-stamp the PostHog identifiers right before the buyer leaves for
+  // Shopify's checkout. They are only written once, at cart creation
+  // (`ensureCart`), so a cart revisited days later carries a stale distinct_id
+  // and no session_id at all, which is what the orders/create webhook reads to
+  // stitch the purchase back to the browsing session. Capped at ~400ms:
+  // measurement must never delay the hand-off to checkout.
+  const prepareCheckout = useCallback(async () => {
+    if (!cart?.id) return;
+
+    const attributes: Array<{ key: string; value: string }> = [];
+    try {
+      const distinctId = posthog.get_distinct_id?.();
+      const sessionId = posthog.get_session_id?.();
+      if (distinctId)
+        attributes.push({ key: "posthog_distinct_id", value: distinctId });
+      if (sessionId)
+        attributes.push({ key: "posthog_session_id", value: sessionId });
+    } catch {
+      // PostHog not initialized — nothing worth stamping
+    }
+    if (attributes.length === 0) return;
+
+    await Promise.race([
+      cartFetch(
+        "updateAttributes",
+        { cartId: cart.id, attributes },
+        locale
+      ).catch(() => undefined),
+      new Promise((resolve) => setTimeout(resolve, 400)),
+    ]);
+  }, [cart?.id, locale]);
+
   return (
     <CartContext.Provider
       value={{
@@ -282,6 +315,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addItem,
         updateItem,
         removeItem,
+        prepareCheckout,
       }}
     >
       {children}

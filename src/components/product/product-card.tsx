@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Product } from "@/lib/commerce/types";
+import { localeCountryMap, type Locale } from "@/i18n/config";
 import { formatMoney } from "@/lib/utils/format";
+import { shouldShowTaxNote } from "@/lib/tax-display";
 import { Badge } from "@/components/ui/badge";
 import posthog from "posthog-js";
 
@@ -14,6 +16,9 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("common");
+  const tp = useTranslations("product");
+  const locale = useLocale() as Locale;
+  const country = localeCountryMap[locale]?.country;
   const variant = product.variants[0];
   const isOnSale =
     variant?.compareAtPrice &&
@@ -75,6 +80,11 @@ export function ProductCard({ product }: ProductCardProps) {
               {isOnSale && variant.compareAtPrice && (
                 <span className="text-xs text-muted line-through">
                   {formatMoney(variant.compareAtPrice)}
+                </span>
+              )}
+              {shouldShowTaxNote(country) && (
+                <span className="text-[10px] text-muted">
+                  {tp("taxNoteShort")}
                 </span>
               )}
             </>

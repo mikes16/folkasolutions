@@ -7,10 +7,14 @@ const localeMap: Record<string, string> = {
 
 export function formatMoney(money: Money): string {
   const locale = localeMap[money.currencyCode] || "en-US";
+  const value = parseFloat(money.amount);
+  // MXN reads cleaner without decimals, but rounding real cents away would
+  // make the displayed total disagree with Shopify's checkout.
+  const digits = money.currencyCode === "MXN" && Number.isInteger(value) ? 0 : 2;
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: money.currencyCode,
-    minimumFractionDigits: money.currencyCode === "MXN" ? 0 : 2,
-    maximumFractionDigits: money.currencyCode === "MXN" ? 0 : 2,
-  }).format(parseFloat(money.amount));
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  }).format(value);
 }

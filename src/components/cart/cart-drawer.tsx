@@ -4,11 +4,12 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "./cart-context";
+import { CartSummary } from "./cart-summary";
+import { CheckoutButton } from "./checkout-button";
 import { formatMoney } from "@/lib/utils/format";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
-import posthog from "posthog-js";
 
 export function CartDrawer() {
   const t = useTranslations();
@@ -191,45 +192,8 @@ export function CartDrawer() {
         {/* Footer */}
         {!isEmpty && cart && (
           <div className="border-t border-border px-6 py-5 space-y-4">
-            {/* Subtotal */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-muted">{t("common.subtotal")}</span>
-              <span className="text-lg font-bold">
-                {formatMoney(cart.cost.subtotalAmount)}
-              </span>
-            </div>
-            <p className="text-xs text-muted">
-              {t("common.taxesShipping")}
-            </p>
-
-            {/* Checkout button */}
-            <a
-              href={cart.checkoutUrl}
-              className="block"
-              onClick={() => {
-                try {
-                  posthog.startSessionRecording();
-                } catch {
-                  // ignore — SDK may not expose method on older builds
-                }
-                posthog.capture("begin_checkout", {
-                  cart_total: cart.cost.totalAmount?.amount,
-                  cart_total_currency: cart.cost.totalAmount?.currencyCode,
-                  subtotal: cart.cost.subtotalAmount?.amount,
-                  item_count: cart.totalQuantity,
-                  items: cart.lines.map((l) => ({
-                    product_title: l.merchandise.product.title,
-                    variant_title: l.merchandise.title,
-                    quantity: l.quantity,
-                    price: l.merchandise.price?.amount,
-                  })),
-                });
-              }}
-            >
-              <Button size="lg" className="w-full">
-                {t("common.checkout")}
-              </Button>
-            </a>
+            <CartSummary cart={cart} />
+            <CheckoutButton cart={cart} />
           </div>
         )}
       </div>

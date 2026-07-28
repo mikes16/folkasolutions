@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { commerce } from "@/lib/commerce";
 import { localeCountryMap, type Locale } from "@/i18n/config";
 import { formatMoney } from "@/lib/utils/format";
+import { shouldShowTaxNote } from "@/lib/tax-display";
 
 export interface ProductCalloutProps {
   handle: string;
@@ -37,6 +38,7 @@ export async function ProductCallout({
   const productVariant = product.variants[0];
   const priceLabel = productVariant ? formatMoney(productVariant.price) : null;
   const ctaLabel = locale === "es" ? "Comprar" : "Shop";
+  const showTaxNote = shouldShowTaxNote(country);
 
   if (variant === "horizontal") {
     return (
@@ -69,7 +71,10 @@ export async function ProductCallout({
               {product.title}
             </h3>
             {priceLabel && (
-              <p className="text-base font-semibold mb-3">{priceLabel}</p>
+              <p className="text-base font-semibold mb-3">
+                {priceLabel}
+                {showTaxNote && <span className="text-xs opacity-60"> + IVA</span>}
+              </p>
             )}
             <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[3px] font-[family-name:var(--font-rajdhani)] font-medium text-foreground/80 transition-colors duration-300 group-hover:text-foreground">
               {ctaLabel}
@@ -110,7 +115,10 @@ export async function ProductCallout({
           {product.title}
         </h3>
         {priceLabel && (
-          <p className="text-base font-semibold mt-2">{priceLabel}</p>
+          <p className="text-base font-semibold mt-2">
+            {priceLabel}
+            {showTaxNote && <span className="text-xs opacity-60"> + IVA</span>}
+          </p>
         )}
         <span className="inline-flex items-center gap-1.5 mt-4 text-[11px] uppercase tracking-[3px] font-[family-name:var(--font-rajdhani)] font-medium text-foreground/80 transition-colors duration-300 group-hover:text-foreground">
           {ctaLabel}

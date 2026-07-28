@@ -220,6 +220,7 @@
     "showLess": "Ver Menos",
     "quantity": "Cantidad",
     "taxNote": "+ IVA al pagar",
+    "taxNoteShort": "+ IVA",
     "buyNow": "Comprar Ahora",
     "buyWhatsApp": "¿Dudas? Escríbenos por WhatsApp",
     "noProducts": "Aún no hay productos en esta colección.",
@@ -315,6 +316,11 @@
   "cart": {
     "title": "Carrito",
     "empty": "Tu carrito está vacío",
+    "tax": "IVA",
+    "taxEstimated": "IVA estimado (16%)",
+    "total": "Total",
+    "estimatedTotal": "Total estimado",
+    "shippingAtCheckout": "El envío se calcula al pagar",
     "trustBadges": "✓ Importador oficial · ✓ Envío asegurado · ✓ Pago seguro"
   },
   "search": {

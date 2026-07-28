@@ -219,6 +219,7 @@
     "showMore": "Show More",
     "showLess": "Show Less",
     "quantity": "Quantity",
+    "taxNoteShort": "+ tax",
     "buyNow": "Buy Now",
     "buyWhatsApp": "Questions? Chat with us on WhatsApp",
     "noProducts": "No products in this collection yet.",
@@ -314,6 +315,11 @@
   "cart": {
     "title": "Cart",
     "empty": "Your cart is empty",
+    "tax": "Taxes",
+    "taxEstimated": "Estimated taxes",
+    "total": "Total",
+    "estimatedTotal": "Estimated total",
+    "shippingAtCheckout": "Shipping calculated at checkout",
     "trustBadges": "✓ Official importer · ✓ Insured shipping · ✓ Secure payment"
   },
   "search": {

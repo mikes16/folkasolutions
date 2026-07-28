@@ -69,7 +69,7 @@ export const termsContent: LegalContent = {
         paragraphs: [
           "7.1. La adquisición de productos podrá generar cargos a través de plataformas de pago digitales externas, específicamente Shop Pay.",
           "7.2. Folka se deslinda de cualquier responsabilidad derivada de fallos técnicos atribuibles a Shop Pay u otros intermediarios bancarios.",
-          "7.3. Todos los precios incluyen impuestos aplicables y comisiones relacionadas con la tienda en línea, salvo que se indique lo contrario.",
+          "7.3. Los precios mostrados en el Sitio Web no incluyen el Impuesto al Valor Agregado (IVA). El IVA aplicable y los costos de envío se calculan y muestran de forma desglosada antes de confirmar el pago.",
           "7.4. Folka se reserva el derecho de modificar precios y promociones en cualquier momento. Los cambios aplican únicamente a futuras operaciones.",
           "7.5. Una vez confirmado el pago, el Usuario recibirá un correo con los detalles del pedido y número de seguimiento, si aplica.",
           "7.6. Para facturación, el Usuario deberá solicitarla al momento de la compra o dentro del mismo mes fiscal, enviando un correo a hola@folkasolutions.com con: (México) nombre/razón social, RFC, domicilio fiscal, uso del CFDI, forma de pago, correo electrónico y Constancia de Situación Fiscal actualizada; (Extranjero) nombre, país de residencia fiscal, domicilio fiscal, Tax ID/VAT/EIN, correo electrónico y comprobante de la operación.",
