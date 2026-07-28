@@ -67,6 +67,35 @@ const categoryKeys = [
   { key: "care", href: "/collections/cleaning-stuff", imageUrl: "/icons/ic_care.webp" },
 ] as const;
 
+/**
+ * Slot 5 of the homepage is market-dependent. Philips is only distributed in
+ * Mexico, so each market gets its own collection, merchandising order, and
+ * copy in that slot. Message keys are literal so `t()` stays type-checked.
+ */
+const philipsRail = {
+  handle: "philips",
+  sortKey: "MANUAL",
+  href: "/collections/philips",
+  copy: {
+    eyebrow: "home.philipsEyebrow",
+    title: "home.philipsTitle",
+    description: "home.philipsDescription",
+    viewAll: "home.philipsViewAll",
+  },
+} as const;
+
+const homeBarRail = {
+  handle: "best-seller",
+  sortKey: "BEST_SELLING",
+  href: "/collections/best-seller",
+  copy: {
+    eyebrow: "home.homeBarEyebrow",
+    title: "home.homeBarTitle",
+    description: "home.homeBarDescription",
+    viewAll: "home.homeBarViewAll",
+  },
+} as const;
+
 const brands = [
   { name: "Rocket", href: "/collections/rocket" },
   { name: "Profitec", href: "/collections/profitec" },
@@ -117,9 +146,13 @@ export default async function HomePage({
   const t = await getTranslations();
   const { country, language } = localeCountryMap[locale as Locale] ?? localeCountryMap.es;
 
+  // The Philips super-automatic line is stocked for Mexico only, so the US
+  // storefront keeps the bestsellers rail in this slot.
+  const featuredRail = country === "MX" ? philipsRail : homeBarRail;
+
   const [
     commercialEspressoCollection,
-    philipsCollection,
+    featuredCollection,
     baristaPicksCollection,
     journalPosts,
     stories,
@@ -129,9 +162,9 @@ export default async function HomePage({
       country,
       language,
     }),
-    commerce.getCollection("philips", {
+    commerce.getCollection(featuredRail.handle, {
       first: 8,
-      sortKey: "MANUAL",
+      sortKey: featuredRail.sortKey,
       country,
       language,
     }),
@@ -205,17 +238,17 @@ export default async function HomePage({
         imageAlt={t("home.editorialTitle")}
       />
 
-      {/* 5. Philips — new-to-catalog super-automatics, given homepage placement
-          while the line is being introduced to the market. */}
-      {philipsCollection && philipsCollection.products.length > 0 && (
+      {/* 5. Market-dependent rail — Philips launch in Mexico, bestsellers in
+          the US. See `philipsRail` / `homeBarRail`. */}
+      {featuredCollection && featuredCollection.products.length > 0 && (
         <ProductCarousel
-          eyebrow={t("home.philipsEyebrow")}
-          title={t("home.philipsTitle")}
-          description={t("home.philipsDescription")}
-          viewAllText={t("home.philipsViewAll")}
-          viewAllHref="/collections/philips"
-          products={philipsCollection.products}
-          viewAllOverlay={philipsCollection.pageInfo.hasNextPage}
+          eyebrow={t(featuredRail.copy.eyebrow)}
+          title={t(featuredRail.copy.title)}
+          description={t(featuredRail.copy.description)}
+          viewAllText={t(featuredRail.copy.viewAll)}
+          viewAllHref={featuredRail.href}
+          products={featuredCollection.products}
+          viewAllOverlay={featuredCollection.pageInfo.hasNextPage}
         />
       )}
 
