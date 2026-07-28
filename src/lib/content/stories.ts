@@ -54,7 +54,7 @@ export interface StoryVideo {
   provider: "cloudinary";
   /** Fully qualified Cloudinary publicId, e.g. "folka/stories/folka-x-jardin-sucre-main". */
   publicId: string;
-  aspect: "16:9" | "9:16";
+  aspect: "16:9" | "9:16" | "4:5";
 }
 
 export interface StoryCoverImage {
@@ -126,8 +126,9 @@ export function formatCafeLocation(cafe: StoryCafe): string {
 }
 
 /**
- * The registry. Phase 3.B launch set: three café spotlights authored from
- * real video transcripts (sources in `docs/stories-source/`).
+ * The registry. Three café spotlights authored from real video transcripts
+ * (sources in `docs/stories-source/`), plus one teaser-only collaboration
+ * announcement (Aletazul) that has no transcript yet.
  *
  * Slug ↔ Cloudinary publicId asymmetry: the URL slug names the *café*
  * (`jardin-sucre`), while the Cloudinary publicId names the *partnership*
@@ -283,6 +284,53 @@ const STORIES_REGISTRY: StoryEntry[] = [
         return import("@/content/stories/en/yuzo.mdx");
       }
       return import("@/content/stories/es/yuzo.mdx");
+    },
+  },
+  {
+    // Teaser-only entry: the collaboration is still in progress, so there is
+    // no long-form video yet. `mainVideo` is deliberately absent, which makes
+    // the detail hero fall back to the cover image (see StoryHero).
+    slug: "aleta-azul",
+    publishedAt: "2026-07-28",
+    cafe: {
+      name: "Aletazul",
+      city: "Monterrey",
+      country: "MX",
+      website: "https://www.aletazulcompany.com",
+    },
+    coverImage: {
+      url: "/stories/posters/folka-x-aleta-azul",
+      alt: "Interior de la tienda de Aletazul: un hueco abierto en el muro por donde se entrega el café.",
+    },
+    teaserVideo: {
+      provider: "cloudinary",
+      publicId: "folka/stories/folka-x-aleta-azul-teaser",
+      aspect: "4:5",
+    },
+    featuredProductHandles: [],
+    i18n: {
+      es: {
+        title: "Aletazul x Folka: café dentro de una tienda de ropa",
+        eyebrow: "Folka X",
+        description:
+          "Una colaboración en curso entre Folka y Aletazul, la marca mexicana de ropa técnica. Por ahora existe el teaser: café que se entrega por un hueco abierto en el muro.",
+        tags: ["Colaboración", "Retail", "Monterrey"],
+        readingTimeMinutes: 1,
+      },
+      en: {
+        title: "Aletazul x Folka: coffee inside a clothing store",
+        eyebrow: "Folka X",
+        description:
+          "An ongoing collaboration between Folka and Aletazul, the Mexican technical apparel brand. For now there is the teaser: coffee handed through a hole cut into the wall.",
+        tags: ["Collaboration", "Retail", "Monterrey"],
+        readingTimeMinutes: 1,
+      },
+    },
+    loadBody: async (locale) => {
+      if (locale === "en") {
+        return import("@/content/stories/en/aleta-azul.mdx");
+      }
+      return import("@/content/stories/es/aleta-azul.mdx");
     },
   },
 ];
