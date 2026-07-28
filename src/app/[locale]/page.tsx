@@ -119,7 +119,7 @@ export default async function HomePage({
 
   const [
     commercialEspressoCollection,
-    homeBarCollection,
+    philipsCollection,
     baristaPicksCollection,
     journalPosts,
     stories,
@@ -129,8 +129,9 @@ export default async function HomePage({
       country,
       language,
     }),
-    commerce.getCollection("best-seller", {
+    commerce.getCollection("philips", {
       first: 8,
+      sortKey: "MANUAL",
       country,
       language,
     }),
@@ -204,16 +205,17 @@ export default async function HomePage({
         imageAlt={t("home.editorialTitle")}
       />
 
-      {/* 5. Home Bar Favorites — curated bestsellers */}
-      {homeBarCollection && (
+      {/* 5. Philips — new-to-catalog super-automatics, given homepage placement
+          while the line is being introduced to the market. */}
+      {philipsCollection && philipsCollection.products.length > 0 && (
         <ProductCarousel
-          eyebrow={t("home.homeBarEyebrow")}
-          title={t("home.homeBarTitle")}
-          description={t("home.homeBarDescription")}
-          viewAllText={t("home.homeBarViewAll")}
-          viewAllHref="/collections/best-seller"
-          products={homeBarCollection.products}
-          viewAllOverlay={homeBarCollection.pageInfo.hasNextPage}
+          eyebrow={t("home.philipsEyebrow")}
+          title={t("home.philipsTitle")}
+          description={t("home.philipsDescription")}
+          viewAllText={t("home.philipsViewAll")}
+          viewAllHref="/collections/philips"
+          products={philipsCollection.products}
+          viewAllOverlay={philipsCollection.pageInfo.hasNextPage}
         />
       )}
 
