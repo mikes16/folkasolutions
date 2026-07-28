@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils/cn";
 import { siteConfig, whatsappLink } from "@/lib/site-config";
 import { shouldShowTaxNote } from "@/lib/tax-display";
 import { shouldShowWhatsappCta } from "@/lib/whatsapp-gate";
+import { getTrustBadgeConfig } from "@/lib/trust-badges";
 import posthog from "posthog-js";
 
 const COLLAPSED_HEIGHT = 160;
@@ -231,7 +232,7 @@ export function ProductInfo({ product, selectedVariantIndex: externalIndex, onVa
       )}
 
       {/* Trust badges */}
-      <TrustBadges />
+      <TrustBadges vendor={product.vendor} />
 
       {/* Description */}
       {product.descriptionHtml && (
@@ -275,16 +276,29 @@ export function ProductInfo({ product, selectedVariantIndex: externalIndex, onVa
   );
 }
 
-function TrustBadges() {
+function TrustBadges({ vendor }: { vendor: string }) {
   const t = useTranslations("product.trust");
+  const { officialImporter, shippingScope } = getTrustBadgeConfig(vendor);
+
   const badges = [
-    { icon: "shield-check" as const, title: t("officialImporter"), sub: t("officialImporterSub") },
-    { icon: "truck" as const, title: t("insuredShipping"), sub: t("insuredShippingSub") },
+    ...(officialImporter
+      ? [{ icon: "shield-check" as const, title: t("officialImporter"), sub: t("officialImporterSub") }]
+      : []),
+    {
+      icon: "truck" as const,
+      title: t("insuredShipping"),
+      sub: shippingScope === "mx" ? t("insuredShippingSubMx") : t("insuredShippingSub"),
+    },
     { icon: "chat-bubble" as const, title: t("expertAdvice"), sub: t("expertAdviceSub") },
   ];
 
   return (
-    <ul className="grid grid-cols-3 gap-3 mt-2 border-t border-border/60 pt-5">
+    <ul
+      className={cn(
+        "grid gap-3 mt-2 border-t border-border/60 pt-5",
+        badges.length === 3 ? "grid-cols-3" : "grid-cols-2"
+      )}
+    >
       {badges.map((badge) => (
         <li key={badge.icon} className="flex flex-col items-center text-center gap-2">
           <Icon name={badge.icon} size={22} className="text-foreground/70" aria-hidden="true" />
